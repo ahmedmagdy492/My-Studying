@@ -1,0 +1,132 @@
+Boolean Operations:
+And: +
+Or: *
+Not: - on top of the element
+
+Laws for boolean functions:
+-Commutative Law:
+(x And y) = (y And x)
+(x Or y) = (y Or x)
+
+-Associative Law:
+(x And (y And z)) = ((x And y) And z)
+(x Or (y Or z)) = ((x Or y) Or z)
+
+-Distributive Law:
+(x And (y Or z)) = ((x And y) Or (x And z))
+(x Or (y And z)) = ((x Or y) And (x Or z))
+
+-De Morgan Laws:
+Not(x And y) = Not(x) Or  Not(y)
+Not(x Or y)  = Not(x) And Not(y)
+
+-Idempotence Law:
+Not(x) And Not(x) = Not(x)
+removes redandant operations
+
+NOTE: a bunch of bits together are refered to as a bus
+
+Multiplexer(Mux):
+is a type of gate that allows you to select one of its inputs to be outputed (sometimes also called programable gate)
+
+Demultiplexer(Dmux):
+is a type of gate that takes one input and a selection bit and has 2 output pins and based on the selection bit it directs the output to a or b.
+
+Representing Negative Numbers in Binary:
+using the 2's complement: the idea behind that is that if you want to represent a negative number -x you just need to use the positive number 2^n-x
+so for example if you only have 4 bits and you want to represent the number -4 then what you do is that 2^4 = 16 and 16 - 4 is 12 so you would represent the number -4 with 12
+
+Sequetential Logic:
+-is basically dealing with logic gates implementation one after another
+
+Handling delays:
+-to handle delays we simply invent what's called an logical integer time unit which is an integer number that corresponds to how many clock cycles have been passed with that we can set a spcific time for each cycle and simply ignore all inconsistencies in the hardware level because that simply will be handled automatically by the cycle delay.
+
+Clocked Data Flip Flop:
+takes some input and returns the input value of the previous time unit (t-1). the way it works is as follows you give it some input it remembers that input and the next time you feed it some other input and it saves it and outputs the input of the previous time unit.
+
+We will use this flip flop sequential logic chip to build a 1-bit register device that remebers a single bit forever and it has the following interface (it has a input bit and a load bit):
+if you load 1 into the load bit that means that it will output the previous bit and will remember the new bit that you gave it as input otherwise it will remember the old bit forever.
+
+-Any Machine Language should contain the following 3 elements in order to use it to instruct the computer and tell it what to do:
+1.Operations
+2.Program Counter
+3.Addressing
+
+Machine Operations:
+-Arithmetic Operations: addtion, multiplication and subtraction
+-Logical Operations: and, or, ...
+-Flow Control: goto instructionX, if C then goto instructionY
+
+Memory Addressing Modes:
+-Direct Addressing: 
+accessing a memory location directly by its address for example 67 and storing the address itself into the register
+
+-Immediate Addressing:
+instead of loading the address into the register you load the value stored in that address into the register
+
+-Indirect Addressing:
+accessing a memory location by referring to a register that contains the address or do some operation on an address to get to the final address (i.e arr[i]).
+
+
+How hardware devices communicate with periphals (i.e Screen, Keyboard):
+-in the case of the screen for example we can use the data memory (RAM) to store pixels of the screen and the screen will pull these data from Ram several times per second in order to refresh what it displays to the user and this is called "Screen Memory Map".
+
+Keyboard input goes into a Keyboard Memory Map just like the screen memory map.
+When a key is pressed on the keyboard a scan code gets sent to the key memory map
+
+the Hack Machine Lang:
+in the hack platform there are only 2 16-bit registers the A register which can be used to store both instruction addresses and data and the D register which is considered a general purpose register.
+NOTE: the address in the hack platform is 15 bit only
+
+Instructions:
+@number or @symbol will both set the A register to a specific value
+
+NOTE: when trying to do any comparison for example comparing a constant value with a value in memory the pattern here is that you set the A register to that constant value (since the only way to get a constant value fed to the computer is using the A instruction) and subtract the A register value (the A register here is used as a data register) from that other value and then see whether the result of this operation is > 0, < 0 or = 0 and based on that you can jmp to a prespecified location or continue the executation normally.
+
+in Hack Machine Language:
+there are a set of predefined symbols:
+-Predefined Virtual Registers from R0 to R15 which refers to Ram from address 0 to 15
+-Predefined Pointers: which are SP, LCL, ARG, THIS, THAT refers to Ram locations from 0 to 4
+-I/O Pointers: are SCREEN and KBD and refers to the following locations in memeory 16384 and 24576 which you simply put data for example in the SCREEN memory map (region) to output something to the screen.
+-Predefined Symbols: user defined sybmols which can be defined once and used anywhere and any number of times across the whole program
+-Predefined Variables.
+
+pseudo-command: is a command that will not be translated to a machine code instruciton
+
+declaring variables in the hack machine language:
+you simply define it using the @ sign like that @temp for example, then the assembler will search for an available memory register and store any values assigned using that variable to that memory location chosen (so the assembler will pick that memory location, we as programmers will not interfere with that process).
+
+NOTE: in the hack machine language variables are assigned addresses from address 16 onwards.
+
+NOTE: write your program in psudeo code first then translate it into machine language
+
+
+Building a computer system:
+to build a computer system you can use one well-known archeticture called the von neumon archeticture which describes the computer system as a system that contains the following pieces (Memory (data, instructions), CPU(ALU, registers), Buses(control, address, data buses)).
+
+for example the ALU would get some input data to perform some operations on them (i.e addtion) from the data bus and know the type of operation to perform using the control bus and then return the output to the data bus again.
+
+for registers they need to be connected to the address bus as well as the data bus.
+
+for memory and for data memory specifically we need it to be connected to the data bus as well as the address bus and for the program memory we need it to be connected to the data bus, address bus and the control bus.
+
+
+The stored program concept:
+the idea of not making the program code embeded in the hardware platform itself which adds a lot of flexibility and makes the computer more useful and more capable. so the basic idea behind is that, when you load up a new program into the computer to get it executing, the computer will load the program into memory and then begin executing it.
+
+
+NOTE: The CPU is always in the fetch-execute cycle it fetches the next instruction, decodes it and then execute it and repeat these steps again and again forever.
+
+The Flow of the fetch-execute CPU Cycle:
+the first part is going to be about how the cpu fetchs the instruction code itself:
+1.the cpu fetches the next instruction by either sending an address to the PC or by increameniting the existing one
+2.then the PC feeds that address into the address input of the program memory
+3.the program memory puts the content of that address into the control bus
+4.then the ALU takes that instruction from the control bus and decodes it
+
+
+NOTE: if we had to use a single memory to use for both program code and program data then we would have a clash between requesting an instruction and requesting some data. so one way to resolve this issue is by adding an instruction register and a fetch/execute bit to identify in which part we are is it the fetch or the execute part and a multiplixer. so when an instructoin address is requested we set the fetch bit and then the address goes into the multiplexer and then the select bit is set based on the value in the fetch/execute bit then the memory fetches the content of that address and stores it in the instruction register and then the execute part is executed and the data is reterived and goes back to the alu to perform the instruction in the instruction reigster. however there is another way to resolve this issue and that by using 2 separate memory unit: one for the data and the other for the instructions and this is called the harverd architecture.
+
+
+NOTE: to offload some the peripherials handling from the CPU in a general purpose computer usually these devices are equiped with controllers that are specific hardware that can communicate with the cpu and the hardware peripherial to acheive what the cpu wants to do.

@@ -1,0 +1,30 @@
+Probability:
+Sample Space: is a set that has all the possiable outputs usually denoted as U or S (sometimes called the universe)
+Event: is a subset of the sample space that represents an event
+suppose U = {1, 2, 3, 4, 5, 6} and E is an event such that E = {1, 2, 3, 4, 5, 6}
+in this case E = U which means that the event is certain but in general
+E <= U
+NOTE: the imposiiable event is represented as follows:
+E = {} or E = φ which represents an empty set
+the bottom line is that we have 2 cases that are called extreme cases:
+1.certain event
+2.imposiable event
+Operations on Event:
+1.Intersection: A and B
+2.Union: A or B
+3.Complement: Not in A
+Disjoint Events(Mutually Exclusive):
+describes 2 events that can never occur at the same time
+A Intersection B = φ or an empty set
+Example: an event of getting an even and an odd number at the same time.
+
+Propability:
+P(A) -> means the propability of Event A to occur
+Example:
+P(A) = 0.8
+there are 2 ways we can argue about this:
+1.chance of occurance
+
+2.relative frequency
+
+NOTE: the more i increase the sample space the more accurate the propbaility will be

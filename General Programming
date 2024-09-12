@@ -1,0 +1,114 @@
+C# Linq:
+-when you write a query expression in a variable the execuation of that query is deffered until you use that query in a foreach and this is called "deferred execution"
+NOTE: some queries do execute immediatly such as Count, Average and First
+NOTE: to force immediate execuation of any query you can call .toList() or .toArray()
+
+General C#:
+Span type is a struct and represents a contiguous memory chunck that is created on the stack.
+you can use the stackalloc keyword to allocate a specified amount of memory in the stack and return in a Span.
+
+Expression Trees in C#:
+
+
+Facade Pattern:
+-is a wrapper around more complex objects to provide simpler interface for the client to deal with
+
+State Pattern:
+allows an objects to change its behavior at runtime depending on a specific state the program can be in
+
+CQRS:
+seperates reads from writes in the datastore.
+
+General NOTE:
+always use the concept of pure functions when creating functions that contains pure logic from pure functional programming which treats functions as mathmetical deterministic functions
+
+#Computer Sceince#
+Functional Programming:
+-High-order function:
+functions that takes functions as arguments or return functions, one benifit is currying which allows programmers to define more specialized functions within the original function that is created to do one specific thing
+
+-Pure Functions:
+functions that have no side effects and always gives the same output with respect to the same input (Referential transparency)
+a function has the property that its output depends only on its input, and it doesn't have any side effects.
+This can enable caching optimizations such as memoization
+always thread-safe
+
+-Recursion:
+when a function calls itself, but expensive cause it consumes the stack but tail recursion can allow the compiler to optmize the code.
+catamorphisms: breaks down a recurisve data structure into a single value after performing some computation on the data
+anamorphisms: builds up a recursive data structure from an input data
+NOTE: in order for a functional language to be turning complete it has to have some sort of unrestricted recurision which will lead to the halting problem.
+Functional programming limited to well-founded recursion with a few other constraints is called total functional programming.
+
+-Lazy (non-strict) and Eager (strict) expression evaluation:
+concepts that are related to evaluating the arguments of a function
+NOTE: The usual implementation strategy for lazy evaluation in functional languages is graph reduction
+
+-Type Systems:
+functional langs nowadays tend to adapt the mind set of typed lamda calculs since the development of type inference
+
+-Imutability:
+achives Referential transparency, once a variable is defined it cannot be changed.
+NOTE: assignment statements are never referentially transparent.
+
+NOTE: Purely functional data structures have persistence.
+
+#Small Comparison Between OOP and Traditional#
+https://learn.saylor.org/mod/page/view.php?id=33046
+
+NOTE: structure chart was used the days before OOP
+
+Generic Programming:
+is a programming paradigm in which enforces algorithems to be written in terms of types to be specified later.
+so the algorithems operate on unknown type.
+
+Generic programming is known as paramateric polymorphomism in ML, Scala and Haskell
+
+NOTE: Following Stepanov, we can define generic programming without mentioning language features: Lift algorithms and data structures from concrete examples to their most general and abstract form
+
+Arrays and structs can be viewed as predefined generic types. Every usage of an array or struct type instantiates a new concrete type or reuses a previous instantiated type. Array element types and struct element types are parameterized types, which are used to instantiate the corresponding generic type. All this is usually built-in in the compiler and the syntax differs from other generic constructs.
+
+template metaprogramming:
+is a way of pre-evaluating some of the code at compile-time rather than run-time. Using template specialization.
+
+Duck typing is a programming concept that is used in dynamically typed languages, such as Python and Ruby. In duck typing, the type of an object is determined not by its class or type, but rather by its behavior or the methods and properties that it supports.
+
+Template specialization: 
+This allows alternative implementations to be provided based on certain characteristics of the parameterized type that is being instantiated. Template specialization has two purposes: to allow certain forms of optimization, and to reduce code bloat.
+
+Multi-stage Programming:
+Genericity in general may come with performance cost and to avoid that we can use what's so called Multi-Staged Programming.
+
+Multi-stage programs improve efficiency using information that becomes available after a function is defined but before it is invoked. For example, the author of listify cannot possibly know the eventual types of its arguments, and so ought to make listify as general as possible. However, the caller of listify typically knows the types of the arguments before the time when the function is actually called. This type information can be used to specialise listify at the call site, taking advantage of type information to optimize the function implementation.
+
+
+OOP:
+abstraction and modularity acheives reusability
+
+Programming Process (Software lifecycle):
+requirements, design, implementation, and validation
+
+when creating an instance of a class that inherits from another class, the parent class object gets created first and then the child class object but the opposite happens in the object destruction process.
+
+NOTES about object creation in OOP:
+Construction:
+	Derived allocated
+	Base allocated
+	Base constructor called
+	Derived constructor called
+
+Destruction:
+	Derived destructor called
+	Base destructor called
+	Base deallocated
+	Derived deallocated
+
+In OOP in C++:
+the invoked function depends on the type of pointer or reference the variable has not the actual object but in c# that's would hold true as well but in case the child has not overriden on the parent function
+
+Software Engineering Methodologies:
+1.Waterfall:
+requirements, design, code, test and deploy
+-may work very well for small projects that may have no changes
+
+2.Iterative:

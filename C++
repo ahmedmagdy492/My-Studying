@@ -1,0 +1,45 @@
+Initializer list:
+- is used to initalize all types of member variables
+- preferred way to initalize variables
+
+Delegation:
+in general the term delegation refers to moving work from me to another component to handle
+it for me. in c++ an example of delegation is when a constructor delegates some work to
+another constructor
+
+Deleted Functions (since c++ 11):
+You can declare an implicitly defined function as a deleted function if you
+want to prevent its usage. For example, you can declare the implicitly
+defined copy assignment operator and copy constructor of a class as deleted
+functions to prevent object copy of that class.
+
+Difference between shallow copy and deep copy:
+shallow copy copies things in the 1st level of the object or in other words only copies
+members that are actual members not pointers but on the other hand when it comes to pointers
+the newly created pointer after copying is still pointing to the same original place in memory
+
+deep copy on the other hand is copying the entire object including creating pointers that points
+newly created piece of memory
+
+Dangling pointer:
+is a pointer that points to a memory that has already been deallocated
+
+const keyword infront of a member function:
+-the const here refers that this method will not change any member varaible, the reason why we should
+use this const along with member functions as possible as we could to acheive data integrity
+
+const keyword with objects:
+if used when creating objects the object instance can only call member functions that are
+marked as const (creates immutable objects)
+
+friend class:
+is a feature that allows a class to allow another class to access its private section
+
+friend function:
+the same idea of a friend class expect that only a function has access to the private seciton
+
+static_cast<new_type>(variable): converts a type to a new type
+
+manipulators:
+are functions that changes the cout outputs
+examples are: setbase(base_value) which sets the base field of the iostream directly to output the given number in a specific format such as hex or octal

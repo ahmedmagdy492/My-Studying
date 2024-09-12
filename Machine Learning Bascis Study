@@ -1,0 +1,12 @@
+-we have some sort of relationship and it's a continous relationship and we will use linear regression to try and come up with what the relationship should look like
+-and the idea of linear regression is to have a set of training examples which contains input and the correct output and we will try to fit a line so we are predicting a linear relationship
+-so at most we will have 2 parameters if we considered the slope-intercept form
+-so the main goal here is to guess the values of these 2 parameters
+-not only that but we are trying to measure how good or bad our guess was and we are doing this using a known function in statistics called mean squared error and sometimes called cost function or loss funciton and the idea here is the smaller values this function pops out the better our guess is
+-so we want the cost function to pop out values that are small as possible as we could and to do that we will use a techinque called minimzation from linear programming
+-there are many algorithms but the first one we will use is called the gradient descent
+-so we will initialize our parameters for the cost function and then come up with better values next time we run gradient descent
+to get more to the point where the cost function is at its local optimum
+-one great advantage of using gradient descent is that if you are on a point that is representing the local optimum the algorithm will leave the value of the current parameter that is being guessed unchanged which will save us a lot
+
+When we have multiple features (more than one dimension) instead of using the normal notation to represent all of these features we can use matricies to do so by plotting each feature in one column of the maxtrix

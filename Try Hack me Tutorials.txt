@@ -1,0 +1,81 @@
+💡Learning Malware Analysis? Check below:
+
+📒Malware Analysis Cheat Sheets:
+https://bit.ly/3EqTXz2
+https://bit.ly/3twshCk
+https://bit.ly/3g0E9cK
+https://bit.ly/3ts5CaE
+https://bit.ly/3g2b14V
+
+➡️Blogs/Posters :
+SANS Malware Analysis: Tips & Tricks Poster: https://bit.ly/3AeXRZo
+Binary Posters: https://bit.ly/3UNnSqg
+RE Malware Methodology:https://bit.ly/3GdaI1K
+APT Notes:https://bit.ly/3UB2ipi
+Harlan Carvey's Blog:https://bit.ly/3E1IEvD
+Dr. Fu's Blog on RE : https://bit.ly/3EtQccc
+Rensselaer Polytechnic :https://lnkd.in/dzTbvRKE
+https://lnkd.in/dNDFAfy9 Tutorials:https://bit.ly/3DX6CrO
+PE Disection Poster: https://bit.ly/3EuPTOn
+PE File Format Graphs (Ero Carrera's blog) :https://bit.ly/3g4TAkf
+Josh Stroschein's Blog: https://bit.ly/3txu6Pr
+
+➡️RE Basics & beyond:
+Intezaar: https://bit.ly/3EpEpeN ,https://bit.ly/3X355cO
+RE 101:https://bit.ly/3TwAvFh
+Slides: https://bit.ly/3hGJYMT
+Hackers-arise :https://bit.ly/3tuwMO1
+IBM: https://ibm.co/3hInAmg
+Malware Analysis ,RE Workflow:https://bit.ly/3EsmB2x
+RE For Beginners Videos: https://bit.ly/3hDEdjg
+Resources on RE: https://bit.ly/3hBvEFy
+RE tutorial on x86, x64, 32-bit & 64-bit ARM: https://bit.ly/3UVtcYG
+0verfl0w Twitter:https://bit.ly/3AbJe8S
+0xPat blog: https://bit.ly/3hFShsk
+Alexandre Borges Blog: https://bit.ly/3GdIx2T
+Josh Stroschein's Blog: https://bit.ly/3UWNuRT
+
+❗️Malware Family Specific:
+➡️Quakbot-
+Qakbot Dropper Analysis: https://bit.ly/3E51T7D
+QakBot Excel Malware Analysis:https://bit.ly/3tJXT81
+Analysis Of Qakbot's DLL Sideloading Technique: https://bit.ly/3g2O1Tw
+MS Defender TI :https://bit.ly/3trHO6D
+https://bit.ly/3TsAZfL
+https://bit.ly/3GeS4a4
+https://bit.ly/3hBzQFi
+https://bit.ly/3UVsATd
+https://bit.ly/3UyNKqp
+https://bit.ly/3O4Y1ba
+
+➡️Emotet:
+Bromium's Blog: https://bit.ly/3ttSSQO
+Examining Emotet Traffic: https://bit.ly/3EtxW2v
+Emotet Maldoc Analysis :https://bit.ly/3GeJYhG
+Zscaller :https://bit.ly/3WVSPuv
+Kroll : https://bit.ly/3hA3hHQ
+
+➡️Agent Tesla:
+Qualys: https://bit.ly/3hD7lqW
+Deep Analysis Agent Tesla : https://bit.ly/3tut2fr
+AgentTesla Sample Using VBA Macros and Certutil : https://bit.ly/3X1BwIz
+AgentTesla analysis Work Flow: https://bit.ly/3Eui4wG
+BlackBerry : https://blck.by/3UJ1xKG
+Agent Tesla Extraction of final payload from dropper : https://bit.ly/3EoCTZp
+Microsoft Security Intelligence : https://bit.ly/3AbTYnL
+
+➡️Process Hollowing/DLL Sideloading :
+Process Hollowing Tutorial :https://bit.ly/3E1PmSl
+Process Injection: https://bit.ly/3UVlgHd
+Analysis Of Qakbot's DLL Sideloading : https://bit.ly/3G9UiHt
+Publicly disclosed DLL Hijacking opportunities:https://bit.ly/3AbIlNA
+Pentestlab : https://bit.ly/2FxVQeR
+itm4n's blog: https://bit.ly/3EuLZ8b
+Exploiting DLL Hijacking by DLL Proxying : https://bit.ly/3g2NkcS
+DLL Hijack Scanner: https://lnkd.in/dXb5ymbS
+UAC bypass - DLL hijacking: https://bit.ly/3AdqC8N
+Abusing dll misconfigurations :https://bit.ly/3g68h6v
+Red Canary: https://bit.ly/3hGbB97
+SANS: https://bit.ly/3hDmk4b
+
+#cybersecurity #infosec #hacking #malware

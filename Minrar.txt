@@ -1,0 +1,32 @@
+main goals:
+archiving
+archiving and encrypting
+
+requirements:
+-as a user i want to be able to view the archive file content
+-as a user i want to be able to protect my archive file using a password
+-as a user i want to be able to restore back my original file
+-as a user i want to archive a set of files
+
+CD:
+archiver:
+- encode
+- decode
+encryptor:
+- encrypt encoded content
+- decrypt encoded content
+
+flow:
+1.archiving files without encryption
+-select files from file system
+-archive them by:
+ - read a file
+ - get its name
+ - start decoding: 
+   Header:
+   MRAR<version:1byte><encrypted:1,not-encrypted:0:1byte> -> size: 6 bytes
+   filename size in bytes + filename(including extension)
+   filecontent size in bytes + filecontent
+   filecontent size in bytes + filecontent
+   filecontent size in bytes + filecontent ...etc
+-create a new file with .mrar extension

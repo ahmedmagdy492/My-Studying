@@ -1,0 +1,45 @@
+REST: is an archetictural style to build web apis, it stands for Representational State Transfer
+NOTES:
+-it's not a standard
+-is in principle protocol aganostic, which means that neither JSON or HTTP is part of rest theortically.
+-involves constraints to apply to a web api
+-client changes state dependong on the representation of the resource you're accessing
+
+Rest is defined by 6 Constraints:
+1.Uniform Interface:
+ 1.Identification of Resources (sub-constrinat):
+	-a resource should be conceptually seperated from its representation:
+	that means that the representation could be available in any format (i.e json, xml or any other format), in other words we can have different representations for the same resource
+	-server internal representation is different from the one returned
+ 2.Manipulation fo Resources Through Representations (sub-constrinat):
+    -resource representation and meta data must be suffcient for the client to know how to manupilate that resource (for example delete or update that resource)
+    -for example the representation of an author resource should contain the id of the author in order to delete that resource or update it if required
+    -also an api should also have the ability to return metadata such as the links for deleting and updating that resource
+ 3.Self Descriptive Message (sub-constraint):
+    -each message should contain enough information about how to process this message
+    -for example if the API returns a json representation of a resource the message headers should contain a content-type header that informs the client that "application/json"
+ 4.(HATEOAS) Hybermedia as the engine of application state (sub-constraint):
+    -
+
+2.Client-Server:
+-it enforces client-server archeticture which in turn enforces seperation of concerns
+-this allows the client and the server to evolve seperatly
+
+3.Statelessness:
+-the necessary information to process and handle the request is contained within the request itself.
+-this information should be kept by the client and sent in the request and should be suffcient for the server to handle that request
+
+4.Layerd System:
+-this one says that each layer should not know about the layer beyond it
+-for example the client should not know whether he is connected directly to the API or another intermediary layer or not
+
+5.Cacheable:
+-each response must state whether this response can be cached or not
+
+6.Code on Demand (optional):
+-server can extend client functionality
+-for example if the client is a web application the server can send javascript code to the client to extend its functionality
+
+
+Richardson Maturity Model:
+is a model that helps us grade our api by their RESTful maturity

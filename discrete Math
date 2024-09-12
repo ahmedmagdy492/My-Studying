@@ -1,0 +1,113 @@
+Difference between Unverisal Existential statements and Existential Universal statements:
+Unverisal Existential describes that a certain property exists in a set of elements but on the other hand Existential Universal means that there exist certain types of objects that has a certain property.
+
+Sets:
+a set can be considered as a collection of elements. if I is the set of integers from 0 to 100 then 45 is an element of I.
+-in a set the order of elements does not matter
+-in a set how many elements is repeated does not matter
+what matters is that what are the elements of the set.
+R: is the set of all real numbers
+Z: is the set of all integers
+Q: is the set of all rational numbers
+-the set of real numbers can be pictured as all points on a line, the middle point is 0 and called the origin and all points on the right are positive and can be denoted by computing the distance between it and the origin and all points on the right are negative and can be denoted by computing the distance from the origin and postfix it with a minus sign
+-the set of real numbers is a continuous set because it has no holes between its elements, but the set of all integers is discrete becauase it skips in between non-integer numbers
+-the set might be represented using the set builder notation:
+{x belongs (E) S | P(x)} where P(x) is a property that may or may not be satisfied
+and is read as follows "the set of elements x in S such that P(x) is true"
+
+Set roster notation:
+is a notation to write sets {x1, x2, x3, ..., xn}
+
+Set builder notation:
+a more compact way to represent sets and also can be used to describe some type of a property that is true for this set.
+{x ∈ S | P(x)} and can be read as follows: the set of all real numbers x that belongs to set S such that P(x) is true.
+
+Subsets:
+is a basic relation between 2 sets which denotes that set A is part of set B
+A is a subset of B if for all elements x in A, x belongs to B
+
+Proper Subset:
+it's said that A is a proper subset of B if there is at least one element of B that does not exist in A
+
+All sets are subset of themselves
+
+
+Ordered Pairs:
+they were able to use the set notation to write ordered pairs and it was as follows {{a}, {a, b}} but they found that it's so cumbersome and error-prone to write it this way and so difficult to use it on the daily basis so the following notation was introduced:
+- (a, b) where a is the first element and b is the second element
+
+the property of equality of ordered pairs:
+if we have the ordered pairs (a, b) and (c, d), (a, b) = (c, d) if and only if a = c and b = d.  
+
+Ordered n-tuple:
+is an ordered set that contains more than 2 elements, and order pair can also be called order 2-tuple
+
+The equality of ordered n-tuple:
+-(x1, x2, ..., xn) = (y1, y2, ..., yn) if and only if x1 = y1, x2 = y2, ..., and xn = yn
+
+The Certisian Product:
+is the set that contains all possible ordered n-tuples of n given sets for example if A = {a1, a2, a3} and B = {b1, b2, b3} then the certisian product of A and B (AxB) is {(a1, b1), (a1, b2), (a1, b3), (a2, b1), (a2, b2), (a2, b3), (a3, b1), (a3, b2), (a3, b3)}
+
+
+Strings:
+is a set of ordered n tuple written without paranthisis and without commas and refered to as a string over set A (which A is any aribitrary set). the elements of set A in this case are called the characters strings.
+the null string over A is the string with no characters that has a length of 0.
+if the set A = {1, 0} then the string over A is called a bit string.
+
+ex:
+given that A = {a, b} List all strings of length 3 with at least 2 characters are the same:
+aaa, aab, aba, baa, bbb, baa, bab, bba
+
+
+Relations:
+a set R is a subset of A x B such that (a, b) belongs to R if and only if a and b meets the conditions defined by R
+A is called the domain and B is called the co-domain
+
+The Circle Relation:
+is where C is a subset of RxR and C is defined as follows: x^2+y^2=1
+
+Arrow Diagram of a relation:
+draw an arrow diagram from x to y:
+if and only if x R y
+if and only if (x, y) belongs R
+
+Functions:
+a function from set A to set B is a relation with a domain A and a co-domain B that satisfy the following conditions:
+1.for every element x in A, there is an element y in B such that (x, y) belong to F
+F is the relation
+2.for all elements x in A and all elements y and z in B, if (x, y) belong to F and (x, z) belong to F then y = z
+the second condition describes that for an element x in A there must be excatly one element in B such that x is related to only one element in B
+
+Function Notation:
+the element y in set B that is related to element x in set A can be denoted as y = F(x)
+
+Note: one of the way to know whether a given relation is a function or not is to use to arrow diagram
+Note: here we defined all of the above objects in terms of sets (including functions), but when it comes to functions we can also define it mathemetically in a different way.
+
+Function as a machine: we can think of functions as machines that takes some input x and processes it in a way then produce an output f(x).
+
+Equality of Functions:
+f = g if and only if f(x) = g(x)
+
+
+The language of graphs:
+the points on a graph are called verticies (plural of vertex) and they are connected together using lines and these lines are called edges.
+-it's possible that 2 edges can interect at a point that is not a vertex.
+-edges can be in different forms:
+1.straight edge
+2.curved edge
+and an edge can also either connect 2 verticies together or connect a vertex to itself (in this case it's called a loop)
+-if 2 edges are connecting the same 2 verticies they are called parallel edges.
+-a graph also can contain a single vertex that is not connected to any other verticies and in that case it's called an isolated vertex.
+
+Formal Defination:
+A graph G is: 2 finite sets the first one is the set of verticies V(G) and the other set is the set of edges E(G). an edge is associated with a set that contains 1 or 2 verticies are called the endpoints. the correspondence between edges and endpoints are called the edge-endpoint function.
+NOTE: 2 verticies connected through the same edge are said to be adjecent.
+NOTE: an edge is said to be incident on its endpoints, if 2 edges are incident on 2 endpoints they are said to be adjcent.
+
+Proofs:
+-Proof by Example
+-Impossiabilty proof
+-Existensial proof: proving that some object exists and finding one example is enough
+
+one of the ways to search for a prove for something is to narrow the search when brute force search is not feasible

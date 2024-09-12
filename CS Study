@@ -1,0 +1,102 @@
+In Computer Science functions that produce either true or false value are called "Predicates"
+
+How to design function recipe:
+- Signature: the job of the signature is tell what kind of data the function accepts and what kind of data it produces, and it's spelled as follows "the function consumes a Number and produces a Number".
+
+- Purpose: is a 1 line descrption of what the function produces in terms of what it consumes
+
+- Stub: just serves as a scafold and allows us to be able to run our tests and later on will be removed.
+
+- Examples: helps us understand what function must do, mulitple examples to illustrate behavior, wrapping in check-expect means they will serve as unit-tests. (first we need to run the tests and make them fail in order just to ensure that they are well formed)
+
+- inventory - Template and constants: the template is going to be ... <param> means is that we gonna be doing something with the param (so that what the ... mean). the template also helps us outline how the final function looks like.
+
+- Code the Body: you should use every thing from the above steps in order to help you know how to code the function body.
+
+- Test and Debug
+
+NOTE: try to be specific to what types you use when writing functions signatures
+NOTE: whenever you are dealing with a function that tries to answer a yes/no question the purpose should state what it means to be true and what it means to be false
+NOTE: whenever you are trying to test your functions you have to consider code coverage or in other words do the tests cover all of the function branches.
+NOTE: you need also to consider "boundary case" test which states that whenever you have an input to a function that has boundary you have to create 3 tests at least to test beyond the 2 boundaries and those in which within the boundary.
+
+Data Defination:
+is going to solve the problem of representing the information that we have in the problem domain as data in our program
+for example if we have a program that simulates traffic and we want to represent the traffic lights we might wanna say red is represented as 0 and yellow is represented as 1 and green is represented as 3
+
+-if we have a data defination we can say that the template that we have in a function design that consumes or produces the types defined in the data definations is coming from the data defination
+
+Data Definations provides the following:
+- how to form data of a new type
+- how to represent information as data
+- how to interpret data as information
+- template for operating on data
+
+it also:
+- restricts data consumed
+- restricts data produced
+- helps generate examples
+- provides template
+
+How to design data defination:
+1. you need to list some examples to know the type of data you're dealing with (atomic like a string, or numbers within certain range, etc...)
+	- for each type of data we have a way to represent it
+2. write the type comment which states what type is the data
+3. write down the template
+4. determine how the body of the template looks like based on the type of data that we have
+5. then write down the template rules used like atomic non-distinct
+6. finally we can comment out the template to later be used for a function design that uses this type that we have made a defination for
+
+-one form of data is interval which is a range of numbers that a certian program accepts
+-one other form of data might be enumeration if you have a finite number of distinct values such as letter grades for courses
+NOTE: you might skip examples in this case because you have already written them in the type comment step
+NOTE: here distinct means something like "red" but on the other hand non-distinct value means something like a String type
+
+-itemization data form is pretty much like enumeration except that it should have at least one value that is not distinct. when it comes to data itemization you might have arguments with different data types so you might want to check for the the type of the argument before taking any extra steps.
+
+TIP: always try to run your code as often as you can
+TIP: working on tests first will give you the ability to understand what the function that you are designing should do
+
+TIP: the structure of the data determines the structure of the template determines the structure of the function and the tests
+
+How to design world recipe:
+is used to develop real-world interactive programs and is divided into 2 stages:
+- the analysis phase
+- use the design to develop the program
+
+World program design is divided into two phases, each of which has sub-parts:
+Domain analysis (use a piece of paper!)
+    Sketch program scenarios
+    Identify constant information
+    Identify changing information
+    Identify big-bang options
+    Build a wishlist of functions
+Build the actual program
+    Constants (based on 1.2 above)
+    Data definitions using HtDD (based on 1.3 above)
+    Functions using HtDF
+        main first (based on 1.3, 1.4 and 2.2 above)
+        wish list entriesfor big-bang handlers
+    Work through wish list until done
+
+NOTE: When there is a modifiction in the program it's better to go back to the domain analysis done to go and check where this change might fit and then go to the approriate parts directly that needs to be changed
+
+Templates:
+is the idea to get the basic structure of a program before you get to the details.
+
+Data Defination for compound data:
+(define-struct hockey-player (firstname lastname))
+;; HockeyPlayer is (make-hockey-player String String)
+;; intrep. HockeyPlayer first name and last name
+
+(define HOCKEY-PLAYER1 (make-hockey-player "Ahmed" "Magdy"))
+
+#;
+(define (fn-for-hockey-player h)
+  (... (hockey-player-firstname h)   ; String
+       (hockey-player-lastname h)))  ; String
+
+;; Template rules used:
+;; - compound: 2 fields
+
+NOTE: whenever we have data of aribtrtry size we need to have a type comment that has a self reference to the data type we are defining.

@@ -1,0 +1,173 @@
+
+First Law of Computer Graphics:
+if it looks right then it's right
+NOTE: we will stick to use real numbers (rational and irrational numbers)
+
+2d Coorindate Spaces:
+NOTE: we are totally free to orient our 2 axis in any way we want. they don't have to be x is the vertical axis and y is the horizental axis. but the normal orientation is as follows y+ pointing up and x positive pointing right. and we can convert from any orientation to this orientation. in generatl we can convert from any orientation to the normal orientation and vice versa.
+
+3d Cooridinate Spaces:
+in 3d we have 3 axis x, y and z but it's not correct that the x-axis and the y-axis are the same as the axes in 2d coordinate spaces. in 3d these 3 axis are prependicular to each other and have no standard way of orienatation.
+
+NOTE: in 3d if we changed the direction of one axis and we want to rotate the coordinate system to flip it back into its original state you won't be able to, and there will always be an axis pointing in the wrong direction.
+
+there are 2 types of 3d coordinate spaces:
+1.Left-handed coordinate space
+2.Right-handed coordinate space
+
+to know whether the current coordinate system is a left-handed or a right-handed coordinate system you should do the following:
+use your left hand and make your index finger point up and your thumb points right and the other finger points forward then if these fingers represents the x+, y+ and z+ directions then this is a left-handed coordinate system if you do the same with your right hand and the directions represented by your fingers are x+, y+ and z+ then this is a right-handed coordinate system.
+
+NOTE: if 2 coordinate spaces have the same handedness then they can be rotated to align with each other.
+
+To know the positive direction of rotation:
+assume that there is a line that points up and its positive end is at the top of the line then make your left hand so that your thumb points up then direction in which your fingers are curled that's the positive rotation direction and this is called the left hand rule and is used to know the positive direction of rotation for a left-handed coordinate system and there is a similar rule for the right-handed rotation.
+
+NOTE: we can change a coordinate space from left-handed one to a right-handed one by fliping one of the 2 axes.
+
+Summations: 
+is a notation to combine more than one term by addtion.
+i=1∑3 (i*4) this is the syntax the first part (i) is the start before the symbol, the part right after the sigma symbol is the end (n) and the last part in the parenthisis is the rule
+
+1st rule:
+if the rule part is constant and the i=1 then evaluating the summation is as follows multiply the rule part * n
+
+2nd rule:
+the sum of all numbers from i to n is equal to n(n+1)/2
+
+3rd rule:
+summation is applied to each term, for example:
+∑(7i-3) can be rewritten as follows 7∑i - ∑3 and both terms have the same n and i values.
+
+4th rule:
+if you have a squared term in your rule part, you can use the following formulla to evaulate that:
+(n(n+1)(2n+1))/6
+
+5th rule:
+if you have a cubed term in your rule part, you can use the followingg formulla to evaluate that:
+(n^2(n+1)^2)/4
+
+Angles and measurements:
+-2 line segements or 2 rays starting from a common end point forms an angle
+-these 2 rays are called the sides of the angle and the common endpoint is called the vertex of the angle.
+
+NOTE: a degree can be subdivided more into minutes and 1 degree = 60 minutes (written 60') and a minute can also be subdivided into seconds 1 minute = 60 seconds (written 60'') and that's all for more precise angle measurements.
+
+-an angle in a standard position is when its vertex is on the origin and its initial side lies on the positive part of the x axis.
+
+Quadrantal angles: are angles in standard position whose terminal side either lies on the x axis or on the y axis.
+
+Vertical Angles:
+if you have an angle and we extended the rays of that angle then the newly formed angle that is directly above or opposite to the original angle then the measure of these 2 angles are the same.
+
+2 Parallel Lines intersected by a line:
+-forms 8 angles have special props.
+-corresponding angles are equal
+
+Sum of triangles angles is equal to 180 degrees
+
+Types of triangles based on the angles:
+-acute triangle
+-obtuse triangle
+-right triangle
+
+Types of triangles based on the sides:
+-all sides are equal
+-two sides are equal
+-no sides are equal at all
+
+Similar triangles:
+are triangles that have the same shape but not necessarly the same size.
+
+Congruent triangles:
+are triangles that have the same size and the same shape.
+
+Conditions must be hold for 2 triangles to be similar:
+-corresponding angles should be equal
+-sides are propertional
+
+we can measure an angle in 2 units: degrees and radians and what measuring an angle in radians means is that if we place 2 rays connected together via a certain point if we place these 2 rays on a unit circle we can measure the space between the 2 rays by measuring how much this part takes from the circle.
+
+as the circumference = 2 π r and the unit circle has a radius of 1 so the circumference = 2 π which means in order for us to go around the circle we go either 360 degrees or 2 π, and if a whole revolution around the circle is 2 π then a half one (180 degrees) is π and 90 degrees is π/2 and 270 degrees is 3/2 π
+
+To Convert from radians to a degrees = 180/π
+
+Trig Functions:
+we can define cos and sine of theta using a unit circle by rotating a ray from a x+ to another (x,y) forming a angle counter-clock wise the new (x, y) coordinates of the ray endpoint after rotation are x = cos θ and y = sin θ.
+
+some rules:
+tangent θ = sin θ / cos θ
+
+
+Calculate the Distance between 2 points:
+we will imagine that the distance between the 2 points is the hyptonuse which means that we will form a right angle traiangle so that the distance between these 2 points can be calculated using the pythagoas's therom as follows:
+1.first we only have 2 points and have no idea what are the length of the other 2 sides of the traingle so to calculate them we do the following:
+  A. to get the length of the opposite side B = Y2 - Y1
+  B. to get the lenfth of the adjecent side A = X2 - X1
+2. afterwards we can now calcuate the length of the hyptonuse side: C = Sqrt(A^2 + B^2)
+
+
+Calculate the Traveled Distance:
+you basically keep track of all of the visted vectors and add them together
+- a vector generally has a length and a direction
+- a vector that has a length of 1 is called a unit vector
+- any normal vector can be converted a unit vector by a process called normalizing the vector and we can simply do that by dividing the x and y coordinates of that vector by the length of that vector
+
+
+Angels:
+tan(ceta) = opposite/adjecent
+cos(ceta) = adjecent/hyptonese
+sin(ceta) = opposite/hyptonese
+ceta = tan-1(opposite/adjecent) -> this is the inverse
+
+
+Game Programming:
+ECS Archeticture (Entity, Components, Systems):
+-is a software design paradigm that uses Composition Based Design
+Entity: any object in the game (i.e Player, Platform, Tile, Bullet, enemy)
+Component: have properties that can be attached to Entities (i.e Position, Speed, Bounding Box, Health, Weapon, Damage, Animation, Gravity, Texture)
+-NOTE: Components are pure data
+Systems: is how we do things with these data, Code Logic that drives behavior
+(i.e Movement, Rendering, Sound, Physics)
+-nowadays all window drawing have 2 buffers (representing 2 frames) one that is currently being displayed and the other is a back buffer that is going to be rendered after the current one.
+
+-sometimes it's conveient to draw to a texture and save it for later and then render that texture, and you might want to do that when you have for example a big grid that you want to draw so you would rather do it this way instead of rendering it directly.
+
+-Texture is a 2d array of bytes that contains color information
+
+-Sprite is a texture and a shape in SFML but what the sprite allows us to do is to draw a porition of that texture
+
+-Entity Tags:
+are some attribute that are given to entities to allow for grouping them by functionality for example: we might have a tag called Player, Bullet, Tile, ...etc.
+
+-Color Space:
+is amount of data to store in a pixel and is different from RGB, RGBA, CMYK, Grayscale, MonoChrome
+
+
+Calculating the distance VECTOR that represents delta x and delta y between 2 points (speed vector):
+-if you have 2 vectors and you want to calculate the distance between these 2 vectors you simply subtract both vectors (by doing element by element subtraction).
+
+
+Normalizing a vector:
+normalized vector = (x / length, y / length)
+
+NOTE: sin and cos and sqrt are a very costly functions
+
+Game Dev:
+in unity a mesh filter component stores data about a mesh, but a mesh renderer component renders that mesh and the material controls how the object interacts with the light, how it looks and so on.
+
+In unity, C# scripts that are attached as components to a game object can be thought of creating your own components.
+
+In unity editor you can position the scene camera to whatever position you like and to apply this position to the main camera just press CTRL + SHIFT + F after selecting the main camera.
+
+In unity you should not place the logic and the visuals in the same game object because basically any changes made in the logic will effect the visuals. so for example if you want to create a player you would create an empty game object and within that create the visual object. and that will come in handy shortly because if you want for example to add character controller you would add it to the empty game object (logic object) not the visual object.
+
+
+In Unity to always ensure that the input is not dependent on the frame rate you want always to multiply your movement vector by Time.DeltaTime
+
+
+to apply smooth rotation of objects you can use the forward the property in the transform object and apply the slerp function to make the rotation pretty smooth.
+
+
+to add animation in unity to a game object you add an animator component. then you need to create a new animator controller to attach it to the animator component
+

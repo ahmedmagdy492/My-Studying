@@ -1,0 +1,255 @@
+Numbering Systems:
+
+1.Decimal: which has 10 as the base
+to convert from decimal to any numbering system simply divide the decimal number by the base of that system
+
+2.Binary: which has 2 as the base
+3.Hexadecimal: which has 16 as the base and has the characters from 0-9 and A-F
+1 hexadecimal digit = 4 binary digits
+-the left most bit is called the most siginificant bit
+-the right most bit is called the least siginificant bit
+
+-to convert from hexadecimal to decimal we can:
+1.multiply each hexadecimal digit by 16 to the power of the current digit position which starts from 0, like so:
+  2BD = 2 × 162 + 11 × 161 + 13 × 160
+  = 512 + 176 + 13
+  = 701
+
+NOTE:
+The reason that hex is useful is that there is a very simple way to convert between hex and binary
+
+To convert a hex number to binary, simply convert each hex digit to a
+4-bit binary number. For example, 24D16 is converted to 0010 0100 11012.
+
+
+Computer Organization:
+1.Memory:
+the basic unit that can store a value in memory is called a byte and each byte has a unique number associated with it which is the address.
+
+2.CPU:
+is the component that is used to execute instructions. CPU must be able to decode an instruction’s purpose very quickly to run efficiently. Computers use a clock to synchronize the execution of the instructions. The electronics of the CPU uses the beats to perform their operations correctly, like how the beats of a metronome help one play music at the correct rhythm. The number of beats (or as they are usually called cycles)
+an instruction depends on the CPU generation and model. The number of cycles depends on the instructions before it and other factors as well.
+Instruction Cycle: is the time taken by the cpu to execute one instruction
+
+Basic Computer Design:
+the basic design is composed of CPU, Memory and IO devices, these are all connected through 3 types of buses:
+1.data bus: real bus on the motherboard itself and from the name you can imply that it transfers data back from memory to cpu.
+2.control bus: is a real cable that connects for example a keyboard to the motherboard
+3.address bus: real bus on the motherboard itself and from its name you can imply that it sends the address through from CPU to memory to fetch an instruction located in memory to be executed.
+
+Cpu Components:
+1.ALU: performs the logic and arithmetic operations
+2.Control Unit: coordinates the execuation of instructions
+3.Clock: synchronizes CPU operations
+
+
+What happens when you double click a program:
+1.the OS load the executable file into memory along with modules that the program relys on (i.e dll files)
+2.then the OS allocates memory for that program
+3.then the CPU fetchs an instruction from memory to be executed by sending the address of that instruction in the address bus.
+4.the memory waits (this is called waiting cycle) until it finds the instruction stored in that memory address and send it back to the CPU using the Data Bus.
+5.a bunch of instructions gets stored into the cache for fast reterival later (cause namely the cache is faster than memory).
+6.then the CPU fetchs an instruction from the cache and stores it into the registers
+7.the CPU then decodes the instruction to understand what it asks him to do.
+8.then the CPU executes that instruction and if any writes need to be done to memory it will be sent.
+and this is called the instruction cycle.
+
+MultiTasking:
+on a high level; it's the ability of the CPU to execute more than one program interchangably as if they were executing at the same time.
+the component that coordinates that is called the Schedular and it's part of the OS.
+
+
+Registers:
+1.General Purpose Registers (32 bit):
+EAX: most used one and called the accumelator.
+EBX, 
+ECX: used as a loop counter
+EDX
+2.Indexes:
+ESI, EDI
+3.Stack Pointers:
+ESP, EBP
+4.Pointers:
+EIP
+5.Flags:
+EFLAGS -> it's only 1 register
+4.Code Segaments (16 bit):
+CS, DS, SS, ES, FS, GS
+
+in intel 80486:
+pipelining was introduced, which can be described as follows:
+-the idea of pipelining relys on the nature of the instruction cycle which involve the following stages:
+1.fetch -> done in memory
+2.decode -> done in CPU
+3.execute -> done in ALU
+4.store -> done in memory
+so instead of just waiting for an instruction to entirley finish its executation cycle we can execute multiple instructions at once by doing the following:
+while instruction A is being decoded in CPU we can fetch another instruction B and after A goes to ALU to be executed we can pass B to the cpu to be decoded and so on.
+
+Pentuim:
+introduced superscaler which is simply means they added multiple ALUs.
+
+when 64 bit Arch. was introduced:
+there was problems with comptability with 32 bit programs to solve this problem intel introduced:
+IA-32e which consists of 2 sub modes:
+1.Comptability mode for legacy 16 and 32-bit applications
+2.64-bit mode uses 64 bit addresses and operands
+
+Pentuim 4:
+a new techonology was introduced called hyber threading which simulates as if you have mutliple processers on your machine and that's done by doubling the number of registers.
+
+then multiple cores was introduced.
+
+Memory Management in x86:
+1.Protected Mode:
+programs can only deal with its own porition of memory and if it needs more memory it should as the operating system to give it.
+2.Real Address Mode:
+programs can write in memory in wherever they like.
+3.System Management Mode:
+power management, system security, the processor controls a porition of memeory that contains information the cpu uses to for example put the computer into sleep mode or in other words to save power whenever is possible.
+4.Virtual-8086 mode:
+emulates the real mode but it's totally virtual and you still under the hood work in protected mode (e.g cmd).
+
+16-bit Real Mode:
+for 1,048,576 bytes of memory we need 1,048,576 address to work with them
+and we need 20 bit to store all of this addresses, calculated using log2(10248576)=20
+
+when 16-bit processor were dominant memory technologies were also evolving leading to memory space up to 1mb which needed 20 bit to store these addresses and back then registers were only of size 16 bit so intel came up with a trick to solve this problem:
+intel simply used 2 registers the first 16 bit register was called selector and the other 16 bit register was called offset.
+
+the selector is a segment which has multiple bytes this segment shares the same address or you can say that it shares selector number but inside each byte has its own offset.
+
+to calculate the real address we need to do the following: 16*selector + offset
+
+When 32 bit archeticture introduced we were able to address 4 gb of memory but what happen when you for example want to play some game that takes up to 2 gb memory the os does the following:
+-allocate some memory from the hard disk and use it to allocate memory for that program, this memory is called the virtual memory and linux it's called a swap.
+
+In protocted mode as well the os divides the memory into segments.
+
+Simm module in memory was used before but Dimm is now used instead and both are different layouts of memory.
+2 types of dimm:
+1.sd ram
+2.ddr sdram
+Dimm in general has 64 bit wide
+Due to the need for 32 bit systems to deal with more memory than 4gb physical address extension was introduced
+When PAE is enabled 36bit addresses can be addressed
+
+Memory Models:
+is the solution to processor to allow it to know how to deal with memory.
+1.Flat Segment Model:
+A model where the CPU can directly address the memory locations that are numbered from 0 – 2^32 (this is usually the case on IA-32 processors). This memory model provides direct access to the physical memory, but virtual memory can still be implemented on top of it.
+
+2.Multi Segment Model:
+each program has its own table and it's called local descriptor table.
+With segmented memory model, the physical memory is divided between segments. When we’re trying to address a certain memory location, we need to provide the segment ID and the offset within that segment. Each segment has a length associated with it, so we’re only allowed to reference the memory locations within that length of the segment. If we try to address a memory location outside of the segment, a segmentation fault is raised [4]. The MMU unit is used to translate the segment and offset within that segment into the memory address.Each program usually uses the code segment where the code instructions are stored; the code segment that the program uses is stored in the CS register. The DS register is used for data segment and specifies the data segment the program is using. The SS register specifies the stack segment of the program. But there’s also an extra segment ES which is used for data.Many of the 32-bit operating systems use a segmentation model that simulates the flat memory model by setting the segment base to 0 and length to 2^32. This is done because we don’t like to think about that when programming; we only wish to use the virtual address so there is no distinction between the code and data space and we also don’t like to think in terms of virtual and physical addresses. The programs can them think in terms like each of them has access to its own 0-2^32 address space, which greatly simplifies the understanding we need to have in order to use such memory locations. Since the program is run in its own memory space, we don’t have to worry about accessing memory with relative addressing.
+3.Paging:
+When using this model, the physical memory is divided on page frames, while the virtual address space contains pages. The programs know only about the virtual addresses. When we try to access the pages that are not in the physical memory, a page fault is triggered and must be handled by the operating system. Once that happens, the operation system must reserve an empty page frame in the physical memory where the data will be stored to. Also, the page table must be updated to link the certain page from virtual memory to its corresponding page frame in physical memory.
+
+Writing Assembly Program:
+when you write your assembly program you have the source then use the an assembler to output 2 files:
+1.object file (which is binary)
+2.listing file (text file)
+then a linker comes into play and takes your object file along with any libraries that your program uses and links them and produce an executable then at the end a component called OS Loader takes the content of the executable and move it to memory to begin executing the program.
+
+we can simply write numbers as follows:
+decimal -> 12 or 12d where d is the radix that indicates the base of the numbering system used
+hexa -> 0A2 note that here we need to prefix so that the assembler has to differaitiate between the number and the variable.
+
+strings:
+we can use '' or "" to store one character or multiple characters
+but note that if we want to create a string we need to end it with a 0 for example:
+"my name is mr developer",0 
+
+naming variables and procedures:
+1.cannot be a reserved word
+2.must be between 1 to 247 characters including digits
+3.not case senstive
+4.first character must be a character or _,@,? or $
+
+Directives:
+assembler use them to divide the exe file into sections
+examples:
+.data -> used to indicate that the upcoming section represents variables delcartions
+.code -> used to indicate that the upcoming section represents instructions
+.stack100h -> used to indicate the stack and the number at the end represents the size of the stack.
+
+NOTE: directives differ from one assembler to another but the concept of divding your source code into sections still exists among them.
+
+The general form of any intel assembly instruction:
+[label]: mnemonic [operands] [;comment]
+loop1: mov eax,32 ; count of array elements
+
+Labels:
+is a place mark to mark and know the address of a command
+
+Commands:
+stc: set carry flag and has no operands
+inc <register>: increament the value in that register by one. the same can be done in memory
+add eax, ebx: adding values from register and another register
+sub myByte, 25: adding values from memory and as a constant
+add eax, 5*6: adding a value from register and another as an expression will be evaluated by the assembler.
+-these operations is done by taking the second number and for example add it to the number in the first operand and stores the result in the operand in case if it were register.
+
+NOP operation:
+-is an operation that has no-effect except that it will layout memory such that the starting address always is even.
+-gets stored in one byte only.
+
+NOTE: you can talk to the kernel using syscalls and on linux you can find them in a file called unistd_32.h
+
+NOTE: to link the object file using the ld linker on linux you can use the following command: ld -m elf_i386 -o <out_name> <src_name>
+
+lea <dst>, <src>: is an instruction that will simply loads an address of a label in memory you give it
+
+NOTES:
+if someone wants to test if a register has 0 or not:
+and reg, reg or you can use add reg, 0
+
+inc reg == add reg, 1
+add is faster than the mul instruction
+
+xor reg, reg: to zero out the register
+
+mov is the only 64 bit instruction immediate operand
+
+sub has the same problem as add when dealing with immediate 64 bit values you have to deal with these values
+
+we can use sub reg, reg to zero out reg
+
+we can use XCHG: to swap values
+
+Bitwise Operators:
+&: is used to extract information
+|: is used to set parts of the word (used to set certain bits on or you can think of it as if you are copying the 1 bits from one variable to the other).
+xor: can be used to toggle a bit on or off
+
+compiler puts code into the obj file with hardcoded addresses these addresses is changed when the executable is loaded into memory
+
+when compiler generates binary code it has to know how to pass arguments to functions and how they return values in order to generate code that obey to ABI
+
+.lib files are just a set of bundled obj files into one file that can be linked direclty with your program to use the functionality that it offers.
+
+when you call functions from windows dlls the executable file itself still contains symbols that are not yet resolved which are symbols from windows when you run your program the windows os loads the corresponding dll that your exectuable needs the code from in order to resolve these unresolved symbols in your exectuable and this is called dynmaic linking.
+
+When OS loads Programs instructions into memory:
+first the os creates an address space for the program to run and then loads the different sections of the executable into memory.
+sections of the program:
+.data: are writable sections and contains the global variables of the program and contains initialized data.
+.bss: are writable sections and contains the global variables of the program and contains unintialized data.
+.text: is a readonly section and holds the program instructions.
+and finally the stack and the heap are initliazed
+
+Stack grows down towards lower addresses.
+
+Example:
+↑ Lower addresses (0x08000000)
+Shared libraries
+.text
+.bss
+Heap (grows ↓)
+Stack (grows ↑)
+env pointer
+Argc
+↓ Higher addresses (0xbfffffff)
+
+VIP NOTE:
+we can understand how assembly work under the hood by compiling a c program that is called rosta stone

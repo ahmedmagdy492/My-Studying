@@ -1,0 +1,55 @@
+Cryptography:
+securing traffic using tls/ssl is done for 2 main reasons:
+1.secure traffic
+2.provides data integirity
+
+TLS:
+consists of 2 parts:
+1.Handshake protocol: generates a secret key (sometimes called session key) that is used by both sides of comminucation to encrypt the traffic generated using public-key cryptography and then shares that key between the 2 parties.
+2.Record Layer: transmit data using the shared secret key.
+
+Symeteric encryption systems:
+2 people and one key
+2 algorithems: one to encrypt and another one to decrypt
+Alice takes use Algorithem 1 to encrypt the data by providing 1.message 2.key
+Bob decrypts the message using Algorithem 2 and provide the cypher text and the key
+the key should be kept secret
+
+there are 2 use cases for symeteric encryption:
+1.Single Use Case: is to use one time encryption (like for emails) new key for every email
+2.Multi Use Case: one key is used to encrypt all messages or files
+
+
+the three steps in cryptography:
+1.precisly specify the threat model
+2.propse a construction
+3.prove that breaking the construction under the threat model will solve an underlaying hard problem.
+
+
+RSA:
+When we mention prime factorization, what’s meant is that RSA uses two large random prime numbers (p and q) – we’re talking huge, hundreds of bits long – and multiplies them to create a public key.
+
+So, p * q = x
+
+And, x = Public Key
+
+Anyone can take the public key and use it to encrypt a piece of data. Typically in the context of SSL/TLS what’s being encrypted is the session key. However, without knowing the values of the two prime numbers, p and q, nobody else can decrypt the message.
+
+From an RSA standpoint, RNGs have two big problems:
+
+    They’re not really that random
+    Almost everyone uses the same ones
+
+There are, for all intents and purposes, two ways to randomly generate numbers. The first requires you to map some naturally occurring event or phenomenon that is expected to be random. There’s actually a fairly new biological key generation method being tested at Penn State University that maps the movement of living cells against a grid that’s overlaid and then uses that to generate a cryptographic key. Cloudflare does something similar with the lava lamps in its lobby. 
+
+Frankly, the first way is kind of fascinating but it’s also a rabbit hole that we’re going to avoid right now. The second method is called pseudorandom number generation and it relies on computational algorithms. For the sake of RSA encryption we call these cryptographically secure pseudorandom number generators (CSPRNGs) and they produce long sequences of what appear to be random results, which are actually determined entirely on the basis of a shorter value, called a seed. 
+
+Here’s a list of some of the most commonly used CSPRNGs that have been standardized:
+
+    FIPS 186-4
+    NIST SP 800-900A Rev. 1
+    ANSI X9.17-1985 Appendix C
+    ANSI X9.31-1998 Appendix A.2.4
+    ANSI X9.62-2005, Annex D
+
+Let’s get back to seeds. When you hear politicians and law enforcement officials talk about encryption backdoors, one way to accomplish that is to share the seed that was used during key generation, which can help to determine the value of the keys faster and more efficiently. 

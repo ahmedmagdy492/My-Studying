@@ -1,0 +1,135 @@
+Writing a number in Expanded Notation:
+1.first locate the position of each digit whether it's in the tens, hundards or thousands place etc...
+2.then multiply each digit by the corresponding value for example multiply the digit in the 10s place by 10 and in the 100s place by 100 etc
+3.then add all of them together
+
+Rules for rounding off a number to the nearest value (i.e thousands, hundared):
+1.get to the round off digit
+2.see the digit to the right if it's:
+  - <= 4 then leave the round off digit unchanged and replace all the digit after to 0
+  - >= 5 then add 1 to the round off digit and replace all digits to the right by 0
+
+Props of Addtions:
+1.commutative property: we can add the numbers in any order:
+1 + 2 = 2 + 1
+
+2.associative property: states that if we have more than 2 numbers to add and we have () around 2 of them we can simply switch the () to be around the other 2 numbers and that will not change the sum:
+(1+2)+3 = 1+(2+3)
+
+3.identity property (0):
+if you add 0 to a number the number stays unchanged:
+12 + 0 = 12
+
+Identify the parts of an addtion problem:
+-the numbers that are being added are called "the addends"
+-the result number is called "the sum"
+
+Vertical Addtion:
+adding each digit in the corresponding position in addends
+
+Subtraction Problems:
+in subtraction the right most number is called the minuend and the number to subtract from is known as the subtrahend and the result is called the difference
+
+Props of Multiplication:
+numbers that are multiplied together are called factors and the result of the multiplication operation is called the product
+
+props:
+1.cumtative property
+2.associative property
+3.distributive property
+
+Trailing zeros:
+are the zeros at the end of a number that no other number follows it.
+you can use this fact in mutliplication to just multiply the non-zero numbers and directly add the trailing zeros at the end of the product
+
+Props of division:
+names of the division components:
+the divdend: the part that you start with
+the divisor: the amount that you divide by
+the qotient: that is the result of the division
+
+Order of operations:
+1) grouping (either parenthisis or curly brackets or any other grouping sympol)
+2) exponents
+3) multiplication and divsion
+4) add or subtract
+
+Z is the set of all integers (including negative, postive numbers and 0)
+
+Absolute value of a number:
+is the distance between that number and zero (which means that the output is always going to be postive cause there is no negative distance)
+
+Divisability Rules:
+-to determine whether a number is divisable by 2 or not:
+ 1.the last digit in that number needs to be an event number
+-to determine whether a number is divisable by 3 or not:
+ 1.sum the digits of the number and divide them by 3 if there is no reminder then it's divisable
+-to determine whether a number is divsiable by 4 or not:
+ 1.if the last digit is even so i can take the last 2 digit and divide them by 4 if no reminder then it's divisable by 4
+
+
+Prime and Compoisite Numbers:
+-prime number: is a number that is only divisable by 1 and itself
+-composite number: is a number that is divisable by other numbers including 1 and itself
+-neither of both categories is the numbers 0 and 1
+
+GCD of 2 numbers (also known as GCF):
+-you do a prime factorization of each number
+-form a list of prime numbers that are common in for both numbers
+-multiply the list of prime numbers
+-if there are no numbers in common between both numbers then GCD = 1
+
+LCM (least common multiple):
+2 ways to get the LCM for 2 or more numbers:
+- first way is to multiply each number by every possible number starting from 1 and find the first shared product
+- second way is to do a prime factorization of each number then form a table of prime factors and if there are more than one common factor that are repeated pick up the large one that is repeated for example if there are 2*2 and another number has 2*2*2 we only pick up 2*2*2 and put all the other non-repeated numbers
+
+NOTE:
+To compare 2 fractions that does not have a common denmonator you can cross multiply the 2 fractions and based on the output of this cross multiply we can determine which one is the bigger and which one the smaller.
+
+
+Propertion:
+a propertion is a ratios that are equal to each other (2 fractions are equal)
+when the 2 rates are equal we can say that one is propertional to the other
+NOTE: before evaluating the 2 ratios (fractions) we should look at the units of each numenator and denomenator
+
+
+When adding or subtracting mixed numbers:
+add/subtract the fractions first then do the same to the whole numbers
+
+
+Rounding numbers:
+- you can round a number to the nearest tenth, hunderdth, ... etc
+- and depending on which decimal place you have chosen to round to, you can remove the decimals after that place
+
+
+Converting decimal to percent:
+to convert a number to a percent you just simply multiply that number by 100 or if you have a fraction you can divide both the numerator by denomarator and just simply go ahead and multiply the qotient by a 100
+
+Convert percent to decimal:
+just divde the number by 100
+
+
+Mean:
+is simply the average
+
+Median:
+sort the list of numbers from small to large then if the count of numbers is odd then it's directly the number in the middle but if the count of the numbers are even you need to get the average of the 2 numbers in the middle and then that's the median
+
+Mode:
+is the number/numbers that occur the most in the given group of numbers
+
+Units:
+Length:
+1 foot = 12 inches
+1 yard = 3 feet
+1 mile = 5280 feet
+
+Weight:
+1 pound = 16 ounces
+1 ton   = 2000 pounds
+
+Volume:
+2 cups = 1 pint
+2 pints = 1 quart
+4 quarts = 1 gallon

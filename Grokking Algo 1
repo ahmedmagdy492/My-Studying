@@ -1,0 +1,194 @@
+Binary search:
+is an algorithem that search for item k in a sorted list.
+
+Input:
+Permutation of size n
+
+Output:
+Index of the found element
+or Null in case the element is not found
+
+Iterative Solution:
+public static int? Iterative(List<int> listOfNumbers, int value)
+{
+    int start = 0, end = listOfNumbers.Count - 1;
+
+    // old condition: start < listOfNumbers.Count - 1 && end > 0
+    while (start <= end)
+    {
+        int mid = (start + end) / 2;
+        if(value == listOfNumbers[mid])
+            return mid;
+        if(value > listOfNumbers[mid])
+            start = mid + 1;
+        if(value < listOfNumbers[mid])
+            end = mid - 1;
+    }
+
+    return null;
+}
+
+Q1: why the terminate condition is start <= end?
+we can also use this condition: "start < listOfNumbers.Count - 1 && end > 0" and it will work just fine but this one is more readable and makes more sense
+
+Q2: why start <= end not just start < end?
+well, it depeneds on the initial value of end if you start with end = list.length - 1 then we defintly need to use "start <= end" because if we don't use it the last element will be never be checked.
+
+Q3: why use (start+end)/2 instead of just using end/2?
+because incase we go towards the end of the array the formula "end/2" will always give us the same number which means that it will produce an infinite loop and one other reason is that we want get the mid of the current chunk of the array that we are currently using not the entire array.
+
+NOTE: if we try to compare between the running time of linear search and binary search will never come across that linear search is better than binary search, here is an example
+let's say that n = 3 and the running time of linear search is n and the running time of binary search is log2(n), after removing all constants and only leaving the larger terms we can say that:
+3 < log2(3)
+3 < 2 is not true
+
+Solving Missing Number Problem:
+first i solved it using a traditional approach which takes n^2 time but relaized that i can do better by involving the binary search but i found out that i have to sort the array comming as input so i've done so and at the end i found that it takes 2nlogn which is nlogn.
+but afterwards i found some other useful solutions:
+1.using a hashtable as the place in which we can check against to get the missing number and that's will give us an advantage by removing the inner loop and lowering down the running time down to n*1 where 1 is the access time of an element within the hashtable. but the issue in this solution is that it requires o(n) extra space.
+
+2.using the sum formula: in this solution will calcuate the sum of the input array and the sum from 0 to n (the length of the array) and then subtract both of them to get the missing number.
+this has an issue of integer overflow in case if the array is quite large.
+
+3.using the xor:
+get the xor of the first array and the xor of the second array then xor between the result of the 2 previous operations
+
+Big Oh:
+Algorithm speed isn’t measured in seconds, but in growth of the
+number of operations.
+Instead, we talk about how quickly the run time of an algorithm
+increases as the size of the input increases.
+
+Tree:
+is a heirarichal data structure (non-linear) that conisits of nodes connected to each other by edges(sometimes called branches).
+Node Types:
+node types vary depending on the level it's in:
+1.Root node: a node which has no parent
+2.Leaf node: a node which has no child
+3.interior node: which is neghther a root nor a leaf (in other words it's between the root and the leaf nodes).
+
+Height or Depth of a tree:
+the number of edges in the longest path from the root to the leaf node.
+
+Types of Trees:
+1.General tree: a tree which its nodes could have any number of parents and any number of children.
+
+2.Binary Tree:
+a tree which should have only one root node
+each should have 0 or 1 or at most 2 children nodes
+no node can have more than one parent
+
+Binary Tree Traversal:
+1.pre order: root -> left -> right
+2.in order: left -> root -> right
+3.post order: left -> right -> root
+
+Binary Search tree:
+The same as binary tree but with 2 conditions:
+1.elements on the left side of the root should be smaller than the root
+2.elements on the right side of the root should be greater than or equal to the root
+
+NOTE: binary search tree in general has o(h) where h is the hight of the tree when searching.
+
+NOTE: we call a tree balanced if for all nodes the difference between the heights of left and right subtrees is not greater than one
+
+Skewed binary search tree:
+a tree that has all of its nodes on one side. this tree has o(n) in searching and removing.
+
+NOTE: by defination binary search trees cannot have duplicates but we can get a work around for this by doing the following:
+-one simple solution is to create an extra piece of data to keep track of the count, but of course that will increase the complexity and the running time.
+
+Deleting a node from binary search tree:
+case 1: if the node to be deleted is a leaf node:
+then we need to get a reference to the parent node and remove the reference to the child node (the one to be deleted)
+
+case 2: if the node to be deleted has one child or one sub tree:
+then we need to get a reference again to the parent node and then set the child of the parent to the child of the node to be deleted.
+
+case 3: if the node has 2 children:
+in this case we will get the min value in the right sub tree and set the value of the node to be deleted to this min value and then delete the min node.
+
+
+Problems:
+First Bad Version Problem:
+is a problem that wants you to find the first bad version in a sequence versions and since a version is based on the preceding one so what comes after it as going to be bad as well.
+
+-the brute force solution is simply to use linear search which is o(n) time.
+-but a better one would be binary search which of course o(log(n)) time since the version numbers are sorted.
+but if you use the binary search by default and try to run your code with very large numbers unfortunaitlly will cause an integer overflow but to overcome this problem you can use a trick here:
+mid = left + (right - left) / 2
+
+
+Intersection:
+1.first solution:
+is to iterate over one of the 2 arrays then put what ever matches into the result array but considering skipping elements already taken
+
+2.another good way to optimze is to use a hashtable for looking up an element to see whether it's exist in the result array or not but that will cost us o(n) at the end of the algorithem to convert the hashtable back to an array
+
+3.another way is sort one of the arrays and use binary search on the sorted array for example iterate over normally on the not sorted array and start doing a binary search within the first loop to find whether the element is exist within the other array or not this will cost us "n log n + n + n log n" and also use the hashtable as mentioned in the previous solution
+
+4.The idea is to convert both arrays into sets, and then iterate over the smallest set checking the presence of each element in the larger set. Time complexity of this approach is O(n+m)\mathcal{O}(n + m)O(n+m) in the average case.
+
+Perfect Square:
+the first approach that came into my mind is to use binary search since we are searching for a number from 1 to n (where n is the input number that we are aiming to check if it's a perfect square or not) so i decided to make the termination condition to return true is to: middle * middle = num but that approach is not effcient since it caused an overflow when middle is too big and we multiply it by itself that will result in a huge number that will not fit into memory so if the msb is 1 it will consider the number negative since it cuts the part that can only fit in memory so my approach was to use division instead of multiplication for the terminating condition and for the other 2 conditions used the following:
+-if num / middle < middle: means that if qotionet is less than the middle so we need to reduce the middle a little bit since we use the middle as the divisor so in this case we reduce the high pointer to be middle - 1 to get closer towards the target.
+
+
+Extended Euclidian algorithm:
+is writing the gcd number as a linear combination.
+
+
+The majority element:
+the majority is the element that appeares more than half of the length of the input array
+-the first approach that may come to your mind is to create a hashtable in order to keep track of the occurance of each element and then simply get the max of the occurances from the hashtable and that the majoirty element but that solution will cost us O(n) time and O(n) space.
+-the best way to solve this problem which is O(n) time and O(1) space complexity is:
+we need to keep track of the current element and the number of time this element occurs and iterate over the array and if we encounter the same value increament the counter if you encounter another item decreament the counter if the counter reaches 0 then change the element variable to be the current element and simply at the end return the element variable and that's the majority element.
+
+
+Find a cycle in a single linked list:
+-the first intuation is to have a hashtable and simply start adding nodes to it as long as it's not exist if you encounter a node that is already exist return true which means that the list has a cycle otherwise return false. that solution has O(n) time and O(n) space.
+
+-a better one in terms of space o(1) and time o(n) but i my self don't consider it a solution cause beyond a certain point the algorithm will not work but at least for specific cases it's valid and better in performance as mentioned:
+you would simple create a counter and a pointer and keep iterating until you either encounter a null pointer and in that case the list has no cycle or you encounter a limit therfore you have been in a cycle and then return true.
+
+
+-Floyd's Algorithm (tortoise and hare):
+the idea here is to have two pointers a slower one that moves one node ahead and a faster one which moves 2 pointers ahead at a time and once both pointers meet at the same node then there is a cycle otherwise either one of them will be null which means there is not cycle.
+
+-Recursion:
+1.what is the least amount of work that i can do?
+2.when would the process complete?
+
+HailStone Numbers:
+are a sequence that starts with a speicfic number and then the numbers goes up and down continounsly until it ends with the value of 1 and here how you can calculate it:
+If the current number is even, divide it by two; else if it is odd, multiply it by three and add one.
+
+Techinques for solving problems:
+1.Divide and conquer:
+a recuirsive approach to solve problems, D&C has two steps:
+1.figure out the base case (this should be the simplest case to handle)
+2.decrease or reduce your problem until it becomes the base case
+
+
+Properties of a node:
+
+-The depth of a node is the number of edges from the node to the tree's root node.
+A root node will have a depth of 0.
+
+-The height of a node is the number of edges on the longest path from the node to a leaf.
+A leaf node will have a height of 0.
+
+Properties of a tree:
+
+-The height of a tree would be the height of its root node,
+or equivalently, the depth of its deepest node.
+
+-The diameter (or width) of a tree is the number of nodes on the longest path between any two leaf nodes. The tree below has a diameter of 6 nodes.
+
+Converting an Array to a Balanced BST:
+1.first we need to think about that both sides needs to have approximately the same depth
+and the array also is sorted so in order to do that we have to think about the simplest case to handle first to get the base case then we need to calculate the mid element cause and make it the current root element (do not use the first element as the root cause that will make the tree skewed toward one side and will have a bad complexity which in the worst case will be o(h) where h is the height of the tree) then do the same to the left and to the right subtrees recursivly and walla you're done.
+
+
+Hamming Weight:
+The Hamming weight of a string is the number of symbols that are different from the zero-symbol of the alphabet used.

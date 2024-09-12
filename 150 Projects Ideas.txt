@@ -1,0 +1,44 @@
+1.sniffer (postponed and will be web app in c++ or will be made in raygui and win32 api)
+- my steps in flutter
+- social media (system design, graphql, flutter, angular or react, nosql db, real time notification system) -> -C#-Make your C# code more object oriented-Asp.net core Web API-Authorization and Authentication (all of its types)-Unit testing in Asp.net Core Web APIs
+- race typer (php and websockets)
+- the document (tokenization, state machine, parsing)
+-cv templates creator (xml SAX parsing)
+-the hangman over network [Working on now] (pub-sub arch, C#)
+-chat app in flutter using xxmp protocol (up next)
+-bandwidth limiter (by using windows api hooks)
+-a mobile app that sends clicks to an opened powerpoint window on windows that moves to the next slide
+-Dominio Game -> to be continued
+-chat using public-key cryptography -> done
+-Ftp client -> done
+-snake -> done
+-connect 4 -> done without AI
+-tetris
+-pong -> done without proper bouncing
+-space invaders with levels and build -> done
+-push notification (may be part of the real time system)
+[SOON]:
+-.net minimal api and sql database and front-end react for building a small trello app to be local for me
+
+Low Level projects:
+- binary visualizer
+- cards game engine in c++
+- bootable usb that boots up a snake game
+- kernel driver to deal with disk
+- network scanner with c and raygui
+- wav file waves visualizer with c and raygui
+- woki toki
+- bluetooth attacker with c and libbluez
+- frame visualizer with ffmpeg and raygui
+- pdf file reader
+- crawler and search engine
+- compiler
+- web server
+- chat bot
+- simple vpn (cryptography, how vpn works, networking)
+- memory allocator
+- database engine
+- web server that can support tls in the future and supports range requests and uses HTTP/1.1 and a client that is like internet download manager (the implemntation should not depended on the UI layer
+- version control
+- network stack
+- operating system

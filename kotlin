@@ -1,0 +1,120 @@
+NOTE: everything in kotlin is an object even primitive types such as char and int etc...
+
+Structural Equality:
+var a1 = "ahmed"
+var a2 = "mohamed"
+
+checking if the content of both variables are equal using:
+a1 == a2 or use .equals() method a1.equals(a2)
+
+Referential Equality:
+comparing the reference themself instead of the content we can use === operator
+a1 === a2 means that is the address of a1 is the same as the address of a2 but that not the case with numbers, chars(strings) and booleans
+
+Nullable references:
+objects by default are non-nullable which means you cannot set them initially to null unless you explicitly tell the compiler by prefixing the type with "?"
+
+to call a method or access a field within a nullable object you have to use the safe operator "p1?.name" this will mean that if p1 is null return null otherwise get the value of name
+
+if you want to avoid returning null you can use the "elvis operator" which is written as follows:
+var a1 = p1?.name ?: ""
+
+Functions:
+NOTE: by default all functions in kotlin retunrs Unit
+NOTE: functions in kotlin are first class which means they can accept functions as parameters and they can return a function and also we can declare function within another function
+
+kotlin has a conecpt called single line expression function which can be declared as follows:
+fun hello() = println("hello")
+
+if we have more than one value of the same type that can be passed to a function instead of creating more than one overload we can simply use the "vararg" keyword prefixing the parameter and that parameter will now become an array
+
+Classes:
+
+in kotlin you can create only one primary constructor but you can create as many secondary constructor as you wish.
+
+if the primary constructor does not have any annotations or visibility modifiers, the constructor keyword can be omitted
+
+init block is called after the primary constructor has been invoked
+
+we can create properties inside kotlin classes by simply using the usual notation for creating a variable:
+var prop = "ahmed"
+val rprop = "mohamed" for a readonly property
+
+we can also override the getter and the setter of a property using the following syntax:
+for getter:
+val fullName = "$firstName $lastName"
+	get() = "FullName: $field"
+note field here is a special keyword that refers to the value of the property
+
+for setter:
+set(value){
+	field = value
+}
+
+Companion objects:
+are basically a way to create static fields and methods within a class
+NOTE: only one companion object is allowed per class
+
+in kotlin to implement the signleton design pattern on a class we can easily do that by creating an object using the object keyword instead of the class keyword just as follows:
+
+object User {
+	var firstName = ""
+	var lastName = ""	
+}
+
+Constants by default are not static if you want to access them via the class level you should wrap them within a componion object
+
+difference between const and val are like the difference between const and readonly in c# respectivly
+
+nested classes and inner nested classes:
+both are classes created within other classes but the difference is that in normal nested classes you cannot access members directly of the parent class unless you create an instance directly of the parent class within that nested class, on the other hand inner nested class are fundmentally the same but it gives the ability as a programmer to access the member of the parent class directly. but that would lead kotlin to create an instance of the inner nested class which means that you can access the inner class using an instance of the parent class.
+
+
+the let inline function: is one of the scope functions used on a variable to execute something on that variable if that variable is not null.
+
+
+Kotlin Co-routines:
+are methods that are suspendable (which means you can start them any time you want and pause their execuation anytime you want) can run in different contexts (which means that they either can run in the main thread or in another thread).
+
+NOTE: when you create a co-routine it will be executing untill the application is running otherwise it will simply be cancled once the application exits.
+
+NOTE: co-routines are not threads themself they are just functions that can run in a different thread or in the same thread.
+
+NOTE: suspend functions can only run within a coroutine or within another suspend function.
+
+NOTE: when creating the co-routine you can define the context in which you can determine on which thread the co-routine code will run by selecting the right dispatcher (main, io, default, unconfined)
+
+NOTE: if you a heavy call to say for example a remote server so you need to perform that operation in another thread say you can set the context to the co-routine to run in a different thread but after that call ends you need to update the UI so you have to go back to the main thread context so you can do so by changing the context explicitly back to the main thread via calling the function "with context" and providing the main thread as the current context.
+
+NOTE: coroutines returns a job which can then allow you to wait for the coroutine to finish and then continue the work and you can also cancel that job.
+
+NOTE: we can use withTimeout Function to cancel a coroutine automatically if it takes more time than the specified time out.
+
+async function: can be used to do async calls instead launch and it returns deffered object which can be used to get the value back and in order to wait for the answer you simply need to call await on the returned deffered object.
+
+Scope Functions:
+let: is used with null checks and returns the last line of the block
+example:
+var name: String? = null
+    name?.let {
+        println("ahmed")
+    }
+// it means run that code if name is not null
+
+apply: used when you want to apply many changes to an object, somewhat like object initializers
+
+run: does the same thing as apply but will not return a reference to the object it was called on.
+
+lambda syntax in kotlin:
+fun printName() {
+	println("name")
+}
+
+val funName = ::printName
+
+funName()
+
+Defineing function as a parameter:
+fun printName(function: () -> Unit) {
+	function()
+}

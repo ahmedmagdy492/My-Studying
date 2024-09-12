@@ -1,0 +1,180 @@
+virtual memory:
+modern processors run processes on a memory that appears to be the real memory but it's not (this done nowdays to protect memory from malcious processes) and this done by the cpu by divding the memory into pages that has a spcific size and these pages are exist in phyiscal memory.
+so when you talk about an address that you have access to in your program that address is relative to the virtual memory that the program see not the actual memory but the role of the os here is to map these virtual addresses into real addresses which also does not have to be in memory maybe swaped in hard disk or something.
+-each page has somethings on it that the cpu calls the flags and those flags allow access control so they will simply mark a page as being readable by a process executable by a process and what they often do currently is marking pages that are executable as not being readable or writeable
+
+ASLR (Address Space Layout Randomization):
+is a security feature that allows os pick up random addresses each time a process runs.
+
+Some important terms that are useful when trying to send something for example from cpu to ram and from ram to gpu:
+latency: describes how long it would take to do that full round trip
+througput (bandwidth): describes how many things that i can send while i'm waiting for the first thing that i sent to finish.
+
+-so we can say that the bandwidth of memory is how many bytes can be read and written by the memory can do per second.
+
+Endinaness:
+is the bytes order in memory and there are 2 modes:
+little endian:
+is when the lower byte is stored first
+big endian:
+is when the higher byte is stored first in memory
+
+NOTE about how compiler may allocate or lay out things in memory:
+compiler may change the size or allocate more space if needed in order to pad memory approperiatly to make accessing values from the main memory way more faster for the cpu.
+
+Bitwise operators:
+number << amountToShift shift left: shifts the number by the specified amount to the left or it's like multiplaying by 2 for example:
+1 << 2 means multiply 1 by 2 two times or 2 to the power of 2
+or operator | : is a way to combine things together
+and operator & : is a way to mask values or if you have a pattern and you want to apply that pattern to a value you can use the and operator.
+
+typedefs:
+are used for more than one thing but mainly we can use it to alias a function declartion so that we are able to create pointer to functions and the c compiler is able to know the function signature and able to generate the code that obey to the ABI.
+
+to make some data in memory other than bytes that are in the code section we tell windows that this certain data in data section for example is executable by the "Virtual Protect" call
+
+
+Opening a window in windows to draw on:
+NOTE: first we will write code to tell the cpu how to render our staff instead of making the gpu do that but that's done for the sake of education but in practice the oppoiste is done.
+
+the flow in windows is as follows:
+1.create an instance of the class wndclass
+2.register the class with registerclass function
+3.call create window
+4.we need to set up a message loop to tell windows to start extracting the messages from the queue for our application to handle and we do that by calling the "GetMessage" function and call within a loop
+5.call TranslateMessage and pass in the message out parameter you got from calling GetMessage function (this function do some processing on keyboard input).
+6.call DispatchMessage
+
+
+device contexts:
+To enable applications to place output in memory rather than sending it to an actual device, use a special device context for bitmap operations called a memory device context. A memory DC enables the system to treat a portion of memory as a virtual device. It is an array of bits in memory that an application can use temporarily to store the color data for bitmaps created on a normal drawing surface. Because the bitmap is compatible with the device, a memory DC is also sometimes referred to as a compatible device context.
+
+Starting to Draw things:
+to draw things on a window we handle the wm_paint signal that we get back from windows in windproc and then use begin paint and end paint functions.
+
+this technique is not what we are going to use but what we should is as follows we first want to use gdi as less as we could:
+1.so first tell windows to allocate a bitmap buffer and then we can write to it and then tell it to draw it
+
+DIP (Device independent bitmap): is a bitmap that windows can draw.
+
+NOTE: in windows there are 2 kinds of buffers:
+1.rgb buffer: every individual pixel has a red, green and a blue value
+2.palettlailezed buffer: if you want to have a number of colors only that you will use to color the pixels on the screen. and compresses the size of the buffer.
+
+
+Bitch: the value that you add to your pointer to the first of the row to move it to the next row.
+Stride: the value that you add to your pointer to the end of the row to move it to the next row.
+
+NOTE: GetMessageA will block our program so we need to use another function called peekMessageA to do not block our program.
+
+OPEN GL Stuff:
+-one of the things that we can use the vertex shader for is to map normal screen coordinates into normalaized device coordinates which is mainly the coordinate system that opengl uses.
+
+-one of the things that we can use the fragement shader for is to adjust individual pixels to add lighting.
+
+Vertex Attribute:
+is a single piece of information such as a position, a color etc.
+
+-in the graphics pipeline we have the vertex shader and the inputs of the vertex shader is called a vertex attribute and the maximum vertex attributes that is supported in open gl is 16 with at most 4 components per vertex attribute but it's possible that the hardware supports more.
+
+-usually in shader programs we specify input variables to recieve data and output variables to output data to the next shader program and the matching is done between the output of the previous shader as well as the next shader based on the variables types and names.
+
+Uniforms:
+are a way to pass data from our application on the cpu to the shader on the gpu, uniforms are global and unique per shader program, and can be accessed from any stage in that same shader program. a uniform keeps its value as long as it's not updated or reset.
+
+NOTE: a vertex buffer consists of multiple arrays each array has multiple vertex attributes such as position and color for each one of this arrays you define the structure or the layout of this pointer via a call to glVertexAttribPointer.
+
+Textures:
+is a 2d image(1d and 3d textures exist) that add more details to our objects without adding more vertices and more colors.
+
+we can map textures to shapes we draw on the screen and we do that using texture coordinates.
+
+texture coordinates are a 2d coordinate system that allows us to pick a specific x, y point such that it maps to a color from that texture and that process is called Sampling.
+
+texture coorindates ranges from (0,0) in the left lower corner to (1, 1) in the right upper corner
+
+normalized coordinates used to avoid changing the texture coordinates when the texture size changes
+
+the default behavior of open gl when specifing a texture coordinate that is outside the range is to repeat the image GL_REPEAT and open gl allows you to change this default behavior and some of the options available are:
+GL_MIRRORED_REPEAT, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_BORDER
+
+NOTE: open gl allows you to set the texture wrapping mode per axis (S and T which corresponds to x and y)
+
+Texture Filtering:
+is the way to define how to map a texture coorindate to a texture pixel (a texture pixel is also called a texel)
+
+NOTE: we have to tell open gl how to do this mapping and there are several options such as GL_NEAREST, GL_LINEAR
+
+GL_NEAREST: returns the texel color that its center is the nearest to the texture coordinate and this is the default option
+GL_LINEAR: interpolates all the nearest texel colors and the more the center of the texel is closer to the texture cooridinate, the more the texels color contributes to the sampled color.
+
+
+Mipmaps:
+is a technique in computer graphics in general that is used to render low resultion textures on far away objects and high resolution objects on objects near to the viewer which saves a lot of memory and also helps open gl to reterive the right color of the specified texture cooridinate so you should have a collection of textures that each one is twice smaller than the other one.
+
+NOTE: Creating a collection of mipmapped textures for each texture image is cumbersome to do manually, but luckily OpenGL is able to do all the work for us with a single call to glGenerateMipmaps after we’ve created a texture.
+
+NOTE: Just like normal texture filtering, it is also possible to filter between mipmap levels using NEAREST and LINEAR filtering for switching between mipmap levels.
+
+NOTE: A common mistake is to set one of the mipmap filtering options as the magnification filter. This doesn’t have any effect since mipmaps are primarily used for when textures get downscaled: texture magnification doesn’t use mipmaps and giving it a mipmap filtering option will generate an OpenGL GL_INVALID_ENUM error code.
+
+we can use a libarary to load the image data from the specefied file format and this libarary is a single header file libarary called stb_image.h.
+
+NOTE: we should pass the texture coorindate to the fragment shader by adding a new vertex attribute
+
+we should pass the texture coordinate to the fragment shader and also pass the texture object via a uniform of the type samplerXD where X is a placeholder for whatever value the texture type is for example 1D, 2D or 3D and by default there is an active (depending on the graphics driver impelmentation) texture unit that your texture is attached to which is assigned automatically to the sampler object you define in your shader by opengl.
+
+Texture Units: 
+are references or locations to texture objects so that you can send more than one texture object to shaders.
+
+so the flow should go as follows:
+-first you need to generate your texture object and activate a texture unit and bind it to the active texture unit so that you can modify the texture wrapping mode as well as texture filtering then you need to load an image and attach it to the texture object and maybe generate the mipmaps for that texture.
+
+NOTE: when setting the uniform in the fragment shader to the texture objects you pass in the texture unit number not the texture id.
+
+Some Vector Math:
+The Dot Product: V . K = ||v|| . ||k|| . cos theta
+where theta is the angle between the 2 vectors
+
+-if the lengths of the 2 vectors are 1 (which means they are unit vectors) then the dot product will equal cos theta
+-if theta is 90 deg then cos theta is 0 which means that the 2 vectors are orthogonal
+-if theta is 0 deg then cos theta is 1 which means that the 2 vectors are parallal
+
+-usually you will use the following formula to get the dot product:
+	(x1, y1, z1) * (x2, y2, z2) = (x1*x2) + (y1*y2) + (z1*z2) = a single value
+then you can calucalate the angle between both of the vectors in degrees by using the first formula and giving the inverse of cosine the dot product calculated previously:
+	cos -1 (the dot product) the result will be in radians then you can convert it to degrees easily..
+
+
+Cross Product of 2 vectors:
+takes 2 input vectors that are not parallel and produces a third vector that is orthognal to the other 2 vectors.
+
+
+Matricies:
+matrix addtion and subtraction are only allowed on matrices of the same size for example 2 matrices that are 2x3 because mainly these operation are done on a per-element basis.
+
+Matrix Multiplication:
+you can only multiply 2 matrices if and only if:
+1.the no of columns in the left hand side is equal to the no of rows of the right hand side matrix
+2.matrix multiplication is not cummtative which means that A * B != B * A
+
+the way to do it is by simply multiply each row from the left hand matrix with each column of the right hand matrix and add each product to end up with a matrix of the same dimensions.
+
+
+NOTE: a vector is just a Nx1 matrix which means that we can apply transformation to this vector by multiplying it by a matrix.
+
+Identity Matrix: is a an NxN matrix that has all of its element 0 except for the diagnaol has 1
+
+Transformation:
+Scaling:
+we can define a vector variable and use to scale a vector by multiplying the correspondeing components of each vector and if the vector variable (used to scale) components are different then this is called a non-uniform scale but if both components have the same value it's then called a uniform scale.
+
+Rotation:
+we can rotate our vector by multiplying it by the rotation matrix and the structure of the rotation matrix depeneds on the axis that we want to rotate around.
+
+NOTE: if you want to rotate around the 3 axis x, y and z you can combine the 3 rotation matricies but doing this will end up doing something called gimbal lock and in order to resolve this you can use quaternions.
+
+to change the origin of rotation or the pivot point you should first translate the object by a translation matrix that has its translation components as the -center of the object itself (which will move the object to the current origin of the screen) and then rotate by the rotation matrix and then translate back the object by the positive center point of the object.
+
+VI NOTE: after rotating an object by a given angle and then you want to move it in that new direction and you still have the current angle so you need to calcuate something called a direction vector and then translate the object with that vector.
+

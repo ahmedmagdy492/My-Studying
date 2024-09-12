@@ -1,0 +1,144 @@
+-a byte is the smallest unit the computer can deal with
+-information is stored as 0 and 1s at the end and what tells us more about them is the context
+-there are 2 types of files text files and binary files
+
+How c/c++ programs gets from the plain text (source code) into a file that contains machine code that can be executed on a specific operating system:
+1.evaluating preprocessing dirctives by the preproccesor: it involves evaulating statements that start with # symbol
+2.compiling the c/c++ code into assembly code which is still in text format can be understood by humans
+3.assembling which assembles the code and converts them into object files
+4.linking these object files into a single unit which is the file executable by the operating system and the target cpu.
+
+Endianess:
+it's about how we store bytes in memory.
+little endian: stores most significant byte at the highest address, ex: intel
+big endian: stores least siginificant byte at the highest address, ex: others
+
+NOTE: some systems now such as Arm is bi-endian which means that it can be configured to either be little endian or big endian
+
+NOTE: processor caches are implemented in SRAM technology whereas Main Memory is implemented in DRAM technology
+
+x86 Assembly:
+-the 64 bit arch has 16 general purpose registers, in addtion to an instruction register.
+-the first generation of the intel x86 processors had only a single register called A which was 8 bit then it got extended to 16 bit and each byte can be accessed seperatly (the lower byte AL and the higher byte AH), and then it got extended once again to 32 bit and got the name EAX which also allows the programmer to access the lower Word for backward comptability and amd extended it again to be 64 bit and give the registers a name that starts with an R such as RAX rather than EAX.
+-RAX is also called R0 and EAX is called R0D (stands for the Double Word version of R0) and R0W which is obviously the Word version of R0 and finally accessing the lower byte of AX by the name R0B.
+-the above idea is applied to all general purpose registers.
+-the other 15 registers have also the same aliases as R0 so they were named starting from R0 to R15
+-starting from the 64 bit archeticture some general purpose registers were added specifically registers that have no alphabat name version, they start from R8 up until R15
+
+Register Types:
+-General Purpose Registers
+-Instruction Pointer
+-Segament Registers
+-Flags Register
+
+Common Registers Using Conventions (Recommended by Intel):
+General Purpose Registers:
+-RAX: used to return values from a function
+-RCX: used for looping and string operations
+-RSI: used as a source index pointer for string operations
+-RDI: used as a destination index pointer for string operations
+-RSP: Stack (top) pointer
+-RBP: Stack frame base pointer
+
+
+RIP: instruction pointer
+
+Flags Register:
+-EFLAGS in 32bit systems and RFLAGS in 64 bit systems:
+it's a single register that each bit has a specific meaning, some of the bits meaning are:
+-Zero Flag: it indicates whether the result of the last executed instruction was zero or not if it was zero the zero bit will be 1 otherwise will be zero.
+-Carry Flag: it's set to 1 when an operation result value is bigger than the destination.
+-Sign Flag: it's set to 1 when an operation result value is negative (or in other words the most siginicant bit is 1)
+-Trap Flag: is set to 1 when the processor is in debugging mode.
+
+Segment Registers:
+they are 16 bit registers that are used to divide the memory into several segments
+-Code Segement Register: points to the code section in the memory
+-Data Segement Register: points to the data section in memory
+-Stack Segement Register: points to the prorgram stack in memory
+-Extra Segement Register (ES, FS, GS)
+
+VI NOTE: the old RBP value will also get saved onto the stack.
+
+Some Common Instructions:
+-NOP: the nop instruction or the no operation instruction is mainly used for padding and aligning purposes and has no effect and its numerical value is 0x90
+
+Stack Memory:
+-by convention most operating systems make the stack grow from high addresses to low addresses.
+-RSP register is the top of the stack pointer that points to the top of the stack and gets changed when a new activation record is created.
+
+information stored in the stack:
+-return addresses
+-local variables
+-used to pass parameters between functions
+
+Stack Related Instructions:
+-Push: pushes a quad word value into the stack and decrements the RSP register by 8 (since the stack grows from high addresses to lower addresses)
+-the push instruction in 64bit mode can have its argument from a 64 bit register or from memory but it has to be in the following format "r/mX"
+
+NOTE: in intel syntax [] means get the value of the address in between these brackets.
+
+examples of arguments to the push instruction:
+register -> rbx
+memory, base only -> [rbx]
+
+NOTE: r/mX means that the instruction accepts a register value or a memory value in one of the following forms: [rbx+rcx*X+Y] where X can only have the values 1, 2, 4 or 8 and Y can be decoded as 1 byte or 4 bytes.
+
+As an example on how the push instruction might work consider the following let's say that you have the following instruction push rbx so the equalivant instruction might look something like that:
+sub rsp, 0x8
+mov [rsp], rbx
+
+-Pop instruction: takes in also a register value or a memory address in the memory format discussed above and does the following: pops the value at rsp to the given location and then increases the rsp register by 8, so for example:
+pop rax will do the following:
+1.mov rax, [rsp]
+2.add rsp, 0x8
+
+Call Instruction:
+it transfers control to a different function taking into consideration coming back to where it left off, so it pushes the content of rip into the stack as a return address to be used by ret later and then decreaments the rsp by 8 (since it pushes an 8 byte addres onto the stack) and then changes rip to the address given in the instruction, so for example:
+call func (0x1000400) will be equavliant to:
+mov [rsp-0x08], rip
+mov rip, 0x1000400
+
+Ret Instruciton:
+is totally the opposite of the call instruction and it has 2 forms:
+1.the first form is that it pops whatever is on the top of the stack into the RIP register and then increaments rsp by 0x8
+ex: ret
+	pop rip
+2.the other form is that it pops whatever is on the top of the stack into the RIP register and then increaments rsp by some constant specified as an argument to the instruction
+ex: ret 0x20
+	mov rip, [rsp]
+	sub rsp, 0x20
+
+NOTE on syntax (intel vs AT&T):
+-intel has the following form regarding 2 operands instructions:
+ mov dest, src
+-whereas at and t has the following format:
+ mov src, dest
+
+
+ Move Instruction:
+ can be in many different forms:
+ -moving a value from a register to another register
+ -memory to register or register to memory
+ -immediate to register, immediate to memory
+
+ NOTE: on x86 arch the instructions bytes are of variable length not like other arch such as arm which is of fixed length 4 bytes except for thumb instructions it's 2 bytes so for the x86 it's much more easier to goto specific offsets (in the middle of an instruction for example) to make the cpu the interpret instruciton as a totally different instruction which is known as return oriented programming.
+
+ NOTE: if you dynimcally link your linux app, the functions that your app depends on is going to have an entry in the procedure linkage table, that entry is going to contain a jmp instruction to the global offset table where this function resides.
+
+ LEA (load effective address):
+ is totally equalivant to the address of operator in C, so for example if you want to get the address of a piece of data stored in the top of the stack and let's assume that the stack size is 0x20 so:
+ lea rax, [rsp]
+
+In Intel Syntax, specifically in the r/mX form sometimes you will see the compiler put dword ptr [rsp] or qword ptr or even word ptr so these refers to the size of data that this instruction operates on for example, consider the next mov instruction:
+mov dword ptr[rsp], eax
+
+so what this means is that i am moving a 32 bit value from eax to the memory pointed to by rsp.
+
+In other words it represents the size of the data that will be moved to that destination (memory in this case).
+
+NOTE about the stack space allocation:
+some compilers trys to pad the return address on the stack after a function call by some variable amount of bytes (so when trying to overlow from a stack allocated buffer in order for you to overwrite the return address you have to consider this padding) to align the stack after adding the return address so at most it will add 16 bytes to align the stack frames.
+the main reason behind that is that microsoft is always trying to allocate memory 16 bytes chunks at a time because that's more effecient for the cpu in case of the x86 64bit archeticture (the amount of padding may differ from system to system).
+
+NOTE: in msvc compiler if the no of local variables is odd it will always allocate extra padding more than needed for local variables but if the no of local variables is even then there will be no extra space for padding and the local variables will fit in the allocated space in the stack.

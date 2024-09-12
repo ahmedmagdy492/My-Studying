@@ -1,0 +1,309 @@
+Basic Terms:
+assume that you have the following expression:
+2x^2 * 4y - 12
+Term: is the parts that are seperated by the addtion operation
+Factors: are seperated by multiplication
+
+12 -> is called a term and 2x^2 * 4y is also a term
+a term is basically a small expression that either has a minus or plus sign
+  mm, m,6456M
+12 -> is also called a constant cause it has a constant value that will never change
+4y -> y here is called a linear term cause the relationship between x and y is a straight growing line
+2x^2 -> is a non-linear term cause the relationship between x and y is not a straight line
+
+4y -> 4 here is called a coeffcient cause it's multiplied times a variable.
+
+Distributive Property:
+if we have an expression like that 4*15 we can also write in an easier way to help evaluate the expression: 4(5+10)
+the way we solve this is by distributing the 4: 4*5+4*10
+we normally use the distributive property to simplify expressions.
+
+NOTE: if we have -1(4x-5) it's written as -(4x-5) the -1 is implied here.
+
+One-Step Linear Equations:
+equations that has one operation or step to be done in order to solve the equation for example: 2x = 12
+
+Two-Step Linear Equations:
+equations that involve more than one term or more than one operation to be done for example: 2x - 10 = 50, here we have: 1.multiplication and 2.subtraction.
+
+Identity Equations:
+is when simplification lead to the absence of the variables in the equations and that will lead us to 2 possiable conclusions:
+1.if the numbers left on both sides are equal so that means that the equation has inifinite number of solutions and x can have any value or in other words the solution is the entire set of real numbers
+2.if the numbers left on both sides are not equal so that means that the equation has no solution.
+
+Conditional Equations:
+is when an equation has an finite number of solutions
+
+Proptions:
+is when you have fractions on both sides of the equation and it turns out that there is an easy way to solve it using cross multiplication.
+
+Literal equation:
+example: y = mx + b
+for example:
+vt = d, solve for t:
+1/t * vt = d * 1/t
+v = d/t
+
+Inequality:
+-Represents a relationship between two objects but the order matters.
+-inequalities have infinite number of solutions the solution is that; we need to use the number line graph 📉
+
+Should be solved just like equations but we have to consider the following things:
+1.order matter
+2.we have to graph it on a number line
+3.when multiplying or dividing by a negative number you have to flip the sign
+
+Compound inequality:
+is a way to decsribe the values between 2 numbers
+so for example if you have x which is greater than 5 and less than 10 you can write it like that:
+ x > 5 and x < 10   this is the first way to write it
+ 5 < x < 10         this is the second way to write it
+
+compound inequality can also represent values that are not in between 2 other numbers for example:
+  x < 0 or x > 7  
+
+Solving compound inequality:
+1.first we need  to seperate both inequalities
+2.solve each one seperately
+3.then combine them again as a compound inequality
+
+Sets:
+a bunch of elements has any order, elements can be numbers, ordered pairs or pretty much anything else.
+
+Sequences:
+a bunch of elements written in the order they appear.
+always starts from the first changed figure.
+
+Domain and Range:
+are like input and output or a relationship between 2 objects can be represented in a varity of ways such as: ordered pairs, set, sequence, table, graph and a mapping.
+so the input is what we call a domain and the output is what we call the range.
+when writing the domain and range we write them as follows:
+NOTE: the order does not matter and we don't have to write the repeated element twice.
+
+Domain: {-3, -2, -1, 0, 1}
+Range: {-25, -18, -11, -4, 3}
+
+
+Linear Functions:
+can be represented by a sequence in which everynumber is added or subtracted to create the next term.
+
+there are 2 questions that needs to be answered in order to fully describe a linear function:
+1.what value to start with? (initial value)
+2.what value do i need to add or subtract to get to the next term?(rate of change)
+
+Relations:
+is a connection between 2 peices of data where the first piece of data is called the domain and the other one is called the range.
+
+Function:
+is a relation in which each element of the domain is connected to only one element of the range.
+
+-when determining whether some points on a graph represents a function or not there is an easy way to test that by using something called the vertical line test which is described as follows:
+run a vertical line across the graph and if more than one point touchs that line then the relation is not a function.
+
+
+Function notation:
+x -> input (aribitrily chosen it could be anything else)
+f -> function name
+y -> output
+
+f(x) = y means that we are evaluating functions when giving it a specific value "x" in this case.
+
+we can also use functions with equations like this:
+f(x) = x + 2
+and this is called a function rule. 
+
+
+Intervals:
+is the space between two locations and is used to describe the domain values and we use compound inequality to write the interval.
+
+the interval can be in one of 3 states:
+-Increasing: if the starting range point is less than the end range point of the interval so that means that the interval is increasing.
+-Decreasing: if the starting range point is larger than the end range point then of course the interval is decreasing.
+
+-Staying Constant: if the starting range value is the same as the end range of value of the interval so that means that the interval is constant.
+
+
+Discrete Data:
+is a set of data in which the numbers can only have certain disconnected values. can be represented as a set of numbers and list all of possible domain values. (discrete function)
+
+Continous Data:
+is a set of data in which the numbers can have any value in a certain range. cannot be represented as a set of numbers as we have to list inifinte amount of numbers so we use inequality to represent these ranges. (continous function)
+
+Qualititve Graphs:
+Qualitive Data is data that does not depend on numbers
+Quantitive data is data that depends on numbers
+
+Linear Functions:
+From graph:
+the function should be in a straight line with no changes in that line
+
+From equation:
+1.no term is raised to a power larger than 0 or 1
+2.no divding by variable
+3.no variable as an exponent
+4.no operation besides mul, divison, addtion, subtraction
+
+From table:
+we have to calcuate the slope between the points and if the slope is equal then it's linear otherwise it's non-linear.
+we can caluclate the slope by the following formula:
+slope = y2 - y1 / x2 - x1
+
+Y-intercept:
+is the y value when x = 0 and it's also called initial value.
+to identify the y-intercept from the following representations:
+
+1.from graph
+where the graph crosses the y-axis
+
+2.from a table:
+when a point has an x value of 0
+
+3.from an equation:
+the constant term in an equation that look like that y = mx+b
+
+the slope:
+is the Steepness of the graph line describes the output of the relationship between the x axis values and the y axis values. sometimes also called "the rate of change".
+
+we can calculate it from:
+
+1.from an equation:
+the slope is the coeffcient of the linear term in an equation like this: y = mx+c
+m is the slope
+
+2.from a graph and from a table:
+using the equation
+
+Linear Functions:
+is a relationship between 2 variables in which one variable changes at a constant rate.
+
+Graphing a linear function:
+1.using 2 points:
+just plot the 2 points and connect them via a line
+
+2.using a point and the slope:
+
+
+Functions classic classifications:
+-power functions:
+y = x^n where n is [0, inifinty[
+x = R
+
+-polynomial functions:
+linear combination of power functions with n non-negative
+
+-rational functions
+
+linear combination:
+a number of n terms that is raised to only the power of 1 and each term consist of only 1 variable multplied by a constant
+
+3 types of linear equations:
+1.slope intercept form:
+example:
+y = 3x+2
+general form:
+y = mx+b
+
+2.point slope form:
+example:
+y-6=3(x-1)
+general form:
+y-y1=m(x-x1)
+
+3.standard form:
+example:
+3x-y=-2
+is useful for knowing the y-intercept and the x intercept which means it will make it easier for us to graph this relationship.
+general form:
+ax+by=c
+
+NOTE: if you want to get rid of fractions on an equations to simplfy it you can multiply both sides by the numbers in the dunminator of each fraction.
+
+Absolute Value:
+is the distence between a real number a and 0
+
+General Rules:
+:= means assignement
+
+System of Equations:
+are 2 equations or more that are solvable together
+
+Basics:
+NOTE: when evaluting an expression that involves division and multiplication if one of the multiplication factors has a parenthsis around it the multiplication should be evaluated first then the division even though the division is the first operation when applying from left to right rule.
+
+Props of Real numbers:
+1.cummutative property of addtion:
+a + b = b + a: in addtion, the order of the operands does not matter
+
+2.cummutative propery of multiplication:
+a*b = b*a: in multiplication, the order of the operands does not matter
+
+3.associative property of addtion:
+(a+b)+c = a+(b+c): the order of operations does not matter
+
+4.associative property of multiplication:
+(ab)c = a(bc): the order of operations does not matter
+
+5.distributive property:
+a(b+c) = ab + ac
+
+6.additive identity:
+a + 0 = a: adding any real number to the additive identity will always gives you the same number
+
+7.multplictive identity:
+a*1=a: multiplying any real number to the multiplicative identity will always give you the same number
+
+8.addtive inverse:
+a+(-a) = 0: when you add a real number to its additive inverse it will give you the additive identity
+
+9.multiplicative inverse:
+a*1/a = 1: when you multiply a real number by its multiplicative inverse it will give you the multiplicative identity
+
+NOTE:
+a set of numbers, operations with these numbers and the properties of these numbers
+these 3 components forms a mathmetical system
+
+NOTE:
+Once you have determined the basic properties (or axioms) of a mathematical
+system, you can go on to develop other properties. These additional properties are
+theorems, and the formal arguments that justify the theorems are proofs.
+
+
+Translating a verbal phrase into a mathematical model is critical in problem
+solving. The next four examples will demonstrate three steps for creating a
+mathematical model.
+
+In mathematics, it is useful to know how to represent certain types of integers
+algebraically. For instance, consider the set of even integers.
+Because every even integer has 2 as a factor,
+it follows that any integer n multiplied by 2 is sure to be the even number 2n.
+Moreover, if 2n is even, then 2n-1 and 2n+1 are sure to be odd integers.
+
+In System of Linear Equations:
+there are 2 types of systems "consistent system of equation" which has a solution and "inconsistent system of equation" which has no solution or in other words the 2 lines that represents both equations do not intersect.
+but under consistent system of equations we have 2 scenarios: the first one is one the 2 lines intersect in only 1 point and the other scenario is when the 2 lines are intersecting in all points which means that they both are the same line. so we differentiate between these 2 scenarios by calling the first case "independent" and the later one "depenedent".
+
+Mathematical Modeling:
+how algebra can be used to solve problems that occur
+in real-life situations. This process is called mathematical modeling.
+
+steps for mathemtical modeling:
+Verbal description -> Verbal model -> Assign labels -> Algebraic equation
+
+Ratios:
+percentage is a spcecific comparison that always done between 100 and any other number, but on the other hand the ratio is a more generic comparison that compares any 2 numbers with each other.
+
+Proportions:
+A proportion is a statement that equates two ratios.
+the product of means = the product of extremes
+
+Strategy for Solving Word Problems
+1. Ask yourself what you need to know to solve the problem. Then write a
+verbal model that includes arithmetic operations to describe the problem.
+2. Assign labels to each part of the verbal model—numbers to the known
+quantities and letters (or expressions) to the variable quantities.
+3. Use the labels to write an algebraic model based on the verbal model.
+4. Solve the resulting algebraic equation.
+5. Answer the original question and check that your answer satisfies the
+original problem as stated.
+
+in a mathemtical models of a bussiness problem that consisits of a fixed term and a variable term, the variable term consists of a product of 2 factors, one of these factors is a rate or a percent

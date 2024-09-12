@@ -1,0 +1,90 @@
+Algebric Expressions:
+is a single or multiple terms combined together and seperated by either a + or a - sign.
+
+Equation: is a statement that 2 algeberic expressions are equal
+
+the general form of a linear equation:
+ax+b=c 
+where a can be any real number expcet 0, b and c can also be any real number
+
+The addtion property of equality:
+we can add the same number to both sides of the equation without changing the solution.
+
+The multiplication property of equality:
+the same as the above rule
+
+NOTE: when multiplying both sides of an equation by a number to for example get rid of a fraction, then you have to multiply all of the terms on each side with that value.
+
+General form of linear equation in one variable:
+ax+b=c
+where a, b and c are any real number
+a != 0
+
+Types of Equations:
+1.conditional: which is true only if the variable has a specific value
+2.contradaction: which happens when an equation ends up in a non-sense situation such as 12 = 34
+3.identity: due to the solution is all real numbers
+
+Ratio:
+is a ratio of one thing to another thing for example the ratio of boys to girls is 12 to 3 which can be written in a variety of different ways such as a fraction and can be simplified without removing the denomenator even if it was 1 and can be written without units.
+
+Unit Rate:
+is a relation between 2 things of different quantities and can also be written as a fraction but you have to mention the units of each thing for example: a car drove 300 miles and in that trip it has used 6 gallons of gas so we can write it as follows:
+300 miles/6 gallons of gas
+and we can also simplify it but without removing the denomerator even if it was 1.
+NOTE: to simplify the unit rate fraction you need to specify what part do you need for example if you have 12 eggs costs 3.60$, do you want to answer the question of how many eggs can i purchase with 1$ or 1 egg costs how many dolloars. depending on which question you want to answer will then be able to determine which number of the 2 to divide by the other.
+
+Propertion:
+is an equality relation between 2 fractions or 2 ratios which means that the 2 fractions has to be the same or equal to each other and we can ensure that that's the case very easily by doing the following:
+-multiply the denmonator of the 2nd fraction with the numerator of the 1st fraction
+-then multiply the denomanator of the 1st fraction with the numerator of the 2nd fraction
+-if the result of these 2 operations are the same then there is a propertion between these 2 fractions.
+
+
+Linear Enqualities:
+enqualities with only a less than sign or a greater than sign are called strict enquality whereas enqualities with a greater than or equal or with a less than or equal is called a non-strict enquality
+
+when it comes to solving enqualities their solution actualy is a range so in order for us to write this down we can use the interval notation
+
+Interval Notation:
+for example consider the following example: x > 2 to represent it using interval notation we can write it as follows: so as we cannot exctaly say what is the possible value that is directly greater than 2 we can put 2 like this (2 note that this parenthisis is used to indicate that 2 is not included as part of the solution and then we put infinity if we do not know exctaly what is the upper limit of the solution so we end up with (2, infinity).
+
+Properties of enqualities:
+-addtion property: we can add or subtract a number from both sides of the enquality without changing the solution
+
+-multiplication property of enquality: we can multiply or divide both sides of an enquality with a positive number without changing the solution.
+
+NOTE: if we use the mulitiplication property of enquality with a negative number we have to reverse the direction of the enquality in order to preserve the solution.
+
+To Verify the inequality solution:
+we have to apply these 3 steps:
+1.subistitute the end value with the variable and ensure that it works (we should replace the inequality sign with an equal sign)
+2.pick up a number from the non solution region and see if it works
+3.pick up a number form the solution region and test to see if it works or not
+
+Transformations:
+Rigid Transformation: is the type of transformation that when applied to a shape it preserves the lengthes of the sides and the angles of the shape. some examples of that type of transformations are translation, rotation around a point and creating a reflection
+
+Rotation:
+firstly rotation is always performed around a center point
+-to find the center point of rotation let's say for a traingle for example:
+1.first, you will draw a line that connects each point and its image
+2.then, you will draw a line that is perpendicular on each of the previously downloaded line
+3.all the of the perpendicular lines will intersect in a point so that point is the point of rotation
+
+R(0,0),90(x, y) = (-y, x)
+R(0,0),180(x, y) = (-x, -y)
+R(0,0),-90(x, y) = (y, -x)
+
+Reflecting lines:
+you basically reflect a line segment over a linear line that has an equation so you basaically reflect each point over that linear line. what you do is to draw a line from each point to the reflection line in way that make that line perpendicular over the reflected line and the slope of that line drawn should be the negative of the recpirical of the slope of the reflection line
+
+
+Algabric numbers:
+are numbers that are solutions to polynomials
+
+Transcendental numbers:
+are numbers that are not solutions to polynomials
+
+
+Start at: 03:26:00 for the course and practice 05:46:40

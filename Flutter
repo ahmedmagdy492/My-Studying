@@ -1,0 +1,157 @@
+Const Keyword infront of class instances (or widgets for example):
+-when preceding a class instance with the const keyword, that will allow the dart compiler to use the same object in memory if you happen to use it somewhere else in your code with the same content rather than creating a new object.
+
+Dart is a safe type language which means that each variable has a specific type
+
+Question mark in dart: means that a certain argument or a variable can be null
+
+Container widgets: are quite useful widgets for configuring styles and creating custom layouts
+
+Lists in dart are like arrays in other programming languages and there are 2 types of lists either a fixed length list or a growable list and you can create a growable list by creating it this way ['value1', 'value2'] and you can create a fixed length list by using for example List.filled(length, fillValue).
+
+NOTE: every value in Dart is an object
+
+in immutable classes we can use the const keyword before the declartion of a constructor function to allow dart to optimze the performance and reuse that object again rather than creating a new one every single time it's required to create one.
+
+difference between const and final is that we can think of them as const a compile time constant and final is a runtime constant
+
+in flutter to add assets you should place them first in your project and then goto to the assets section in the pubsec.yaml and add in all of your assets there
+
+
+in Dart you can create multiple constructor functions as any object oriented language but different in that you assign a name to the new constructor
+
+to make the column or the row widget take the least amount of space on their main axis we use the MainAxisSize property
+
+NOTE: a best practice in flutter is to make the widget params as the last one
+
+NOTE: in flutter when the internal state of a stateless widget has changed the build method of that widget is not called and that's why you should not keep of track of any state right within a stateless widget
+
+NOTE: in flutter it's better to have a statefull widget that has the least amount of widgets inside of the widget tree in order to make the calling of the build method again and again when the internal state change very lightweight.
+
+NOTE: in flutter in statefull widgets if we define a property or a field in the widget class itself we can access it in the corresponding state class through a property called widget.
+
+Lifting the state up in flutter:
+is a concept that is applied if you have 2 widgets that depends on the same state and it can be applied by making a parent widget that renders one of the 2 widgets conditionaly and pass the state needed to one of them.
+
+In flutter the initState function is executed directly after the constructor function has executed.
+
+In Dart you can use if conditions inside lists to add values to the list conditionally.
+
+In Dart you can use what is called a spread operator ... to pull out individual elements from a list and place them within another parent list for example: [...[1, 2, 3], 5, 6]  so the result will look like that [1, 2, 3, 5, 6]
+
+Expanded Widget in flutter:
+if you for example place the expanded widget as a child of a row and a column as a child of the expanded widget, the expanded widget will gurantee that the child column will not take more width than the parent row, in this example if you do not place this column inside of the expanded the column will instead ignore the maximum width of the parent row and will go beyond that.
+
+NOTE: if we want to restrict some widget to some width and height and make it scrollable we can use sizedbox as the first parent and SingleChildScrollView as the second parent for that widget.
+
+in flutter we can use the ListView Widget to render a list of a small items but it's not ideal for using when you have a lot of items but rather you can create with a special constructor List.builder and that will allow flutter to render only visable items of the list and for that a special argument has to be passed to this constructor which is the itemsCount which tells the list view how many items in total should be renedered.
+
+in flutter there a built-in widget called Spacer that can be placed within a row or a column to take the entire left space.
+
+Dart Packages:
+provider: for managing widgets' states in a shared area.
+uuid: for generating uuids.
+google fonts: for using built-in google fonts.
+intl: for formatting dates and can help with localization as well.
+
+NOTE: in flutter the context is an object that contains meta data about its widget such as meta data about how it's positioned on the screen.
+
+
+In Flutter there are 2 ways to handle form elements input and save them:
+1.using the onchange events on form elements to save the value in a state object when for example a button is pressed.
+2.the other approach is to make the widget that contains this form elements into a stateful widget and for each form field use a text controller which will handle all of the heavy lifting for you and you need also to dispose it in the onDispose method.
+
+In Flutter by default there is no such form element that can be used and placed directly in a form and used just as any other text field rather you would have to handle the input part manually and trigger the datePicker popup manually and take the value from it.
+
+In flutter there is a similar concept like the promise but here is called Future, to resolve it you can either use the .then or you can use async and await.
+
+In Flutter there is a utitlity class that is called ScafoldMessenger and as the name suggests it offers a whole bunch of utility pre-made ui elements and widget such as a snack bar.
+
+In Flutter if you have a snackbar that is currently shown and you want to remove it and show for example another one you can use the scafold messenger (discussed above) to clear it by calling the function clearSnackBars.
+
+In Flutter you can copy already predefined themes and customize it without having to write it from scratch by using the copyWith constructor of the ThemeData class and that can be configured in the MaterialApp widget.
+
+
+in Flutter you can configure the Material app widget to take a dark mode theme and tell it to use which one by default by using the theme mode property.
+
+
+in flutter we can lock the screen orientation to one mode by calling out to the services file within the flutter package and by accesing SystemChrome.setPreferredOrientations([]) and then you have to then the result returned from that function call and move your runApp function call within the callback function of the then function right before doing that you have to call WidgetFlutterBinding.ensureInitalized().
+
+in flutter we can know information about the screen width and height for example via the MediaQuery object.
+
+NOTE: if you try to place a widget that tries to take for example as much width as it could inside of a widget that also tries to get as much space as it could the flutter framework will fail to display a UI.
+
+NOTE: Expanded widget constraints its child to take as much space as available in the parent row after sizing the other row children.
+
+NOTE: regerarding the previous point as well if you have a child that takes as much space as it could in any direction you have to place it within a parent that restericts the sizing of that direction.
+
+NOTE: if you have some overlapping between your ui and other elements such as the keyboard you can fix that by for example giving your ui elements some padding based on the keyboard size by doing the following:
+MediaQuery.of(context).viewInsets.bottom: gets the exact size of the ui that is obscured by another ui element (i.e keyboard).
+
+To avoid the overlapping between device features and the ui of your app you can use SafeAreas to avoid such a thing.
+
+We can use a LayoutBuilderWidget if we want to adjust the layout to care only about the size of its parent not the size of the entire screen. it gives you access to the constraints forced by the parent.
+
+
+In Flutter: we have 3 trees:
+1.Widget tree: which is the tree in the source code that you build by combining different widgets.
+
+2.Element tree: is in memory representation of your widget (after the widget tree is loaded into memory) and some extra objects that are used by flutter to determine UI updates. so for every widget object there is an element object that is created by flutter.
+
+3.Render tree: is the final tree that gets rendered on the screen and flutter tries to avoid touching this tree as possible as it could because it has a performance impact and it only tries to rerender parts that should be updated.
+
+How the UI gets updated:
+-first the build method of the widget tree is called
+-then the element tree is compared to the render tree
+-then only the differences between the element tree and the render tree is applied and gets reflected on the UI. (Flutter partially updates the UI)
+
+NOTE: the build method is called only for widgets which are effected by a state change.
+
+NOTE: for refactoring purposes and performance enhancements you can extract part of your widget as in which you call the setState or your state changes and put it into a seperate stateful widget and make the parent widget stateless.
+
+IN SUMMARY: it's always best to keep your stateful widget as small as needed.
+
+NOTE: in flutter widgets objects are not directly connected to their state objects but instead the element object is connected to the widget object and from the other end is connected the widget state. so if any swapping happend between widgets the state objects are going to be miss organized or will be connected to a different widget. so to solve the issue of non swapping states we use keys inside widgets so that flutter when some widgets are changed it compares the key of the widget along with the key of the corresponding element and if they don't match it swaps the states and the keys on these element objects. so for some stateful widgets which may have the above scenario you should pass unique values to these widgets as a key.
+
+in flutter we can build a grid view of any columns count by using the GridView widget and you can use one of 2 ways to create it either dynmically using the builder constructor just like with the ListView or you can use the default constructor which accepts in a gridDelegate and you can use something like SliverGridDelegateWithFixedCrossAxisCount to set columns count.
+
+
+difference between GestureDetector and InkWell is that InkWell will add visual effect when tapped.
+
+
+in flutter there exists some widgets for displaying images with a beatiful animation such as the FadeInImage
+
+
+there is a package called transparent_image which serves some blank transparent images that can be used as placeholders while loading real images
+
+in flutter to display an image directly from the internet you can use the NetworkImage widget and pass in the url of the image.
+
+we can use the Positioned widget to place a widget within the stack widget in a specific position
+
+NOTE: if you have a card and within it you have a child widget that has width and height that go beyond or takes the full width and height of the card so if you have a rounded corner it won't be displayed, on the card you can set the clipBehavior to HardEdges to pervent the child from taking space and even hide the corners.
+
+
+NOTE: to set the width or the height of an image without making it distroted and enforcing the image to take full space of the parent we can use the BoxFit property on the image and set it to cover
+
+
+NOTE: sometimes if you ran into a situation where you have 2 rows inside of each other you would normally wrap the inner one with expanded but in some cases where the parent of the first row is enforces some layout constraints on both axis so that the first child row has fixed width and height and therefore you don't have to use expanded to wrap the child row. one good example of that is when you have a positioned widget which you might want to use enforce some positioning and dimensions constraints and inside of that you have got the 2 inner rows.
+
+
+ListTile Widget:
+can be used to create for example a contact card that contains a picture, multiple titles and maybe on the right hand side add some icon as well and it can also be tappable and all of this in one widget.
+
+SwitchListTile Widget: is another built in widget that contains a bunch of grouped widgets to form a settings like switch.
+
+NOTE: we can replace an existing screen using the navigator rather than pushing using the method pushReplacement.
+
+PopScope is a widget made by flutter that will allow you to execute some code when the back button pressed.
+
+We can use centeralized state management in flutter with the help of the riverpod package
+
+in wide app state management using riverpod we create multiple providers if we have more than one dataset to deal with (specially dynamic data) and in order for us to be able to listen to the changes that happen to a specific value that we are interested in we need to inherit from the widget classes (either statelesss or stateful riverpod classes) that are provided by the riverpod package itself.
+
+it's always recommended to use the watch method when you want to read a value from the provider since we want to get notified (and in case of a stateful widget when the value we are listening to is changed the rebuild method gets rexecuted) when this value changes.
+
+if we want to make the state management work we need either to wrap the whole app or a part of that app with the Provider scope widget.
+
+riverpod forces you not to add or modify a value in the state notifer class 
