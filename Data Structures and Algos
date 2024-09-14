@@ -224,5 +224,10 @@ NOTE: you should always consider making your code cache friendly as possible as 
 Get the Middle Node of a singly linked list without using the length variable:
 -use 2 pointers one slow and the other one is fast.
 
+2 Stacks uses the same array internally:
+-firstly the 2 stacks should take as much as space as they need
+-secondly the operations should have the same running time and auxailary space
+so the main idea here is to have one stack grows from -1 to as much as space as it founds and the other one starts from the end and grows from there until either it meets the first one's top or it takes up the whole array space.
+
 Game Theory:
 Zero Sum Game is where there is only one winner

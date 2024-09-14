@@ -9,7 +9,7 @@ How c/c++ programs gets from the plain text (source code) into a file that conta
 4.linking these object files into a single unit which is the file executable by the operating system and the target cpu.
 
 Endianess:
-it's about how we store bytes in memory.
+it's about how we store bytes in memory in terms of order.
 little endian: stores most significant byte at the highest address, ex: intel
 big endian: stores least siginificant byte at the highest address, ex: others
 
@@ -61,7 +61,7 @@ they are 16 bit registers that are used to divide the memory into several segmen
 VI NOTE: the old RBP value will also get saved onto the stack.
 
 Some Common Instructions:
--NOP: the nop instruction or the no operation instruction is mainly used for padding and aligning purposes and has no effect and its numerical value is 0x90
+-NOP: the nop instruction or the no operation instruction is mainly used for padding and aligning purposes and has no effect and its numerical value (opcode) is 0x90
 
 Stack Memory:
 -by convention most operating systems make the stack grow from high addresses to low addresses.
@@ -74,7 +74,7 @@ information stored in the stack:
 
 Stack Related Instructions:
 -Push: pushes a quad word value into the stack and decrements the RSP register by 8 (since the stack grows from high addresses to lower addresses)
--the push instruction in 64bit mode can have its argument from a 64 bit register or from memory but it has to be in the following format "r/mX"
+-the push instruction in 64 bit mode can have its argument from a 64 bit register or from memory but it has to be in the following format "r/mX"
 
 NOTE: in intel syntax [] means get the value of the address in between these brackets.
 
@@ -107,7 +107,7 @@ ex: ret
 2.the other form is that it pops whatever is on the top of the stack into the RIP register and then increaments rsp by some constant specified as an argument to the instruction
 ex: ret 0x20
 	mov rip, [rsp]
-	sub rsp, 0x20
+	add rsp, 0x20
 
 NOTE on syntax (intel vs AT&T):
 -intel has the following form regarding 2 operands instructions:
@@ -127,18 +127,73 @@ NOTE on syntax (intel vs AT&T):
  NOTE: if you dynimcally link your linux app, the functions that your app depends on is going to have an entry in the procedure linkage table, that entry is going to contain a jmp instruction to the global offset table where this function resides.
 
  LEA (load effective address):
- is totally equalivant to the address of operator in C, so for example if you want to get the address of a piece of data stored in the top of the stack and let's assume that the stack size is 0x20 so:
+ is totally equalivant to the address of (&) operator in C, so for example if you want to get the address of a piece of data stored in the top of the stack and let's assume that the stack size is 0x20 so:
  lea rax, [rsp]
 
 In Intel Syntax, specifically in the r/mX form sometimes you will see the compiler put dword ptr [rsp] or qword ptr or even word ptr so these refers to the size of data that this instruction operates on for example, consider the next mov instruction:
 mov dword ptr[rsp], eax
 
-so what this means is that i am moving a 32 bit value from eax to the memory pointed to by rsp.
-
-In other words it represents the size of the data that will be moved to that destination (memory in this case).
+-so what this means is that i am moving a 32 bit value from eax to the memory pointed to by rsp.
+-In other words it represents the size of the data that will be moved to that destination (memory in this case).
 
 NOTE about the stack space allocation:
 some compilers trys to pad the return address on the stack after a function call by some variable amount of bytes (so when trying to overlow from a stack allocated buffer in order for you to overwrite the return address you have to consider this padding) to align the stack after adding the return address so at most it will add 16 bytes to align the stack frames.
 the main reason behind that is that microsoft is always trying to allocate memory 16 bytes chunks at a time because that's more effecient for the cpu in case of the x86 64bit archeticture (the amount of padding may differ from system to system).
 
-NOTE: in msvc compiler if the no of local variables is odd it will always allocate extra padding more than needed for local variables but if the no of local variables is even then there will be no extra space for padding and the local variables will fit in the allocated space in the stack.
+NOTE: in msvc compiler if the no of local variables is odd it will always allocate extra padding more than needed for local variables but if the no of local variables is even then there will be no extra space for padding and the local variables will have only extra 8 bytes to always make the frame size as 16 bytes or a multiple of 16 bytes.
+
+IMUL Instruction:
+does a signed multplication (visual studio compiler prefers to use this instruction when doing multiplication even if the operands are unsigned values).
+it has 3 forms:
+-imul r/mX                 -> 1 operand
+-imul reg, r/mX            -> 2 operands -> multiplies the 2 operands and puts the result in reg
+-imul reg, r/mX, immediate -> 3 operands -> multplies r/mX by the immediate and puts the result into reg
+
+IMUL forms groups:
+1.Group 1 single operand:
+- imul r/m8   -> ax = al * r/m8
+
+NOTE: in x86 assembly instructions set the ":" (colon) operator between 2 registers (like this DX:AX) it will concatenate the 2 values of the 2 registers.
+
+- imul r/m16  -> dx:ax = ax * r/m16 -> it multiplies the 16 bit value of ax and the given 16 
+bit value and puts the lowest part of the result into ax and the heighest part of the result into the dx register
+
+- imul r/m32  -> edx:eax = eax * r/m32
+
+- imul r/m64  -> rdx:rax = rax * r/m64
+
+2.IMUL Group 2 - 2 operands:
+NOTE: truncation might occur
+- imul reg16, r/m16  ->  reg16 = reg16 * r/m16
+- imul reg32, r/m32  ->  reg32 = reg32 * r/m32
+- imul reg64, r/m64  ->  reg64 = reg64 * r/m64
+
+3. IMUL Group 3 - 3 operands (8 bit immediate):
+NOTE: truncation might occur
+- imul reg16, r/m16, 8 imme  -> reg16 = r/m16 * 8 bit immeidate
+- imul reg32, r/m32, 8 imme  -> reg32 = r/m32 * 8 bit immeidate
+- imul reg64, r/m64, 8 imme  -> reg64 = r/m64 * 8 bit immeidate
+
+4. IMUL Group 4 - 3 operands (16 bit immediate):
+- imul reg16, r/m16, 16 imme -> reg16 = r/m16 * 16 immediate
+
+5. IMUL Group 5 - 3 operands (32 bit immeidate):
+- imul reg32, r/m32, imm 32  -> reg32 = r/m32 * immediate 32 bit
+- imul reg64, r/m64, imm 32  -> reg64 = r/m64 * immeidate 32 bit
+
+NOTE: to know what is the result of an operation after truncation is going to be we simply AND the result with n number of 1s, the value of n depeneds on the size of the result.
+
+NOTE: before doing any operations on any negative value we simply calculate the 2's complement of that value first.
+
+
+MOVZX instruction:
+moves a value from a smaller place into a larger place and the gab in bytes are filled with zeros
+
+MOVSX instruction:
+moves a value from a smaller place into a larger place and the gab in bytes are filled with zeros except for the most siginificant bit is 1.
+
+the supported forms for the previous 2 instructions:
+-r to r, m to r, r to m, i to m, i to r
+NOTE: movsx works only for extending from 8 to 16 bit values but for extending from 32 bit to 64 bit value we can use the instruction movsxd
+
+NOTES: local variables does not have to be stored on the stack in the same order they were defined in.
