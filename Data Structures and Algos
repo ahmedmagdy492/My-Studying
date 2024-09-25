@@ -229,5 +229,7 @@ Get the Middle Node of a singly linked list without using the length variable:
 -secondly the operations should have the same running time and auxailary space
 so the main idea here is to have one stack grows from -1 to as much as space as it founds and the other one starts from the end and grows from there until either it meets the first one's top or it takes up the whole array space.
 
+NOTE: whenever you need to refer previous elements in order while you are already iterating over other elements then that's a sign that you need to use a stack
+
 Game Theory:
 Zero Sum Game is where there is only one winner

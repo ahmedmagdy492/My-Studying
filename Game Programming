@@ -178,3 +178,10 @@ to change the origin of rotation or the pivot point you should first translate t
 
 VI NOTE: after rotating an object by a given angle and then you want to move it in that new direction and you still have the current angle so you need to calcuate something called a direction vector and then translate the object with that vector.
 
+NOTE: one of the things that makes matricies so powerful is that; we can combine multiple matricies thanks to matrix multiplication.
+
+NOTE: the recomonded order in which we can combine multiple different transformation matrices is as follows: scaling, rotation and lastly translation.
+
+NOTE: Image Tearing happens when swaping the back and the front buffer in the middle of a display refresh freqency and it's all about two buffers are overlaping with each other.
+
+NOTE: Z-Buffer is a buffer that stores the z value of each pixel in the image buffer (it describes how far away in the z direction a pixel is) and it's used to improve performance by comparing the z values for 2 pixels to determine which one is behind the other and only rendering the front one (known as hidden surface elimination) and it's stored in VRAM.

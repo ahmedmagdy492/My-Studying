@@ -140,7 +140,7 @@ NOTE about the stack space allocation:
 some compilers trys to pad the return address on the stack after a function call by some variable amount of bytes (so when trying to overlow from a stack allocated buffer in order for you to overwrite the return address you have to consider this padding) to align the stack after adding the return address so at most it will add 16 bytes to align the stack frames.
 the main reason behind that is that microsoft is always trying to allocate memory 16 bytes chunks at a time because that's more effecient for the cpu in case of the x86 64bit archeticture (the amount of padding may differ from system to system).
 
-NOTE: in msvc compiler if the no of local variables is odd it will always allocate extra padding more than needed for local variables but if the no of local variables is even then there will be no extra space for padding and the local variables will have only extra 8 bytes to always make the frame size as 16 bytes or a multiple of 16 bytes.
+NOTE: in msvc compiler if the number of local variables is odd it will always allocate extra padding more than needed for local variables but if the number of local variables is even then there will be no extra space for padding and the local variables will have only extra 8 bytes to always make the frame size as 16 bytes or a multiple of 16 bytes.
 
 IMUL Instruction:
 does a signed multplication (visual studio compiler prefers to use this instruction when doing multiplication even if the operands are unsigned values).
@@ -186,10 +186,10 @@ NOTE: to know what is the result of an operation after truncation is going to be
 NOTE: before doing any operations on any negative value we simply calculate the 2's complement of that value first.
 
 
-MOVZX instruction:
+MOVZX instruction (move zero extend):
 moves a value from a smaller place into a larger place and the gab in bytes are filled with zeros
 
-MOVSX instruction:
+MOVSX instruction (move signed extend):
 moves a value from a smaller place into a larger place and the gab in bytes are filled with zeros except for the most siginificant bit is 1.
 
 the supported forms for the previous 2 instructions:
@@ -197,3 +197,8 @@ the supported forms for the previous 2 instructions:
 NOTE: movsx works only for extending from 8 to 16 bit values but for extending from 32 bit to 64 bit value we can use the instruction movsxd
 
 NOTES: local variables does not have to be stored on the stack in the same order they were defined in.
+
+NOTE: in x86 we store the least significant byte first and then afterwards the most sigifinicant byte.
+
+structs:
+if you create a struct on the stack the elements of the struct are going to be stored in order as opposed to the normal local variables and by default the compiler will add some padding for struct alignement but you can enforce to do not do that and squeesh the elements of the struct together using all of the available space by using the pragma preprocessor directives when declaring the struct.
