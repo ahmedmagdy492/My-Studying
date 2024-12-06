@@ -56,7 +56,8 @@ they are 16 bit registers that are used to divide the memory into several segmen
 -Code Segement Register: points to the code section in the memory
 -Data Segement Register: points to the data section in memory
 -Stack Segement Register: points to the prorgram stack in memory
--Extra Segement Register (ES, FS, GS)
+-Extra Segement Register: ES
+-General Purpose Segement Registers: (FS, GS)
 
 VI NOTE: the old RBP value will also get saved onto the stack.
 
@@ -84,7 +85,7 @@ memory, base only -> [rbx]
 
 NOTE: r/mX means that the instruction accepts a register value or a memory value in one of the following forms: [rbx+rcx*X+Y] where X can only have the values 1, 2, 4 or 8 and Y can be decoded as 1 byte or 4 bytes.
 
-As an example on how the push instruction might work consider the following let's say that you have the following instruction push rbx so the equalivant instruction might look something like that:
+As an example on how the push instruction might work consider the following: let's say that you have the following instruction push rbx so the equalivant instruction might look something like that:
 sub rsp, 0x8
 mov [rsp], rbx
 
@@ -99,7 +100,7 @@ call func (0x1000400) will be equavliant to:
 mov [rsp-0x08], rip
 mov rip, 0x1000400
 
-Ret Instruciton:
+Ret Instruction:
 is totally the opposite of the call instruction and it has 2 forms:
 1.the first form is that it pops whatever is on the top of the stack into the RIP register and then increaments rsp by 0x8
 ex: ret
@@ -122,7 +123,7 @@ NOTE on syntax (intel vs AT&T):
  -memory to register or register to memory
  -immediate to register, immediate to memory
 
- NOTE: on x86 arch the instructions bytes are of variable length not like other arch such as arm which is of fixed length 4 bytes except for thumb instructions it's 2 bytes so for the x86 it's much more easier to goto specific offsets (in the middle of an instruction for example) to make the cpu the interpret instruciton as a totally different instruction which is known as return oriented programming.
+ NOTE: on x86 arch the instructions bytes are of variable length not like other arch such as arm which is of fixed length 4 bytes except for thumb instructions it's 2 bytes so for the x86 it's much more easier to goto specific offsets (in the middle of an instruction for example) to make the cpu interpret the instruciton as a totally different instruction which is known as return oriented programming.
 
  NOTE: if you dynimcally link your linux app, the functions that your app depends on is going to have an entry in the procedure linkage table, that entry is going to contain a jmp instruction to the global offset table where this function resides.
 
@@ -174,6 +175,8 @@ NOTE: truncation might occur
 - imul reg32, r/m32, 8 imme  -> reg32 = r/m32 * 8 bit immeidate
 - imul reg64, r/m64, 8 imme  -> reg64 = r/m64 * 8 bit immeidate
 
+NOTE: the 8 bit immediate is sign extended by the amount of bits needed to be of the same size as the other operand (i.e if you multiply r/m32 by an 8 bit immediate, the 8 bit immediate will be extended to 32 bit and taking the sign of the immediate into account).
+
 4. IMUL Group 4 - 3 operands (16 bit immediate):
 - imul reg16, r/m16, 16 imme -> reg16 = r/m16 * 16 immediate
 
@@ -181,10 +184,9 @@ NOTE: truncation might occur
 - imul reg32, r/m32, imm 32  -> reg32 = r/m32 * immediate 32 bit
 - imul reg64, r/m64, imm 32  -> reg64 = r/m64 * immeidate 32 bit
 
-NOTE: to know what is the result of an operation after truncation is going to be we simply AND the result with n number of 1s, the value of n depeneds on the size of the result.
+NOTE: to know what is the result of an operation after truncation is going to be, we simply AND the result with n number of 1s, the value of n depeneds on the size of the result.
 
 NOTE: before doing any operations on any negative value we simply calculate the 2's complement of that value first.
-
 
 MOVZX instruction (move zero extend):
 moves a value from a smaller place into a larger place and the gab in bytes are filled with zeros
@@ -202,3 +204,56 @@ NOTE: in x86 we store the least significant byte first and then afterwards the m
 
 structs:
 if you create a struct on the stack the elements of the struct are going to be stored in order as opposed to the normal local variables and by default the compiler will add some padding for struct alignement but you can enforce to do not do that and squeesh the elements of the struct together using all of the available space by using the pragma preprocessor directives when declaring the struct.
+
+VI NOTE about sign extension: when using the instruction movsx or movsxd, if the smaller value you are trying to move has its first digit less than 8 then we pad with 0's, but if the first digit is larger or equal to 8 then pad with f's.
+
+Passing parameters to functions:
+when a function calls another function the caller function has to allocate shadow space that is suffcient to hold 4 parameters values for the callee even though the callee does not need that much, this shadow space is used to store function arguments that are passed in to the callee in registers. any parameters beyond the four parameters have to be stored in the stack before the shadow store. this is called fast-call calling convention.
+
+NOTE: so whenever you see a stack allocation that is too much for a function call so you should understand that this space is for the shadow store.
+
+NOTE: so as discussed above the caller has to allocate a shadow space that is suffcient to save 4 parameter values so that the callee can either decide to save the parameters their or does not need to.
+
+Calling Conventions:
+NOTE: calling conventions are compiler dependent.
+1.registers: the caller should assume that the callee will change the valotile registers and should save them somewhere before calling the callee.
+	the following registers are the voliatile registers:
+	-Visual Studio: RAX, RCX, RDX, R8, R9, R10, R11
+	-GCC: RAX, RDI, RSI, RDX, RCX, R8, R9, R10, R11
+	These are called "Caller-save registers"
+
+	Caller-save registers:
+	are registers that the caller should assume that they might be changed by the callee.
+	they belong to the callee.
+
+	Callee-save registers:
+	are registers that should not be changed by the callee
+	they belong to the caller.
+	Visual Studio: RBX, RBP, RDI, RSI, R12-R15
+	GCC: RBX, RBP, R12-R15
+
+2.parameters passing:
+	x86-64 compilers use the caller-saved registers to pass parameters and return values as well.
+	RAX: is going to be used to return back values. or RDX:RAX can be used to return 128bit value.
+
+	in Microsoft "x64" ABI:
+	parameters are passed respectivly in RCX, RDX, R8, R9
+	remaning parameters are pushed into the stack.
+
+	in System V "x86-x64" ABI:
+	parameters are passed respectivly in RDI, RSI, RDX, RCX, R8, R9
+	remaning parameters are pushed into the stack.
+
+
+	32-bit calling conventions:
+	1. cdecl   : caller must clean up the stack (most c code)
+	2. stdcall : callee must clean up the stack (win32 api code)
+
+NOTE: 1 common thing in stdcall and cdecl 32bit calling conventions is that:
+push ebp
+mov ebp, esp
+
+NOTES: in some 32bit compilers you might find:
+-parameters referenced as ebp+offset and local variables referenced ebp-offset
+or maybe esp
+-ebp always points to the base of the previous stack frame (caller stack frame).

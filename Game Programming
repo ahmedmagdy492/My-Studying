@@ -80,9 +80,17 @@ is a single piece of information such as a position, a color etc.
 -usually in shader programs we specify input variables to recieve data and output variables to output data to the next shader program and the matching is done between the output of the previous shader as well as the next shader based on the variables types and names.
 
 Uniforms:
-are a way to pass data from our application on the cpu to the shader on the gpu, uniforms are global and unique per shader program, and can be accessed from any stage in that same shader program. a uniform keeps its value as long as it's not updated or reset.
+are a way to pass data from our application on the cpu to the shader on the gpu, uniforms are global and unique per shader program, and can be accessed from any stage in that same shader program. a uniform keeps its value as long as it's not updated or reset. they also say that it's set per draw.
 
-NOTE: a vertex buffer consists of multiple arrays each array has multiple vertex attributes such as position and color for each one of this arrays you define the structure or the layout of this pointer via a call to glVertexAttribPointer.
+NOTE: a vertex buffer is simply an a buffer of vertices each vertex contains multiple attributes such as colors, positions, texture coordinates and normals, the buffer contains multiple vertices.
+
+NOTE: a stride is the number of bytes between each vertex. basically you can think of it as following: if i am at the begining of my vertex buffer and i want to move to the begining of the next vertex the stride will help me out to know how many bytes do i need to walk in order to be able to reach that point.
+
+NOTE: pointer the last argument in the glVertexAttribPointer function is the amount of bytes to the vertex attribute that you are currently calling glVertexAttribPointer for, for example if you have more than 1 vertex attribute (position, color, texture coordinate) and you are now calling this function glVertexAttribPointer for the position so the pointer parameter here tells open gl the amount of bytes of that position vertex attribute within the vertex itself.
+
+NOTE: by default if you are using compatability mode in open gl then there is array vertex buffer that is created by default but to run in core profile you should first tell glfw that by calling 3 functions.
+
+NOTE: reteriving uniform location every time we need to set the uniform to a value is not fast that's why we could use a cache to store these uniform names.
 
 Textures:
 is a 2d image(1d and 3d textures exist) that add more details to our objects without adding more vertices and more colors.
@@ -185,3 +193,125 @@ NOTE: the recomonded order in which we can combine multiple different transforma
 NOTE: Image Tearing happens when swaping the back and the front buffer in the middle of a display refresh freqency and it's all about two buffers are overlaping with each other.
 
 NOTE: Z-Buffer is a buffer that stores the z value of each pixel in the image buffer (it describes how far away in the z direction a pixel is) and it's used to improve performance by comparing the z values for 2 pixels to determine which one is behind the other and only rendering the front one (known as hidden surface elimination) and it's stored in VRAM.
+
+NOTE: OpenGL expects the vertices to be rendered within the screen boundaries in device normalized device coordinates after the vertex shader has ran.
+
+NOTE: what is usually done is that we define the object in a coordinate system of our own and then transform it to intermidate coordinate systems to do some sort of calculations and then in the vertex shader we transform them to NDC.
+
+Coordinate Systems:
+there are 5 coordinate systems that are important to computer graphics:
+1.Local Space (Object Space)
+2.World Space
+3.View Space (Eye Space or Camera Space)
+4.Clip Space
+5.Screen Space
+
+Local Space:
+when the origin of the object you create is at (0, 0, 0) and all of the other verticies are relative to that origin.
+
+World Space:
+the coorindate space in which all objects are located and positioned relative to a certain origin point which is the world origin and your object vertices will be transformed from local space to this space is by transforming using the model matrix.
+the model matrix is a matrix that transforms your object to where it should be in terms of translation, scaling and rotation in the game world.
+
+Camera Space:
+is the coordinate space in which you transform your world space to and is the space that is visable to the user.
+the view matrix is the matrix that contains the translation and rotation required for the objects to be transformed from world space into view space.
+
+Clip Space:
+coordinates that are out of the open gl expected range is clipped, so before going to the clipping transformation we should convert our vertices to be in the NDC range that opengl expects.
+
+NOTE: that if only a part of a primitive e.g. a triangle is outside the clipping volume OpenGL will reconstruct the triangle as one or more triangles to fit inside the clipping range.
+
+NOTE: the projection in general gives the ability to render 3d scenes on 2d screens.
+
+to transform the coordinate from view space to clip space we should prepare the projection matrix.
+there are 2 ways in which we can form the projectection martix:
+1.orthographic projection
+2.perspective projection
+
+one of the differences between orthographic projection and perspective projection is that the perspective is more realistic since it makes farther objects look smaller as opposed to orthographic projection that all objects look similar on the screen.
+
+Orthographic projection:
+defines something like a cube that any thing within that cube is visable and anything outside is will be clipped, the cube consists of a width, a height and a near and a far plane so anything within these boundaries is visable.
+here in orthographic projection the w component is untouched and when doing the perspecitive division the w component will be 1 so it won't do anything. afterwards the vertices will be converted automatically to NDC.
+NOTE: when using glm to create such a projection matrix you define the size of the near and far planes in one go and you will also need to specify the distance between them.
+NOTE: this projection is considered unrealistic since it does not take persepective into account.
+
+Perspective projection:
+adds a realistic effect by making farther objects look smaller like we see in the real world. what the perspective projection matrix does is that it changes the w value of each vertex in such a way that farther away verticies have greater w value, and at the end perspective division is applied give this realistic effect.
+
+to calculate the vector in clip space we do the following (order matter):
+v_clip = m_projection * m_view * m_model * v_local 
+
+
+Camera:
+in order to setup a camera in 3d space we need to set quite a few things:
+-camera position
+-camera direction
+-right vector
+-up vector
+the camera position is from its name represents the position in the camera in world space
+-the camera direction is where the camera is pointing at (the target) and the direction vector can be calcuated by getting the point in which we want the camera to point at and subtract it from the camera's position.
+-to calculate the right vector we setup first an up vector that points up in the positive y axis then we get the cross product of both the direction vector and that up vector the result of such a cross product operation is a vector that is prependuclar on these 2 vectors.
+
+
+
+
+
+
+
+UNITY Study:
+a mesh generally is a wireframe of a 3d object in a 3d scene that is composed of other primitives.
+Mesh Filter:
+it's a component that tells which primitive is being used by the object it's attached to.
+Mesh Renderer:
+is a component that knows how to render a specific object according to the points that defines this object by the mesh.
+
+Materials:
+there are 2 types of materials:
+1.rendering materials: which tells how the object should look and gets added to the mesh renderer
+2.physical materials: which controls how the object should behave and gets added to the type of collider attached to that object
+
+Physics:
+Colliders: describes a bounding shape (it could be a box, sphere, or even a convex shape) that will add some sort of a physical effect to the object when it gets hit by any other objects in the scene
+
+Ridigd Body: is a component that adds gravity and drag effects to objects.
+
+Prefaps:
+are game objects some properties already setup for later use as a template for creating similar objects.
+
+NOTE: one important benfit for using prefabs is that you can edit the prefab once and the changes you have made will be applied to all other objects that uses this prefab as a template.
+
+NOTE: sometimes if you have some game objects that belong to each other or that forms one unit in a gamescene we might end up wrapping all of them under a single parent game object just to organize the clutter.
+
+NOTE: to get the camera aligned with current view of the scene you can press Ctrl+Shift+F
+
+NOTE: to create some sort of art work to be hanged on a wall you can create a quad and a material and attach it to that quad then import an image then add that image to the material as a basemap and there you go.
+
+NOTE: in order to make the player listens to audio surrounding him in the scene we need to attach an audio listener component to the player game object, but on the other hand if you want to an object to make sounds in the game scene then you need to add an audio source component to that object.
+
+NOTE: to make the audio 3d or in other words the volume of the audio gets decreased when the audio listener is far away from the source and gets increased when the audio listener is more closer we need to adjust the spetial blend property of the audio source and make it set to 3d rather than 2d.
+
+NOTE: to add a background music we can do so by simply adding an audio source as a seperate game object and adjust its properties accordingly.
+
+Audio Reverb Zones:
+A reverb zone in Unity is a spatial audio effect that simulates the way sound reflects and reverberates in a physical space, from echoing caverns to a soundproof padded room.
+
+NOTE: to make a camera move with the player you can attach the camera and make it as a child to the player game object and then adjust the position of the camera to be 0,0,0 to create a third person camera.
+
+Collider Is Trigger:
+is a property in the collider component that allows other objects to go through that object but without getting effected by a physical barrier but it still knows when an object go through it.
+
+NOTE: onTriggerEnter is only called when an object go through the current object and that object has a ridigidbody.
+
+NOTE: to reference a prefab in your code create a game object and to instintiate an object of that prefab at runtime you can use the Instintiate method to do so.
+
+Design TIP: To ensure that the collectibles are evenly spaced, hold down Ctrl (macOS: Cmd) while you move the collectible.
+
+NOTE: if you have a player in your scene that is a sphere and you want it to stop falling due to applying gravity you can use constraints on the rotation axes by freezing certain axes to prevent this behavior.
+
+NOTE: Vector.UP in unity means is a normalized vector that can be multipled by a value to adjust its magnitude.
+
+NOTE: ForceMode.VelocityChange applies the force instantly rather than trying to apply force gradully such as using ForceMode.Force or ForceMode.Impulse.
+
+NOTE: differences between on trigger enter and on collision enter: the first one is valid when you have a invisiable collider that just works as a trigger but the later one is used when you want add normal collision detection functionality.

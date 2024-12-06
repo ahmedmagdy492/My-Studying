@@ -231,5 +231,10 @@ so the main idea here is to have one stack grows from -1 to as much as space as 
 
 NOTE: whenever you need to refer previous elements in order while you are already iterating over other elements then that's a sign that you need to use a stack
 
+NOTE: in case you have a solution that should use the stack so deeply and the system stack won't be able to handle that, so we can simulate that system stack by using a custom stack in memory.
+
+Monotonic Stacks:
+are stacks that arrange their internal elements in an increasing order or a decreasing order and helps solving problems such as get next higher number in o(n) time.
+
 Game Theory:
 Zero Sum Game is where there is only one winner
