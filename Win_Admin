@@ -139,3 +139,5 @@ SetPriorityClass:
 is a win32 api function that allows you to programmatically change the priority of a process and as the priority goes up the more cpu time the operating system will give you.
 
 NOTE: windows uses round robin algorithm to do the context switching between processes
+
+NOTE: all tasks that gets run by the Task Schedular Program have an xml file that lives under "%Systemroot%\System32\Tasks"

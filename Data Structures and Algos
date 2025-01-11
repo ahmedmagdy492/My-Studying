@@ -236,5 +236,23 @@ NOTE: in case you have a solution that should use the stack so deeply and the sy
 Monotonic Stacks:
 are stacks that arrange their internal elements in an increasing order or a decreasing order and helps solving problems such as get next higher number in o(n) time.
 
+Queue (Array-Based):
+there are more than one approach:
+1.tradiational approach:
+ enqueue: adding an item to the end of the array
+ dequeue: removing an item from the front which is o(n) due to the need of shifting
+2.front-rear approach:
+ main idea: is to have a pointer index to the front (front) and a pointer index to the last element (rear)
+ enqueue: add an item to the end and update the rear to point to it
+ dequeue: remove an item from the front and update the front pointer to the right (make it point to the item before it)
+ -but this implementation has an issue which is that when the rear pointer reaches the end of the array there are space left in the front which is not used but one solution might be to do a shifting of the elements to the front in case we are full and the front index is not pointing to the first item in the array but this solution is o(n^2).
+
+NOTE: mod operator is quite effcient when it comes circular accessing in a circular based data structure, but be careful division and mod operators are more slower than using an if condition.
+
+Dequ:
+is a double-ended queue or in other words a queue that we can add and remove from both ends.
+
+NOTE: we can implement a queue using 2 stacks.
+
 Game Theory:
 Zero Sum Game is where there is only one winner

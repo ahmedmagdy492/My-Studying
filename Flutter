@@ -1,11 +1,46 @@
+Dart Language:
+-every type in dart by default is non null
+-to make a variable null in dart you use the ? infront of the variable type like this: int? varName;
+-you can tell dart that the nullable variable will not be null when executing the current statement like this: 
+int? number = 12;
+print(number!.toDouble()) // this line tells dart that the number variable is guranteed to be not null
+-you can use the null collescing operator as a shortcut to avoid writing an if-else statement when it comes to working with a nullable variable like this:
+int? number1;
+int result = number ?? 0;
+-you can also use the ? operator when using the . operator with a nullable variable so that it will execute the operation after the dot if the variable is not null otherwise it won't:
+int? number;
+print(number?.toDouble()) // will not execute if number is null
+
+
+Note: Implements in dart works with any type of super class, in other words the super class does not have to be an interface or an abstract to make it work with the implements keyword and for that reason when you use it to inherit from a class in dart it will enforce you to implement all the methods within the parent class regardless the parent has already implemented his methods and attributes or not.
+
+NOTE: you can also override attributes not just methods.
+
+Mixins in dart are like interfaces in C# and Java, came to resolve of the issue of multiple inheritence.
+Mixins can be used more than once by a class, can have implemented or unimplemented methods and if 2 mixins are used by the same class and the 2 mixins have similar methods or attributes then the last used mixin is going to override the one before it. 
+
+
+NOTE: flutter supports hot reload, so when any change is made flutter looks for the nearest build method to call rebuild the changed part, so that's why you have to have at least one custom widget in your app in order to enable hot reloading.
+
+NOTE: by default the row and the column widget takes the entire avialable space on its main axis for example in the case of row its main axis is the  x axis so it takes all of the available space on that axis the enrire width of the screen
+
+NOTE: the container widget takes up the whole available space in case it has no children.
+
+NOTE: the column widget takes the width of its widest children. 
+
+
+NOTE: the spacer widget is used mainly for adding space between widgets based on the percentages of space left.
+
+
+NOTE: prefer to use list tile widget within a card
+
+
 Const Keyword infront of class instances (or widgets for example):
--when preceding a class instance with the const keyword, that will allow the dart compiler to use the same object in memory if you happen to use it somewhere else in your code with the same content rather than creating a new object.
-
-Dart is a safe type language which means that each variable has a specific type
-
-Question mark in dart: means that a certain argument or a variable can be null
+-when preceding a class instance with the const keyword, that will allow the dart compiler to use the same object in memory if you happen to use it somewhere else in your code with the same content rather than creating a new object. and in flutter the widget that is constant will not be built again.
 
 Container widgets: are quite useful widgets for configuring styles and creating custom layouts
+
+NOTE: normal divider is used with a column to create a horizental divider
 
 Lists in dart are like arrays in other programming languages and there are 2 types of lists either a fixed length list or a growable list and you can create a growable list by creating it this way ['value1', 'value2'] and you can create a fixed length list by using for example List.filled(length, fillValue).
 

@@ -254,9 +254,9 @@ the camera position is from its name represents the position in the camera in wo
 -the camera direction is where the camera is pointing at (the target) and the direction vector can be calcuated by getting the point in which we want the camera to point at and subtract it from the camera's position.
 -to calculate the right vector we setup first an up vector that points up in the positive y axis then we get the cross product of both the direction vector and that up vector the result of such a cross product operation is a vector that is prependuclar on these 2 vectors.
 
+NOTE: a material is just a shader + uniforms
 
-
-
+NOTE: it's better if you have a texture class is to manage the texture units outside of it
 
 
 

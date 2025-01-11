@@ -212,7 +212,7 @@ when a function calls another function the caller function has to allocate shado
 
 NOTE: so whenever you see a stack allocation that is too much for a function call so you should understand that this space is for the shadow store.
 
-NOTE: so as discussed above the caller has to allocate a shadow space that is suffcient to save 4 parameter values so that the callee can either decide to save the parameters their or does not need to.
+NOTE: so as discussed above the caller has to allocate a shadow space that is suffcient to save 4 parameter values so that the callee can either decide to save the parameters there or not.
 
 Calling Conventions:
 NOTE: calling conventions are compiler dependent.
@@ -249,11 +249,72 @@ NOTE: calling conventions are compiler dependent.
 	1. cdecl   : caller must clean up the stack (most c code)
 	2. stdcall : callee must clean up the stack (win32 api code)
 
-NOTE: 1 common thing in stdcall and cdecl 32bit calling conventions is that:
+NOTE: 1 common thing in stdcall and cdecl 32-bit calling conventions is the functions prolog:
 push ebp
 mov ebp, esp
 
-NOTES: in some 32bit compilers you might find:
+NOTES: in some 32-bit compilers you might find:
 -parameters referenced as ebp+offset and local variables referenced ebp-offset
 or maybe esp
--ebp always points to the base of the previous stack frame (caller stack frame).
+-ebp always points to the base of the previous stack frame (caller stack frame) and that's before it's being adjusted by the callee and also that's why the callee has to push it first to the stack before adjusting it and that's considered a callee-saved register.
+
+
+LEA Instruction:
+is usually used in pointer arthmetic and array index calculations.
+
+VI NOTE: in most situations [] symbols means to dereference memory but there is one exception to this rule which is the lea instruction so for example if you have the following expression:
+rbx = 0x2, rdx = 0x1000
+lea rax, [rdx+rbx*8+5]
+the evaluation of this instruction is going to be just to put the result of the calcuation inside of rax as if it was mov rax, rdx+rbx*8+5 so treat the square brackets in this case as just a grouping symbol.
+
+
+Control Flow Instructions:
+2 types of control flows here:
+1.Conditional jmp:
+jumps if a certain condition is met. examples of which are if statements, loops, etc...
+
+2.UnConditional jmp:
+jumps without needing any conditions. examples are goto, function calls, exceptions and interrupts.
+
+JMP Instruction:
+jumps to a given adderss unconditionally (changes rip to the given addresss without any conditions).
+
+Ways to specify the address argument:
+-short: relative to rip, and is a single 1 byte that will be sign-extended, for example: jmp -2 -> will cause an infinite loop as the short jump is relative to rip which means to the next instruction.
+NOTE: when you see in the disassambler jmp 000000140000Ch that address was not baked into like this by the assembler but rather the actual instruction was something like jmp 0xC0 which means jmp rip+0xC0 forward.
+
+-far
+
+-Frequently used in for loops
+
+Conditional Jumps:
+there too many types of conditional jumps for example: JNE and JNZ (which are equavilant instructions) which jumps if the zero flag ZF is not set (ZF == 0 jumps if not equal zero)
+
+RFLAGS register:
+in 64 bit archeticture there is a special register called RFLAGS which extends the old 32 bit EFLAGS register but the lower 32 bits are still used for flags and the higher ones are not used for anything yet.
+
+this register holds some bit flags such as:
+-zero flag bit: which is set to 1 when a result of an operation is 0
+-sign flag bit: which is set to 1 when a result of an operation is a negative number.
+
+Some Notable Jcc Instructions:
+-JZ/JE: if ZF == 1
+-JNZ/JNE: if ZF == 0
+-JLE/JNG: if ZF == 1 or SF != OF (overflow flag)
+-JGE/JNL: if SF == OF
+-JBE/JNA: if CF == 1 or ZF == 1
+-JB: if CF == 1
+
+NOTE: A stands for above and B stands for below and they are used with unsigned numbers as opposed to G and L which are used with signed numbers.
+
+CMP instruction:
+compares 2 operands by subtracting the second operand from the first operand and setting the status flags accordingly just like the SUB instruction but the only difference between these 2 instructions is that the SUB instruction does the operation, sets the status flags but also stores the result in some register but on the contrary side the CMP instruction only sets the status flags after the operation and discards the result.
+
+Example:
+cmp dword ptr [rsp+4], eax
+jne 0000000140001033
+
+examples:
+if(a == b) -> jmp if (eax - [rsp+4]) != 0
+if(a < b)  -> jmp if (eax - [rsp+4]) <= 0
+if(a > b)  -> jmp if (eax - [rsp+4]) >= 0
