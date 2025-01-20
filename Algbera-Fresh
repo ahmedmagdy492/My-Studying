@@ -1,0 +1,17 @@
+Differences between Expression and Equation:
+Expressions:
+-are statements without an equal sign
+-cannot be solved
+
+Equations:
+-have an equal sign (two sides)
+-can be solved
+
+NOTE: the number of solution of an equation you can get depends on the largest power of the terms you have, for example a linear equation "x+3=5" is always gonna get you one solution but you have a quaderatic equation "x^2=4" you are going to get 2 solutions -2 and 2 in this case.
+
+NOTE: solving is differnet than evaluating.
+
+Linear Equations:
+are equation that has 1 variable and is of the first degree and most of the time it spitts out one solution.
+there are many forms of linear equations but the most common one is the standard form which looks like that "ax+b=0" where a is a coeffcient, x is a variable and b is a constant.
+NOTE: if you have an equation with a variable rasied to -1, it's not a linear equation.

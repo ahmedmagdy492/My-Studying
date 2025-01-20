@@ -288,7 +288,7 @@ NOTE: when you see in the disassambler jmp 000000140000Ch that address was not b
 -Frequently used in for loops
 
 Conditional Jumps:
-there too many types of conditional jumps for example: JNE and JNZ (which are equavilant instructions) which jumps if the zero flag ZF is not set (ZF == 0 jumps if not equal zero)
+there are too many types of conditional jumps for example: JNE and JNZ (which are equavilant instructions) which jumps if the zero flag ZF is not set (ZF == 0 jumps if not equal zero)
 
 RFLAGS register:
 in 64 bit archeticture there is a special register called RFLAGS which extends the old 32 bit EFLAGS register but the lower 32 bits are still used for flags and the higher ones are not used for anything yet.
@@ -315,6 +315,7 @@ cmp dword ptr [rsp+4], eax
 jne 0000000140001033
 
 examples:
+a = 3, b = 4
 if(a == b) -> jmp if (eax - [rsp+4]) != 0
 if(a < b)  -> jmp if (eax - [rsp+4]) <= 0
 if(a > b)  -> jmp if (eax - [rsp+4]) >= 0

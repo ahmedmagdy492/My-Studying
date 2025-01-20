@@ -44,7 +44,9 @@ NOTE: normal divider is used with a column to create a horizental divider
 
 Lists in dart are like arrays in other programming languages and there are 2 types of lists either a fixed length list or a growable list and you can create a growable list by creating it this way ['value1', 'value2'] and you can create a fixed length list by using for example List.filled(length, fillValue).
 
-NOTE: every value in Dart is an object
+NOTE: difference between ListView and ListView.builder the first one builds the whole list at once even if most of the elements are not visable to the user on the screen but rather the later one only builds and creates the ones that are visable to the user on the screen which makes it more effcient than the normal ListView.
+
+NOTE: expanded has to be placed within either a row or a column
 
 in immutable classes we can use the const keyword before the declartion of a constructor function to allow dart to optimze the performance and reuse that object again rather than creating a new one every single time it's required to create one.
 

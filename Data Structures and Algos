@@ -252,7 +252,10 @@ NOTE: mod operator is quite effcient when it comes circular accessing in a circu
 Dequ:
 is a double-ended queue or in other words a queue that we can add and remove from both ends.
 
-NOTE: we can implement a queue using 2 stacks.
+NOTE: we can implement a queue using 2 stacks and we can optmize either the dequeue or the enqueue methods but not both at once if the queue is implemented using an array.
+
+Priority Queue:
+is a queue that each element inside it has a priority value and the element with the highest priority value is dequeued first. it's best to implement it using a heap data structure so that we are not limited to a certain number of priorities from 1 to 3 because we will have to make all operations effcient and have a big oh of O(1).
 
 Game Theory:
 Zero Sum Game is where there is only one winner
