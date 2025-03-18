@@ -94,11 +94,19 @@ pop rax will do the following:
 1.mov rax, [rsp]
 2.add rsp, 0x8
 
+NOTE: there are other 2 variants of these instructions which are pusha and pushad and their opposite ones which are popa and popad what they do is:
+-pusha: pushes all of the following 16bit registers AX, CX, DX, BX, SP, BP, SI, DI
+-pushad: pushes all of the following 32bit registers EAX, ECX, EDX, EBX, ESP, EBP, ESI, EDI
+NOTE: seeing these instructions in a code might be indicator that this code is hand written assembly as compilers rarely use them.
+
 Call Instruction:
 it transfers control to a different function taking into consideration coming back to where it left off, so it pushes the content of rip into the stack as a return address to be used by ret later and then decreaments the rsp by 8 (since it pushes an 8 byte addres onto the stack) and then changes rip to the address given in the instruction, so for example:
 call func (0x1000400) will be equavliant to:
 mov [rsp-0x08], rip
 mov rip, 0x1000400
+
+NOTE: there is another instruction called leave which does the following:
+-it adjusts esp to have the same value as ebp and it pops ebp off the stack.
 
 Ret Instruction:
 is totally the opposite of the call instruction and it has 2 forms:
@@ -319,3 +327,81 @@ a = 3, b = 4
 if(a == b) -> jmp if (eax - [rsp+4]) != 0
 if(a < b)  -> jmp if (eax - [rsp+4]) <= 0
 if(a > b)  -> jmp if (eax - [rsp+4]) >= 0
+
+Some Common Conditional JMP instructions:
+jz,jnz, je, jne, jg, jge, jl, jle, ja, jae, jb, jbe, js, jc
+jecxz: jump to the location specified as argument if the register ecx = 0.
+
+NOTE: there is another instruction that is called test which is identical to the and instruction but the difference is that it does not impact the operand but it modifies the status flags and the zero flag is the one of interest, it's also sometimes used in the following way test eax, eax to test to see if the eax has a null value or not and it takes fewer bytes and fewer cpu cycles than something like this test eax, 0h.
+
+Bitwise Representation:
+and: source and destination, one of them only can be in r/mX form not both at once.
+or is the same.
+xor: is the same in terms of syntax and sometimes compilers use to clear out a register value.
+
+NOT Instruction:
+single argument that can be in r/mX form.
+not negatation is the same as the one's complement.
+NOTE: when you want to represent a negative number you will represent in the two's complement form.
+
+Shifting Instructions:
+there are 2 types of shifting instructions the normal ones which are shr dest, count and shl dest, count both of them shift either to the left or to the right by the count and when 1 value is shifted out of boundary the CF is set to this value.
+-the form of the shift instructions is as follows:
+ shx r/mX, cl or 1 byte immediate
+ NOTE: compilers will often use the shift instruction instead of multiply if you are multiplying by a power of 2
+the other variant are these:
+ror and rol which are quite similar when it comes what they do but the only difference is that rather than throwing away the shifited bits they rotated to the other end.
+
+in addtion shl and shr there is another variant that is used with signed values called "sar" and "sal" which stands for shift arithmitic right and left. the only differnce is that when shifting values: the sar or sal fills in the shifted places with whatever the original sign was.
+
+NOTE: division for signed values is a bit different than the unsigned version which means that the normal sar won't work by itself so the compiler has to generate some extra instruction handle corner cases and the instructions generated differs from one compiler to another.
+
+inc/dec:
+-used to increase or decrease a value and it takes a single operand which can be r/mX form
+-when the compilers are set for optimization you may not see these instructions used. and if you saw them that might indicate that this is an unoptimized code or it's a hand written assembly instructions.
+-modifies the following status flags OF, SF, ZF, AF, PF, CF.
+
+
+Rep Instructions:
+are instruction that are used with data buffers either an array of bytes or a single byte, word or dword.
+
+Common data buffers manupilation instructions:
+-movs(x), cmps(x), stos(x), scas(x) where x can be replaced with b, w or d.
+
+The ESI and EDI registers are used in these operations. ESI is the source
+index register, and EDI is the destination index register. ECX is used as the
+counting variable.
+
+The rep prefix will continue until ECX = 0. The repe/repz and repne/repnz prefixes will continue until ECX = 0 or until the ZF = 1 or 0.
+
+Therefore, in most data buffer manipulation instructions, ESI, EDI, and ECX must be properly initialized for the rep instruction to be useful.
+
+The movsb instruction is used to move a sequence of bytes from one location to another. The rep prefix is commonly used with movsb to copy a sequence of bytes, with size defined by ECX. The rep movsb instruction is the logical equivalent of the C memcpy function.
+
+The movsb instruction grabs the byte at address ESI, stores it at address EDI, and then increments or decrements the ESI and EDI registers by one according to the setting of the direction flag (DF). If DF = 0, they are incremented; otherwise, they are decremented.
+
+The cmpsb instruction is used to compare two sequences of bytes to deter-
+mine whether they contain the same data. The cmpsb instruction subtracts the
+value at location EDI from the value at ESI and updates the flags. It is typi-
+cally used with the repe prefix. When coupled with the repe prefix, the cmpsb
+instruction compares each byte of the two sequences until it finds a differ-
+ence between the sequences or reaches the end of the comparison. The cmpsb
+instruction obtains the byte at address ESI, compares the value at location
+EDI to set the flags, and then increments the ESI and EDI registers by one. If
+the repe prefix is present, ECX is checked and the flags are also checked, but
+if ECX = 0 or ZF = 0, the operation will stop repeating. This is equivalent to
+the C function memcmp.
+
+The scasb instruction is used to search for a single value in a sequence of
+bytes. The value is defined by the AL register. This works in the same way as
+cmpsb, but it compares the byte located at address ESI to AL, rather than to
+EDI. The repe operation will continue until the byte is found or ECX = 0. If
+the value is found in the sequence of bytes, ESI stores the location of that
+value.
+
+The stosb instruction is used to store values in a location specified by
+EDI. This is identical to scasb, but instead of being searched for, the specified
+byte is placed in the location specified by EDI. The rep prefix is used with
+scasb to initialize a buffer of memory, wherein every byte contains the same
+value. This is equivalent to the C function memset. Table 4-11 displays some
+common rep instructions and describes their operation.

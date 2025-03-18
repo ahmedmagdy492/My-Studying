@@ -47,6 +47,22 @@ Lists in dart are like arrays in other programming languages and there are 2 typ
 NOTE: difference between ListView and ListView.builder the first one builds the whole list at once even if most of the elements are not visable to the user on the screen but rather the later one only builds and creates the ones that are visable to the user on the screen which makes it more effcient than the normal ListView.
 
 NOTE: expanded has to be placed within either a row or a column
+NOTE: expanded widget takes the available remaining space.
+
+CustomScrollView: 
+converts any children widgets into scrollable widgets even if you have 2 listviews beneath eachother but the only difference is that; it takes in a sliver widget and in order to convert any widget to a sliver widget you can do so by using this widget SliveToBoxAdapter(child: <wiget>) put there any widget you wish to convert into a sliver widget.
+
+NOTE: we can make a listview unscrollable by modifying the physics property and assign it a value of NeverScrollableScrollPhysics
+
+NOTE: shrinkwrap property of the listview tells the list view to draw all elements and that will allow it to know its height before hand.
+
+NOTE: sliverList widget is used instead of the normal list view when you want to use a customscrollview widget.
+
+NOTE: if you have a widget that needs to show for example a list depending on the state of something for example the data is still being loaded what you can do is to make a seperate widget that builds only the list and on top of that make another widget that builds this view by either showing an indicator or by showing the list depending on the state and this is called a builder widget.
+
+NOTE: if we need to build our ui based on some data that we will get in the future we can do so by using a future builder.
+
+
 
 in immutable classes we can use the const keyword before the declartion of a constructor function to allow dart to optimze the performance and reuse that object again rather than creating a new one every single time it's required to create one.
 

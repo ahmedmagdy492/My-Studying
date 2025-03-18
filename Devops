@@ -1,0 +1,7 @@
+Virtualization:
+there are mainly 2 types of hybervisors:
+-type1:
+or also called Bare Metal hybervisors which is similar to type2 but the difference is that it's installed directly on top of the hardware there no host os. examples of that is vmware esxi, microsoft hyber-v.
+
+-type2:
+which is the common type it's creating a virtual machine on top of the existing host os, some common examples of this is virtual box and vmware workstation and player, and in this type the resources are shared between the host os and the virtual machine.

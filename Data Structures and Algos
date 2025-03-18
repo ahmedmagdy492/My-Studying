@@ -257,5 +257,116 @@ NOTE: we can implement a queue using 2 stacks and we can optmize either the dequ
 Priority Queue:
 is a queue that each element inside it has a priority value and the element with the highest priority value is dequeued first. it's best to implement it using a heap data structure so that we are not limited to a certain number of priorities from 1 to 3 because we will have to make all operations effcient and have a big oh of O(1).
 
+NOTE: we can use a queue to observe a stream of data each time we observe we get a block of data of a specific size (the block of data is called a window and it has a specific fixed size).
+
+Sigma Notation:
+or the summation, you can think of it as a for loop:
+-the number under the sigma symbol corrsponds to the loop initilization body
+-the number above the sigma symbol corrsponds to the size or how many times the for loop body will execute
+-finally the part after the symbol is the loop body or the part that will be execute n times.
+-the only difference is that the body part (or the part after the sigma symbol) gets summed with the one from the previous iteration.
+
+Recurision Tree Method:
+used for analyzing recursive algorithms such as algorithms that use the divide and conquer technique.
+in this method what we care about is that when i have input of size n how many levels recurision i will have (in other words what is the height of the tree)
+
+Optimzation Problem:
+is the problem in which we need to find the best solution out of a number feasible solutions based on some crieteria.
+
+Greedy Techinque:
+is an algorithmeic techinque that involves multiple steps and we should make a decision in each step and select the local or the current optimal solution in the current step without caring about the rest of the problem.
+
+Components of Greedy Algorithms:
+-Greedy Choice Property
+-Optimal Substructure
+
+
+Tree Data Structure:
+-the tree is flipped or is structured upside down which means that the root is the first node
+-nodes are connected by edges
+-a tree level is all nodes that are on the same line
+-trees may consist of multiple levels
+-a leaf node is a node that has no children
+-we can deal with nodes from different levels as either a parent-child or a child-parent relationship.
+-nodes from the same parent are called siblings.
+-each tree has a height and the height is the longest no of edges from the root to the end leaf
+-the height is equal to the levels of the tree - 1
+-we can calculate the height of any node on the tree by calculating the no of edges from that node to the end leaf that is connected to this node.
+-the depth of a node is the no of edges from the node to the root
+-the difference between the height and the depth is that the height is going down from root to a node but the depth is the opposite, it's going from the node up to the root.
+NOTE: in a tree structure with only one parent there is only 1 path from one node to another.
+
+Binary Trees:
+-each node has at most 2 children.
+
+Common Types of Trees:
+-AVL Tree
+-Binary Tree
+-Binary Search Tree
+-Cartesian Tree
+-Order Statistic Tree
+-Red-Black Tree
+-Splay Tree
+-Treap
+-Trie
+
+Tree Traversal Types:
+-In order: will print the left subtree then the root then the right subtree
+-Pre order: will print the root then left then right
+-Post order: will print the left then right then the root
+
+Types of Binary Trees:
+-Strict or Full Binary Tree: is a binary tree in which each node either have a 0 children or 2 children
+NOTE: internal nodes are nodes that are not leaf nodes which means that it can include the root node in case the root has child nodes.
+NOTE: in a strict binary tree the no of the leaf nodes = internal nodes + 1
+NOTE: the general purpose full or strict k-ary tree that either have 0 or k children is called k-ary tree
+NOTE: given a height h the count of the nodes in that tree is 2*h+1
+
+-Perfect Binary Tree:
+is a tree where:
+1.all leaf nodes are on the same level
+2.all internal nodes have 2 children
+NOTE: that means that perfect trees should have complete no of nodes on each level.
+
+-Complete Binary Tree:
+is a binary tree that is similar to the perfect binary tree which means that all levels are complete except for the last level all nodes from the left are filled but there are a few nodes on the right are missing.
+
+-Degenerate Tree:
+is a tree where each internal node has a exectacly one child
+NOTE: if we are given a N nodes with the degenerate tree we can get a tree with the longest depth
+NOTE: they are very slow
+
+-Balanced Binary Tree:
+here we are trying to make the height as small as possible ~log(n).
+and we try to keep the difference between the height of each subtree is at most 1
+
+Some Tree Forumlas:
+-2^height+1 - 1 -> will get you the no of nodes in a tree given the height
+NOTE: if you have the no of the nodes in a perfect binary tree and you want to get the height of that tree you can use the following formula:
+	h = lg(n+1)-1
+we can actually derive this formula from the previous one.
+
+Heap Data Structure:
+is a special type of a balanced binary tree that either is a min-heap or a max-heap which means each root node in the tree should be either the max or the min among the children.
+
+Huffman coding algorithm:
+there are some variants from this algorithm, but there is an original method that was mentioned by huffman in his scientafic paper and the most common one is called binary tree method.
+some examples on the other variants are:
+-n-ary huffman
+-adaptive huffman
+-huffman template
+-length-limited huffman
+-Hu-tucker coding
+-Cannonical huffman
+props:
+-No code could be repeated for more than one character
+-No code could be a prefix for another code
+-Long codes are used for the least frequency characters
+
+Quick Sort:
+the main idea behind the quick sort algorithm is that you pick an element (called the pivot) and put it in its sorted position (which involves placing elements that are greater than it after it and places all elements less than it before it) and it continues doing so until the whole array is sorted.
+
+NOTE: it uses the divide conquer techinque because it divides the input array into two halfs: one half which is larger than the pivot and the other half which is less than the pivot and it applies this process recurisivly.
+
 Game Theory:
 Zero Sum Game is where there is only one winner

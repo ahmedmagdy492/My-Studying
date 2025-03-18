@@ -15,3 +15,50 @@ Linear Equations:
 are equation that has 1 variable and is of the first degree and most of the time it spitts out one solution.
 there are many forms of linear equations but the most common one is the standard form which looks like that "ax+b=0" where a is a coeffcient, x is a variable and b is a constant.
 NOTE: if you have an equation with a variable rasied to -1, it's not a linear equation.
+
+Circles:
+the circumference of a unit circle is just PI and when the circle gets bigger the radius gets bigger as well so the circumference becomes bigger by r.
+
+NOTE: to get an exact circle area we can write PI as it's like for example 6 PI square inches squared.
+
+NOTE: Area in 3d is called volume and it's the same as area in terms of the forumula but the only difference is a height multipiled by that.
+
+NOTE: when it comes to rectangles we can calculate the surface area which describes the area of each surface and we can as well calculate the volume.
+
+
+Linear inequality:
+-it does not have one solution but rather it has most of the time inifinite number of solutions
+-we can use a number line to represent the solution set of a particular inequality or we can use interval notation
+-when creating an interval notation for a solution of an enquality you always start writing your interval from left to right or in other words from smallest number to largest number.
+
+Solving Linear Enequality:
+is the same as solving linear equations except for one thing:
+-if you multiply by or divide by a negative number then you have to flip the enequality symbol e.g. -x/-1 > 12/-1 then that becomes x < -12
+
+NOTE: you reverse the greater than or the less than symbol only when you multiply or divide both sides by a negative.
+
+Compound Inequalities:
+are an equalities that are combined together using one of 2 words either the word or or the word and.
+
+NOTE: when there is an and that combines 2 inequalities the value of the variable has to satisify both inequalities.
+NOTE: with or solutions need to satisify at least one inequality.
+
+NOTE: there is a special type of compound inequality which is called double inequality which is the same as a compound inequality and can be written in the following form:
+	-3 <= x/2 + 1 < 5
+so you can simply solve each inequality separaetly and then graph them togther or you can solve it at once but consider the following:
+ - whatever you do to the middle part you gotta do to the other 2 sides.
+
+Compound inequality with OR:
+-the solution set can satisify the first enquality or the other inequality or both of them
+-we can denote an OR between 2 intervals by using the Union symbol like this "U".
+
+NOTE: you will always have a solution for OR
+
+Graphing Lines:
+we normally graph lines that has a linear equation in 2 variables and the linear equation can be written in 3 different forms and each form has a way to make graphing easier:
+-slope-intercept form: we can use the y intercept point and the slope to graph a line without having to plot points
+-standard form: we can subsitute x with 0 to get the y-intercept point and we can subsitute y with 0 to get the x-interecpt point but note that in the standard form we can use this method only if the constant term is non-zero.
+
+NOTE: at the bear minimum we need 2 points to graph a line
+
+NOTE: in linear equations if you have an x variable you will have an x-intercept point and if you have a y variable you will have a y-intercept point.

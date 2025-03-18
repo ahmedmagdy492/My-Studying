@@ -141,3 +141,8 @@ is a win32 api function that allows you to programmatically change the priority 
 NOTE: windows uses round robin algorithm to do the context switching between processes
 
 NOTE: all tasks that gets run by the Task Schedular Program have an xml file that lives under "%Systemroot%\System32\Tasks"
+
+Assembly Programming:
+to call a win32 function you have to follow the calling convention which is as follows _funcname@<size-of-params-in-bytes>
+
+NOTE: when pushing parameters to win32 api calls in 32 bit x86 assembly you should consider that they are reversed.
