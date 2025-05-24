@@ -62,3 +62,55 @@ we normally graph lines that has a linear equation in 2 variables and the linear
 NOTE: at the bear minimum we need 2 points to graph a line
 
 NOTE: in linear equations if you have an x variable you will have an x-intercept point and if you have a y variable you will have a y-intercept point.
+
+Slope of a Line:
+is the rate of change, or how steep a line is, it's always going from left to right.
+it's rise over run and the rise describes how does the line change from one point to another point vertically and the run describes how does the line change from left to right from one point to the next.
+
+when calculating the slope of a line using the slope formula it does not matter which point you use in the slope forumlla first.
+
+m = (y2-y1)/(x2-x1)
+
+Graphing Relations:
+if you have a word problem and you have a relation between 2 numbers and you need to graph this relationship then first you need to have 2 points or a point and a slope, if you have 2 points you can of course calculate the slope but the first step is to determine which value should be the depenentant variable and which value should be the independent variable or input and output.
+
+Parallel Lines:
+are lines that never interesects and they have the same slope.
+
+Perpendicular Lines:
+are lines that do interesect at 90 degrees angle, the slope of the lines are opposite so one line has a postive slope and another line has a negative slope, the slopes are recpericals of each other for example if one line has a slope of 1/3 the other will have a slope of -3.
+
+NOTE: so in general to get the slope of a perpendicular line given the slope of the other line:
+-change the sign
+-flip over the fraction
+
+NOTE: if you are given an equation of a line and you are trying to find the equation of a parallel line:
+-get the slope
+-form the equation in the slope intercept form
+-to find the b component we can plug in the x and the y's you got already in the problem statement and then solve for b.
+
+NOTE: to check whether a point is on a line or not we can plug in the x and the y of that point into the equation and if both sides are equal then the point is on that line.
+
+Point-Slope Form:
+given a slope of a line and a point on that line we can derive any other point we want on that line, so the slope forumlla becomes:
+	m = y - y1 / x - x1
+after doing some algebra manupilation:
+    y-y1=m(x-x1)
+
+VIP NOTE: this formulla will find the equation of any line for you.
+
+
+There are 3 ways to find an equation of a line:
+-given a point and the slope we can subistitue the numbers directly in the slope point formula
+-given a point and a slope of another line that is either perpendicular to this line or parallel to the target line
+-given 2 points and you need to figure out the slope and then use the point slope formula:
+ -one thing to take note of here is that the point to pick to subistitute in the point slope formula is that if there is a point that has 0 you should pick it and points that has less negatives.
+
+
+ Systems of Linear Equations:
+ is more than one linear equation on the same graph. basically we have 3 types of graphs:
+ -2 lines that cross each other at some point: that one has one solution where the 2 lines interesct.
+ -2 parallel lines: no solution as there is no common point
+ -2 lines that are on top of each other or the same: that one has an infinte no of solutions since they interesect at every point.
+
+ NOTE: what we are mainly looking for is a point where these 2 lines cross or intersect.

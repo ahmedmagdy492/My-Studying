@@ -1,10 +1,10 @@
-1.sniffer (postponed and will be web app in c++ or will be made in raygui and win32 api)
+1.sniffer (postponed and will be web app in c++ or will be made in a ui framework and win32 api)
 - my steps in flutter
-- social media (system design, graphql, flutter, angular or react, nosql db, real time notification system) -> -C#-Make your C# code more object oriented-Asp.net core Web API-Authorization and Authentication (all of its types)-Unit testing in Asp.net Core Web APIs
+- social media  (system design, graphql, flutter, angular or react, nosql db, real time notification system) -> -C#-Make your C# code more object oriented-Asp.net core Web API-Authorization and Authentication (all of its types)-Unit testing in Asp.net Core Web APIs
 - race typer (php and websockets)
 - the document (tokenization, state machine, parsing)
 -cv templates creator (xml SAX parsing)
--the hangman over network [Working on now] (pub-sub arch, C#)
+-the hangman over network [Working on now] (pub-sub arch, C#) => done but in flutter
 -chat app in flutter using xxmp protocol (up next)
 -bandwidth limiter (by using windows api hooks)
 -a mobile app that sends clicks to an opened powerpoint window on windows that moves to the next slide
@@ -13,7 +13,7 @@
 -Ftp client -> done
 -snake -> done
 -connect 4 -> done without AI
--tetris
+-tetris -> done
 -pong -> done without proper bouncing
 -space invaders with levels and build -> done
 -push notification (may be part of the real time system)

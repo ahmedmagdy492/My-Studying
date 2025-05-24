@@ -1,0 +1,83 @@
+Windows Consists of multiple subsystems:
+-Win32 API
+-Posix
+-OS/2
+-WSL (Windows Subsystem for Linux): made windows cabapable of running linux executables.
+all of the above subsystems operate in user mode and can access the hardware through the communication with the kernel.
+
+User Mode:
+-there are processes, each process has its own address space and has its own resources (i.e. memory, handles, security permissions)
+
+Kernel Mode:
+-there are processes as well but all of them share the same memory and the same resources.
+
+NOTE: when a process running in user mode dies simply windows can remove it from memory and deallocate the resources that it was using, but on the other hand when a process in kernel mode has some sort of an invalid instruction or crashed the operating system cannot continue running and will show the blue screen of death and then restart.
+
+NOTE: most of the security products such as anti-viruses and firewalls operate in kernel mode.
+
+DKOM (Direct Kernel Object Manupilation):
+is a technique used to modify the next and the previous pointers of an eprocess struct that is located in kernel memory to hide a process. the process that wants to do this should be running in kernel mode.
+
+NOTE: DKOM is not used only to hide processes but it also could hide device drivers, ports.
+
+Thread:
+is the actual functioning component of a process, so the process is just a container, and a running process should have at least 1 thread running.
+
+-a thread cannot run on its own or in other words without being under the umperualla of a process
+-a thread has 3 common states: Ready, Running, Blocked
+-threads running within the same process shares memory.
+-each thread has its own stack and registers state.
+
+Process Virtual Address Space:
+in 32 bit systems each running process sees about 2 GB of memory for user mode and another 2 GB of memory for kernel mode, but of course in reality that's not what's happening.
+in 64 bit systems on the other hand each process sees about 128 tb of memory as if its own memory and it's also divide between kernel mode (128 TB) and user mode (another 128 TB).
+
+NOTE: in 64 bit systems we use only 48 bit out of the 64 bit to represent addresses.
+
+VI NOTE: each process sees this amount of memory available to it but in reailty the addresses are virtual and when it wants to allocate actual memory, the os will allocate that amount of memory only, or in other words the amount of memory it sees is not pre allocated, it gets allocated when the process asks the os to do so, and the os allocates that amount and with the help of the cpu it keeps track of addresses that the process sees and maps them to an actual phyiscal address in memory and when the process wants to access or write to this memory, the os and the cpu does a virtual to phyiscal address translation.
+
+NOTE: windows optimzes memory allocation between processes by making sure that modules (dll) are not loaded more than once, only the first process that needs them will load them and then any other process that runs afterwards will use the same loaded modules.
+
+
+Mutex (Mutual Exclusion) or a Lock:
+is a type of object in programming that is used to give access to a certain resource exclusively which means that no other process or thread has access to this resource except the one that has this mutex or lock object.
+
+Common Examples:
+-exclusive access to a shared memory region
+-allow a single instance of a program running at a time by creating a special type of mutex with a unique name.
+
+NOTE: commonly used by malwares
+
+
+Windows Services:
+is a type of exe that does not run as a process like normal other exes, but it runs in its own windows login session under the process named svhosts.exe. 
+-it can run in the background without any user interference.
+-it can be started automatically or after a certain period.
+
+NOTE: svhosts.exe as a running process has multiple instances running at once each instance runs a set of services underneath it.
+
+NOTE: we can also use a built-in windows tool to do some actions such as querying information about services or starting and stopping service and much more by using the tool names "sc.exe".
+https://learn.microsoft.com/en-us/windows/application-management/svchost-service-refactoring
+
+COM (Component Object Model):
+is a software component registered in the registery with an clsId and implements a specific standard interface and can be referenced and used by windows programs at runtime without needing to include them in the compiling process of the application.
+
+-each com object has either a programming identifer (e.g System.Registery) or it can have a class id or an interface id which both can be GUID or UUID.
+
+-to lookup a com prog id from the register we can lookup a key called "HKEY_LOCAL_MACHINE\SOFTWARE\Classes\<Com-Prog-id>"
+
+
+Windows Registery:
+is a type of database that stores the windows os settings as well as programs settings.
+it consists of the following components:
+-Hives (root keys): which are the top level folders that contains all other keys and they are:
+HKEY_CLASSES_ROOT: contains extensions and its associations
+HKEY_CURRENT_USER: which is virtual key that does not really exist or you can think of it as just a pointer on another key that sepcific to the current logged in user
+HKEY_LOCAL_MACHINE: which contains the configuration for the whole machine
+HKEY_USERS: contains keys for each user that has the configuration of each user such as user specific files (e.g. documents, desktop, downloads) and the programs installed only for that user.
+
+each hive consists of a lot of keys (you can think of them as folders) and each key contains a value or multiple values (you can think of a value as a file) and each value has some value and a type.
+
+NOTE: the windows registery contains many information including the history of usb devices that got plugged into this device.
+NOTE: you can also get a list of the installed programs on the system.
+NOTE: you can also get all services installed on the system and also change the start type from there.

@@ -155,9 +155,15 @@ If the current number is even, divide it by two; else if it is odd, multiply it 
 
 Techinques for solving problems:
 1.Divide and conquer:
-a recuirsive approach to solve problems, D&C has two steps:
-1.figure out the base case (this should be the simplest case to handle)
-2.decrease or reduce your problem until it becomes the base case
+The difference between "easy" and "hard" problems using divide and conquer usually comes down to:
+How you split the data
+(by index? by value? by pivoting? etc.)
+
+How you combine the results
+(pick max? merge two arrays? sum values? etc.)
+
+When to stop the recursion
+(empty string? one element left? etc.)
 
 
 Properties of a node:
@@ -367,6 +373,29 @@ Quick Sort:
 the main idea behind the quick sort algorithm is that you pick an element (called the pivot) and put it in its sorted position (which involves placing elements that are greater than it after it and places all elements less than it before it) and it continues doing so until the whole array is sorted.
 
 NOTE: it uses the divide conquer techinque because it divides the input array into two halfs: one half which is larger than the pivot and the other half which is less than the pivot and it applies this process recurisivly.
+
+Knapsack Problems:
+there are 2 types the fractional one and the none-fractional one. the fractional one can be solved using a greedy approach, and the problem is about having a set of items and a bag and you need to get the maximum no of items that will for example get you the maximum profit.
+fractional here means that the item itself can be divided into sub items.
+
+Graphs:
+Nodes connected to each other through edges
+-Undirected Graph: in both directions
+-Direted Graph: in one direction only
+Graph edges can be weigheted
+
+Graph Representation:
+-Adjcenciy Matrix: it’s pretty convenient when almost every node is connected to almost every other node, It does have the drawback that we have to manually check for null all the time, and it also has the drawback that we can’t store any additional information about vertices, since we’re representing vertices merely as an index in the ArrayLists.
+
+Measuring the running time of graph algorithms:
+the runnting time of graph algorithmes is represented as a function of V and E, where V is no of vertices in the graph and E is the no of edges in the graph.
+
+Finding shortest path:
+-depth first search
+-breadth first search
+
+Directed acyclic graph:
+is a graph where there are multiple pathes from the same vertex to a destination vertex
 
 Game Theory:
 Zero Sum Game is where there is only one winner

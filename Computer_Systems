@@ -380,8 +380,7 @@ The movsb instruction is used to move a sequence of bytes from one location to a
 
 The movsb instruction grabs the byte at address ESI, stores it at address EDI, and then increments or decrements the ESI and EDI registers by one according to the setting of the direction flag (DF). If DF = 0, they are incremented; otherwise, they are decremented.
 
-The cmpsb instruction is used to compare two sequences of bytes to deter-
-mine whether they contain the same data. The cmpsb instruction subtracts the
+The cmpsb instruction is used to compare two sequences of bytes to determine whether they contain the same data. The cmpsb instruction subtracts the
 value at location EDI from the value at ESI and updates the flags. It is typi-
 cally used with the repe prefix. When coupled with the repe prefix, the cmpsb
 instruction compares each byte of the two sequences until it finds a differ-
@@ -400,8 +399,28 @@ the value is found in the sequence of bytes, ESI stores the location of that
 value.
 
 The stosb instruction is used to store values in a location specified by
-EDI. This is identical to scasb, but instead of being searched for, the specified
-byte is placed in the location specified by EDI. The rep prefix is used with
-scasb to initialize a buffer of memory, wherein every byte contains the same
-value. This is equivalent to the C function memset. Table 4-11 displays some
-common rep instructions and describes their operation.
+EDI. This is identical to scasb, but instead of being searched for, the specified byte is placed in the location specified by EDI. The rep prefix is used with scasb to initialize a buffer of memory, wherein every byte contains the same value. This is equivalent to the C function memset.
+
+
+Div Instruction:
+has 3 forms:
+-Unsigned divide: div ax, r/m8 -> al=qotient, ah=reminder
+-Unsigned divide: div edx:eax, r/m32 -> eax=qotient, edx=reminder
+-unsigned divide: div rdx:rax, r/m64 -> rax=qotient, rdx=reminder
+
+NOTE: the idiv instruction has the same above forms
+NOTE: when using the idiv form of the division instruction consider the following:
+-if the numerator is negative and the denominator is not -> qotient=negative, reminder=negative
+-if the numerator is positive and the denominator is negative -> qotient=negative, reminder=positive
+-if both are negative -> qotient=positive, reminder=negative
+
+
+REP STOS instruction:
+the rep part is a prefix that can be used with a set of instructions. and it means that the instruciton after it is going to be repeated a number of times.
+
+-REP STOS:
+when rep comes before the stos instruction it will repeat a number of times which means it will act as memset command to a specific memory location.
+-*cx: should contain the no of times to repeat this instruction
+-*ax: should contain the value to set during the loop
+-*di: should contain the address of the destination
+it can fill either 1/2/4/8 bytes at a time.
