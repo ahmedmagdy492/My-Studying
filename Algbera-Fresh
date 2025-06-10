@@ -114,3 +114,8 @@ There are 3 ways to find an equation of a line:
  -2 lines that are on top of each other or the same: that one has an infinte no of solutions since they interesect at every point.
 
  NOTE: what we are mainly looking for is a point where these 2 lines cross or intersect.
+
+ Subistituation Method to Solve Systems of Linear Equations:
+ we can use this method if we have one equation that is solved for one variable and another that does not or can be solved for one variable without having fractions, and you simply subistitute that one variable in the other equation and solve it for the other variable, for example:
+ 	x-y=3, 5x+y=9
+ and this example we can solve the first equation for one variable either x or y and then subsitute that with that variable in the other equation.
