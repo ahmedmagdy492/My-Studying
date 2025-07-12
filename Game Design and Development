@@ -1,0 +1,43 @@
+Analysis:
+asking the following questions about almost all games will help:
+-Is the game of the appropriate difficulty for the intended audience? Is it too difficult, too easy, or just right?
+
+-Is the outcome of the game based more on strategy or chance? Does
+randomness play too strong a role in the game, or, alternatively, is the game too deterministic so that after one player has taken the lead, the other players are unable to catch up
+
+-Does the game have meaningful, interesting decisions? When it's your turn, do you have several choices, and is the decision between those choices an interesting one?
+
+-Is the game interesting when it's not your turn? Do you have any effect on the other players' turns, or do their turns have any immediate effect on you?
+
+Game Analysis Frameworks:
+-MDA:
+ -Mechanics: data representation and algorithms
+ -Dynamics: how the mechanics behave at runtime
+ -Aesithics: the things that make players feel or get the right experience that the designer wishes
+
+From the designer point of view he should go from Aesithics to Dynamics to Mechanics but on the opposite side the player goes backward
+
+Formal, Dramatic, Dynamic Elements framework
+
+Elemental Tetrad framework:
+-Mechinces
+-Aesthetics
+-Technology
+-Story
+
+Layered Teterad Framework:
+1.Inscribed Layer:
+-Mechanics
+-Aesthitics
+-Technology
+-Narritive
+2.The Dynamic Layer:
+-Mechanics
+-Aesthitics
+-Technology
+-Narritive
+3.The Cultural Layer:
+-Mechanics
+-Aesthitics
+-Technology
+-Narritive

@@ -1,0 +1,293 @@
+OSI Model:
+is a specification that describes how a networking sub-system should be build, it defines a set of layers that each has its own specific and well defined functionaility which forms a stack and it's a guideline for anyone wants to implement his own network subsystem.
+
+TCP/IP:
+on the other hand the tcp/ip stack is an implementation of the OSI Model that pretty much exist on 99% of the computers in the world.
+
+Data Link Layer:
+is responsible for data delivery from node to node or in other words from a machine to another machine that is directly connected to it (sometimes called L2 Routing). (Hop by Hop)
+
+Network Layer:
+is responsible for Host to Host Delivery which means that the sending machine and the reciving machine could have several intermediary devices.
+
+Transport Layer:
+is responsible for process to process delivery or from an application on a machine to another application on another machine.
+
+NOTE: each network layer attaches its own header into the data that comes from the above layer in case of sending and it does not care at all about any data attached other than its own header
+
+NOTE: Transport Layer adds ports numbers of the destination and source machine, then network layer adds the src and dest ips into its own header and attachs it to the data and passes it to the next layer, the next layer adds its own header which contains the mac addresses.
+
+NOTE about L2 Routing: the Data Link Layer attaches the mac address of the sending machine and the mac address of the next node or the next machine not the destination machine. and the opposite process happens on the receiving machine.
+
+NOTE: when a packet is sent over a network there are 3 types of machines associated or are involved in this process:
+- Sending Machine
+- Receviing Machine
+- Forwarding Machines
+
+Forwarding Machines:
+are intermidary machines that contributes to Layer 2 Routing to forward the packet to its final destination.
+the process goes as follows:
+-when a forwarding machine receives a packet
+-the data link layer decapsultes its header and forwards the rest to the above layer
+-the network layer recieves the packet and decausulate its header and it checks to see whether the dest ip address is its own ip if it's then it passes the rest to the above layer otherwise it knows that the packet has to be forwarded to the next hop.
+
+NOTE: when sending data over the network we can consider the following terminology:
+-when data is sent from application layer to transport layer it's called segment
+-when data is sent from transport layer to network layer it's called packet
+-when data is sent from network layer to data link layer it's called frame.
+
+Subnetting:
+is the process of dividing the network into smaller subnetworks.
+-A subnet is a layer2 network so the data link layer is responsible only for delivering data from one machine to another machine on the same subnet.
+-if the destination machine is on another subnet the network layer becomes responsible for the data delivery from the src subnet to the destination subnet
+-in summary when the sending and receiving machines are on 2 different subnets L3 routing will be used.
+
+Broadcast domain:
+is a wire that connects 2 or more machines, if that broadcast domain connects only 2 machines then this wire is called point to point domain.
+
+Routers are in layer 3 (network layer) so any packets that needs to go to any other subnet other than the local subnet then the data has to go through the router to go to the other subnet.
+
+NOTE: rounters connects different subnets together
+
+NOTE: if 2 devices are on the same subnet in order for them to communicate they do not need an L3 Router to do this communication.
+
+NOTE: every interface on any device has a mac address and is assigned an IP address and a subnet mask
+
+NOTE: a mask is a value between [0, 32] for ip v4
+
+IP Address Math:
+given an ip and a mask value we can calculate the following for this subnet:
+-Network ID
+-Broadcast Address
+-Max no of machines which could be present in that subnet.
+
+Calcuating the Network Id from the ip and from the subnet mask:
+the basic idea behind it is that the network id will depened on the mask value sepcifically as we will see now:
+1-first convert the ip into its binary form
+2-then create a binary number where the first n bits are 1's where n is the mask value and leave the other bits as 0's
+3-then Bitwise And the binary numbers from step 1 and step2 and you will get the subnet id
+
+Calcuating the broadcast address of a subnet:
+1.calculate the network id
+2.calculate the m' which is nothing but a 4-byte binary number that has its first n bits 0's and the remaining bits are 1's where n is the mask value.
+3.perform a bitwise OR between the resulted number from step1 and step2 and you will finally get the broadcast address
+
+Calculating the max no of hosts in a subnet:
+we can use the following formula to do so:
+	(2^(32-mask value))-2
+
+NOTE: bits that are not part of the mask bits are called control bits
+
+Control Bits:
+are used to find the assignable ip to any machine or interface on subnet and it can be calculated as follows:
+1.calculate the network id
+2.bitwise OR the control bits (32 - mask) with the network id
+3.each time you need to generate an ip you will apply all permutations of the control bits for example:
+-apply 0000 0001 then 0000 0011 and so on and so forth
+
+NOTE: it's always recommended to calculate the mask value based on how many devices you wish to have in your subnet
+
+
+Broadcast Addresses and their Usage:
+the main usage for broadcast addresses is to send a packet to all machines on the same subnet and to make all of them process this packet as well.
+there are 2 types of broadcast addresses:
+-broadcast mac address ff:ff:ff:ff:ff:ff
+-broadcast ip address
+
+NOTE: in order to broadcast a packet to all machines on the same subnet we need to set the dest mac as ff:ff:ff:ff:ff:ff and the dest ip address is for example 192.168.1.255
+
+NOTE: subnet cardinality is the maximum number of assignable ip addresses on a subnet
+
+L2 Routing:
+routing within a subnet
+-uses only mac addresses to delivier frames
+
+NOTE: in order for 2 devices or more that are on the same subnet to communcate, these devices have to satisify the following 2 conditions:
+1.the devices should be interconnected to each other physically either with a wire or wirelessly
+2.these devices have to have ip addresses that fall under the same network id
+
+there are 2 types of subnets:
+-Local Subnet
+-Remote Subnet
+
+Remote Subnet:
+a remote subnet is remote relative to a specific machine and specifically routers.
+so that means that given a subnet and a router, if that router none of its interfaces have an ip that falls in that given subnet so it's said that this subnet is a remote subnet relative to this router.
+
+NOTE: the local subnet is the complete opposite to the above defination.
+
+NOTE: we can say that a home router (which does both routing and switching) determines will it use L2 or L3 routing based on whether the given ip as a destination falls in one of its local networks or it falls in a network that is considered remote to the router.
+
+NOTE: each interface of an L3 Router lays in a different subnet, other than this it's considered a mis configuration in the router.
+
+-L3 Routers are the gateway or the entry point and the exit point of a subnet.
+
+Protocol Identifier Field:
+each header in a packet has to put in its header what the next header will be (or which protocol will be used) for example the ip header contains a field called protocol which determines which protocol is used on the transport layer (e.g Tcp, Udp).
+
+Ethernet Header Format:
+1.Preamble: is well-defined 8 bytes message that denotes the start of a new frame.
+2.Dest Mac Addr (6 bytes)
+3.Src Mac Addr (6 bytes)
+4.Type: identifies the type of the next header protocol used (2 bytes) for example 0800 means ipv4 header is next or 0806 means the next header is arp
+5.Info (payload): min size is 46b and max is 1500b
+6.FCS - checksum: 4 bytes and is used by the reciving machine in order for it to validate whether it frame has been corrupted or not
+
+NOTE: MTU (maximum transferable unit) is the max size of an ethernet frame and this size includes the size of info or the payload itself which is 1518 bytes.
+
+NOTE: when a machine wants to send some data to another machine on the same subnet it places the mac address of the target device in the frame that will be sent and if it does not have that mac address it sends an arp request to fetch that mac address and then sends the packet over the wire a the switch (L2 Router) receives the packet, it will go through the same discussed steps which is checking if the mac is its own mac if it's it processes the packet otherwise it ignores it.
+
+Arp Protocol:
+in order for a machine to communicate with another machine on the same subnet it has to know its mac address, so using the ip address of the target machine, this machine can send an arp request to get the mac address of the destination machine.
+
+so the goal of the arp protocol is to reterive the mac address of a specific machine so that it can communicate with that machine.
+
+so in general each machine sends arp requests very frequently to all hosts on the subnet in order to be able to communicate with them and keeps a table called Arp Table which contains IP-to-MacAddress mapping.
+
+There are 2 types of arp messages:
+-arp request (broadcast)
+-arp replay (unicast)
+
+ARP Protocol Format:
+-Hardware Type: tells us the type of hardware used in the beneath layer, the value is 1 for ethernet and 18 for fibre optic
+-Protocol Type: tells us the type of protocol that the arp request is used to resolve, it can be ipv4 0x0800 or ipv6.
+-Hardware address length: mac addres length
+-Protocol address length: the length of the protocol that the arp request is used to resolve (4 bytes for ipv4, 16 bytes for ipv6)
+-Opcode: tells us the type of arp msg whether it's an arp reply or an arp request.
+-Sender hw address (6 bytes)
+-Sender ip address
+-Target hw address
+-Target ip address
+
+NOTE: the ethernet frame contains a section called info or payload which was discussed above, this part contains the protocol header of the next layer and the type field in the ethernet header determines the type of that protocol for example 806 indicates that this payload contains an arp header.
+
+NOTE: the arp messages can only be sent within the same subnet.
+
+Unicast: means that a packet is sent to a single machine
+Broadcast: means that a packet is sent to all machines in that subnet.
+
+-an example of an L2 Device is the switch (sometimes also called a bridge), and it's a layer 2 device because it only deals with mac addresses.
+
+-L2 Switches do not have any ip or mac addresses it does only have something called mac-to-port-no table which contains only a port number that maps to a mac address, and it populates this table by doing something called mac learning.
+
+Mac Learning:
+is the process of populating a mac address table by entries that maps a switch port number to a mac address.
+NOTE: before the switch knows enough info about each device connected to it, it will forward a frame to all machines.
+
+How Mac Learning is Performed by an L2 Switch:
+-at the very begining the mac address table of the L2 Switch (Bridge) is empty
+-when the switch receives a frame it will inspect its src mac address and it will populate the table with the port and that mac address and then it will send the frame to all machines
+-it continues in this process until the table is totally full with all mac addresses on this subnet
+-then when it recieves a frame it knows where to redirect it excatly.
+
+NOTE: Swtiches have NICs therefore they have a mac address can be assigned an ip as well to act as a normal host on the network.
+
+NOTE: it's okay and acceptable for a mac address table in a switch to have multiple mappings for the same port no.
+
+VLAN:
+vlan stands for virtual local area network and it divides a local lan into several virtual lans that do not see each other and it can be done on the switch level by assigning certain ports to a certain vlan and thus these devices will only see messages or packets from devices on the same VLAN.
+
+VI NOTE: you can think of a vlan as if you are dividing the switch into many small switches but virtually and each of these mini switches handles traffic for the vlan they are connected to and performs the same actions (Learn, Flood, Forward) as a bigger switch.
+
+
+L3 Routing:
+-is done on Layer 3 (The network layer) and only uses ip addresses.
+-it's all about routing a packet from one subnet to another subnet.
+
+-when a machine on a subnet wants to send a packet to anoter machine which is located on another subnet, it has to forward the packet to an L3 Router, then the L3 router forwards the packet through a series of L3 routers until it reaches the target subnet.
+
+-in order for a router to route traffic from one subnet to another subnet we have to configure the L3 Routing Table to tell it where to forward these packets.
+
+NOTE: L3 Routers have a special type of table called the Routing Table which contains information about how to route packets from one subnet to another subnet.
+
+NOTE: each entry in the routing table is actually a route to the next router.
+
+NOTE: to add an entry in the routing table of a router we need these 3 pieces of informations:
+-the network id of the destination network
+-the ip of the gateway router in which we will forward the packet to
+-the local interface of the current router from which the packet will go, for example:
+ 	up route add-net 192.168.1.0 netmask 255.255.255.0 gw 192.168.1.1 dev eth0
+
+When an L3 Router recieves a packet we can imagine that it asks the following questions:
+-should it consume the packet ?
+-should it forward the packet to the next router (using the routing table) ?
+-should it forward the packet to a machine located in one of its local subnets ?
+-should it silently discard the packet ?
+
+VI NOTE: when a packet is recieved by an L3 Router, the L3 router will look up its routing table and if there is more than one entry that matches, the router chooses the entry with the heighest mask value and this is called "longest prefix match"
+
+NOTE: L3 Routing is done only when the dest ip of the packet does not fall in one of the local subnets of that router.
+
+NOTE: when doing L3 Routing the mac addresses of the packet being sent is continuesly changing to the mac addresses of the routers or the hops that the packet is passing through, but on the other hand the ip addresses in the packet are not changing.
+
+How Routing Tables are popuplated:
+1.Directly Connected: 
+Routes for directly connected networks. we have to configure each interface of the router to make it have an ip in that network.
+
+2.Static Routes:
+Manually configured and added routes to the routing table of the router. done manually by the administrator.
+
+3.Dynamic Routes:
+Routers talk to each other and share the routing informatation that they have.
+Here are some common protocols used to allow routers to talk to each other and share routing table information they have:
+-RIP, OSPF, BGP, EIGRP, IS-IS
+
+Route Summarization:
+is a technique used to eliminate the no of repeated routes in the routing table of a router, for example by changing the mask value of the network to make the matching occur only on the first 2 octets for example rather than the first 3 octets.
+
+NOTE: we can also add what's called a default route which looks like this 0.0.0.0/0
+
+Loopback interfaces for Routers:
+when a router wants to send a packet to another router and there are multiple interfaces it can choose to send the packet from (src ip) and also there might be more than one interface in the next router to send the packet to. we can use what's called a loopback addresses.
+
+each router is assigned a unique loopback address which uniqely identifies this router in the network for example:
+	122.1.1.1/32 and 122.1.1.2/32
+
+NOTE: these addresses are not tighed to a specific physical interface of a machine but they represent just the identity of that machine on the network.
+
+NOTE: so when one of these machines 122.1.1.1/32 and 122.1.1.2/32 tries to send a packet from or to each other they should specify these addresses as src/dst ip addresses. the router knows how to route these packets to the target router by using a real physical interface but the packet once received it's not forwarded.
+
+NOTE: loopback interfaces are software interfaces.
+
+NOTE: loopback interfaces cannot be used to send traffic to other devices on the network but they are used for device reachability on the network.
+
+NOTE: how L3 routing works when it receives a packet that is a loopback address as the destination ip, is by adding an entry in the routing table that tells the router when it receives such a packet with destination ip address where it should send it, for example:
+	Destination Subnet: 122.1.1.1/32
+	Gateway IP: 10.168.1.3
+	OIF: eth1
+
+NOTE: 0/0 is a default routing entry that we can install in the routing table of an L3 device to tells it if you did not find a match in the table entry just use this entry and forward the packet to it.
+
+Mail Service:
+SMTP: for sending mails
+POP: for receving mails (post office)
+IMAP: for saving received mails
+
+DMZ: demilitarized zone, is a network that sits between a inside private network and an outside untrusted network
+
+Security Devices and Tools:
+Firewalls
+IPS/IDS -> inspects packets and detects if it's malicious using signature rules.
+
+WAF (Web App Firewall): is an extra layer of protection that is added to protect the web app from ddos and other malicious attempts
+
+Some Common Terms:
+Prefix: is the ip itself
+Wildcard: is the opposite of the subnet mask
+Effective Prefix: is the prefix nd wild card combined together
+
+NOTE: we can represent a routing table in memory using a data structure called mtrie which is nothing but a tree like data structure where each node has 3 child nodes and each node contains 3 pieces of information (prefix, wildcard, prefix_len)
+
+
+Dynamic Construction of Routing Tables in Routers:
+-the routing table of each router in a topology must have their routing table populated while the following properties are maintained:
+-a network topology is represented as a weighted graph in which every edge has a associated cost
+-each routing entry contains (dest ip, output interface, gateway, cost, next hop name)
+-the destination ip is the key element in each entry of the routing table
+-the routing entries must be loop free
+-the routing table might contain more than one entry for a single destination ip and the router should then forward the traffic to all of the gateways present in that entry and that entry is called "Equal Cost Multiple Path" (ECMP) and that's because there might be more than one path that matches the destination ip
+-the route entry should be the shortest path from the source router to the destination router.
+-and of course at the end the traffic must be delivered to its final destination.
+
+NOTE: 
+Local Routing Table Entry: is the entry of the current router.
