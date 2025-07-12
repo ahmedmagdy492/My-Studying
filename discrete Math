@@ -22,6 +22,21 @@ if P then Q: the final statement is true when P is False or Q is True or both P 
 P if and only if Q: is true when both are true or both are false.
 NOT P: is true when P is false.
 
+Logical Equavliance:
+2 statements that have the same logical forms and the same truth values then they are logically equavliant.
+
+NOTE: we can use one of 2 methods to prove that 2 statements are not logically equalivant:
+1.using a truth table and see where the values differ
+2.the other way is to come up with 2 concrete examples for the 2 statements and prove that one is true and the other one is false and hence they are not logically equalivant.
+
+NOTE: logical connectives and and or must be connecting 2 compelete statements in order to apply laws like de morgran's on them.
+
+Tautology:
+is a statement form that is always true no matter what the truth value of its individual statements.
+
+Contracdaction:
+is a statement form that is always false no matter what the truth value of its individual statements.
+
 Implication:
 whenever the hypothisis is false which means that it does not lead or cause the conclusion then the implication is true.
 the only case where the implication is false, is when the hypothisis is true and the conclusion is false.

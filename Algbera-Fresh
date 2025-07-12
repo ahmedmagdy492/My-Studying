@@ -119,3 +119,15 @@ There are 3 ways to find an equation of a line:
  we can use this method if we have one equation that is solved for one variable and another that does not or can be solved for one variable without having fractions, and you simply subistitute that one variable in the other equation and solve it for the other variable, for example:
  	x-y=3, 5x+y=9
  and this example we can solve the first equation for one variable either x or y and then subsitute that with that variable in the other equation.
+
+ Elimination Method to solve Systems of Linear Equations:
+ 1.setup your equations so that they are in written in standard form "All variables are on the left and the constants on the other side"
+ 
+ 2.we need to ensure that one variable in the 2 equations are excactly the same except for the sign for example: 
+ 	-2x
+ 	2x
+ so that we can cancel that variable entirely from the system.
+
+ 3.add the entire system
+ 4.solve for the remained variable
+ 5.subsitute that variable in one of the original equations to get the missing variable.

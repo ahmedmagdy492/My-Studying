@@ -332,7 +332,7 @@ Some Common Conditional JMP instructions:
 jz,jnz, je, jne, jg, jge, jl, jle, ja, jae, jb, jbe, js, jc
 jecxz: jump to the location specified as argument if the register ecx = 0.
 
-NOTE: there is another instruction that is called test which is identical to the and instruction but the difference is that it does not impact the operand but it modifies the status flags and the zero flag is the one of interest, it's also sometimes used in the following way test eax, eax to test to see if the eax has a null value or not and it takes fewer bytes and fewer cpu cycles than something like this test eax, 0h.
+NOTE: there is another instruction that is called test which is identical to the and instruction but the difference is that it does not impact the operand but it modifies the status flags and the zero flag is the one of interest, it's also sometimes used in the following way test eax, eax to test to see if the eax has a null value or not and it takes fewer bytes and fewer cpu cycles than something like this test eax, 0h. 
 
 Bitwise Representation:
 and: source and destination, one of them only can be in r/mX form not both at once.

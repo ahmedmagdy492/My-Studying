@@ -1,0 +1,62 @@
+Requirements:
+-SRS:
+1.Users -> we use natural language (User Requirements)
+2.Developers -> we use system language (System Specification)
+
+Types of Requirements:
+-bussiness requirements: what the bussiness needs
+-user requirements: what the user should do comes in the form of use cases.
+-functional requirements: what the system should do to accomplish the user's goal and are divided into different types:
+	1.process oriented
+	2.information oriented
+-non-functional requirements: 
+describes 2 things:
+1.System Design Constraints: 
+2.Quality Related Constraints: Security, Performance and usability 
+and it can be categoriezed into 3 main categories:
+	-Product Requirements: requirements on the product itself (e.g. encryption)
+	-Organization Requirements: they are defined by the company itself such as team coding style
+	-External Requirements: defined by external entities
+
+NOTE: the analyst must define when to stop gathering more requirements by defining a scope
+
+NOTE: the analyst must list the requirements in a document called requirement defination
+a sample document can be found here:
+https://drive.google.com/file/d/1MeUvqSeKIuR3Xfn2sOkOLq2QuQH4nqHV/view?usp=sharing
+
+WRSPM Model (Reference Model):
+the main usage of that model is to be able to differntiate between the user requirements and the system specification and it helps to ensure that the specification meet the requirements
+(
+[Enviornment]
+	W -> World
+	R -> Requirements
+  (S -> System Specification (overlap))
+[System]
+	P -> Program
+	M -> Machine
+)
+
+if W and S imply R and M and P imply S then the solution is right
+
+Most Common Ways to Elicitate Requirements:
+1.Interviews:
+ -selecting interviews: should select from all positions levels
+ -designing questions: 
+  -closed-ended questions: questions that should have a specific answer (i.e exam questions).
+  -open-ended questions
+  -propbing questions
+2.JAD Sesisons: facilator should handle the conversation and should push everybody to participate.
+3.Questionnnaires: can be electronic and should mostly include closed-ended questions and important ones should be first and should be tested and we should ensure that the questions are clear enough to avoid confusion.
+4.Document Analysis: review old docs of the as-is system
+5.Observation: observe how the operations and processes in the as-is system goes.
+
+NOTE: after finishing gathering requirements from different levels at the organization using the techniques mentioned above the next step is to analyze these requirements we can use one or more of the upcoming requirement analysis stratigies.
+
+Requirements Analysis Stratigies:
+1.Problem Analysis
+2.Root Cause Analysis
+3.Duration Analysis: measures the time of the whole process and of the individual steps of the process and if the first is greater than the later there must be something wrong
+4.Activity-Based Costing: measures costs instead of time
+5.Informal Benchmarking: when for example building a website that provides some sort of a service then you would visit similar sites to gain some insights about you would do it or what things you can borrow from them.
+6.Outcome Anaylsis
+7.Technology Analysis: what new technologies that could add a bussiness value
