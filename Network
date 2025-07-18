@@ -281,13 +281,25 @@ NOTE: we can represent a routing table in memory using a data structure called m
 
 Dynamic Construction of Routing Tables in Routers:
 -the routing table of each router in a topology must have their routing table populated while the following properties are maintained:
--a network topology is represented as a weighted graph in which every edge has a associated cost
+-a network topology is represented as a weighted graph in which every edge has an associated cost
 -each routing entry contains (dest ip, output interface, gateway, cost, next hop name)
 -the destination ip is the key element in each entry of the routing table
 -the routing entries must be loop free
--the routing table might contain more than one entry for a single destination ip and the router should then forward the traffic to all of the gateways present in that entry and that entry is called "Equal Cost Multiple Path" (ECMP) and that's because there might be more than one path that matches the destination ip
+-the routing table might contain more than one entry for a single destination ip and the router should then forward the traffic to all of the gateways present in that entry and that entry is called "Equal Cost Multiple Path" (ECMP) and that's because there might be more than one path that matches the destination ip with the same cost.
 -the route entry should be the shortest path from the source router to the destination router.
 -and of course at the end the traffic must be delivered to its final destination.
 
 NOTE: 
 Local Routing Table Entry: is the entry of the current router.
+
+When Constructing a routing table dynimcally the following steps are done by the router:
+
+1.the router builds a represnetation of the physical topology in the form a graph by sending hello pkts to its neighbours and then builds a database that contains information about each neighbour, afterwards it conveys its neighbourship database to every other L3 device using a packet known as LSP (Link State Packet).
+
+NOTE: these hello packets are sent only between directly connected routers, because these packets are non-routable packets.
+
+examples of protocols that sends such hello packets: STP, OSPF, BGP, ISIS
+
+2.then the router applies dijkstra’s algorithm to find the shortest path in the topology
+
+3.then the router builds its routing table with the following 3 properties ECMA, loop-free, shortest path.
