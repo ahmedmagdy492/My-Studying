@@ -1,0 +1,230 @@
+Network Arch:
+-Know the system -> is a continuous process
+
+steps to know your system:
+-conceptual design: knowing the components and the purpose of a network without knowing much about its details
+
+-logical design: knowing how each identified component  operate either individually or how they communicate with each other.
+start diagraming the network and this diagram will be used in the next phase
+
+-physical design: begins to focus on identifying the inner details of each components (i.e. os and os version, configuration, ...)
+
+Know where the valuable data is stored:
+-typically in today's world it's so hard to know exactly where your valuable data is stored.
+
+Understanding Communication flow:
+-is to understand how the data is accessed, when it was access and who accessed it.
+-we will define a baseline that describes what is the   normal communication flows and hence we can detect or know what is abnormal
+
+
+Threat Enumeration:
+-this is part of a broader concept called "Threat Intelligence" and it includes the following:
+    -knowing the adversaries that are targeting our organization
+	-understanding what the attacker is targeting through TTPs (Tactics, Techniques, and Procedures)
+
+
+Attacks on Routers:
+1.Denial of Service (DoS):
+	effects Availability
+2.Distributed Denial of Service (DDoS):
+	effects Availability
+3.Packet Sniffing:
+ 	effects Confdientiality and Integerity
+4.Packet Mis-routing and Routing Table Poisining:
+	effects Integerity, the attacker can do a null routing or can cause a loop.
+
+
+Attacks on Switches:
+1.CDP Information Disclosure:
+CDP (Cisco Discovery Protocol) is a protocol used between swithces or routers to borrow configuration from another similar device, the attacker could use it to disclose information about these devices in the network.
+
+2.MAC Flooding:
+flooding a switch with so many new mac addresses which will either enforce it either to shutdown or to act like a hub.
+
+3.DHCP Manupliation:
+the attacker will try to listen to any dhcp request and then respond back with a fake default gateway ip (i.e the attacker ip) quickly before the dhcp server to acheive MitM
+
+4.STP Manupilation:
+the stp protocol is used mainly between swtiches to prevent loops while forwarding the traffic, the attacker can exploit this to perform a DoS attack.
+
+5.VLAN Hopping:
+in this type of attack the attacker will compromise the switch to give himself the ability to jump from one vlan to the other.
+
+
+Types of Network Topologies:
+-Logical Topology
+-Physical Topology: one example is the star topology
+
+
+Network Design Approaches:
+Network Segementation:
+is a core concept in any network of an organization, not all devices can see each other. we can divide the network into vlans based on the criticality of these devices. we can acheive this either via VLANs or via a firewall.
+
+on the other hand SDN (Software Defined Network) are becoming more and more dominant since the tendency of going to cloud is increasing which in turn relys heavily on virutlization which makes SDN more relavant.
+
+
+NOTE: VLANs works based upon a concept named VLAN tagging.
+NOTE: in order to leverge vlans for security purposes we have to have ACL (access control lists).
+
+
+801 1.X:
+is standard for port-based network access control that will allow a router or a switch (with the help of an authentication server) to authenticate whoever tries to plug in an ethernet cable or tryies to connect wirelessly.
+
+the device that is trying to gain access to the network should have a supplicant client that will send an access request to the authenticator (Switch), the authenticator will pass the request to a backend authentication server which in turn will say if that device has access or not.
+
+by default that device would have no access to the network at all.
+
+Tiered Archeticture:
+suggests that we should implement segamentation on the network based on the level of trust, such that from the outer part towards the inner part the risk is decreased and the level of trust is increased and vice versa.
+
+Example:
+1.Presentation Layer: this could be in a publicly facing network
+2.Application Layer: this could be in a middle teir
+3.Data Layer: and this could be in the internal network and not accessible via the public internet.
+
+
+In order to implement the definisable network design we have to ensure that these 3 rules are followed:
+
+1.the publicly-facing services should be placed on the dmz and these devices should not contain any sensitive data.
+
+2.any system with sensitive data should be placed in the private network and it should not be publicly avialable.
+
+3.the only way the dmz can communicate with the internal network is via a middle tier.
+
+
+OSI Model:
+Note: one important thing to note here is that the idea that a network stack layers are indepented of each other in terms of functionaility would cause a problem of for example spoofing an src ip address by manupilating the ip header and even more worse is that many security controls rely on ips to implement for example an access control list.
+
+
+IPv4 vs IPv6:
+-ipv6 can support authentication while ipv4 does not
+-ipv6 can support encryption while ipv4 does not
+-ipv6 supports something called quality of service which is used to classify packets in terms of priority
+
+Some fields of the IPv4 header:
+-protocol: 8 bits integer field that tells us what the current protocol that is encapsulated inside.
+-ttl (Time to live): 8 bits integer fields that tells us how many router hops that the packet should travel at most and after that value it can no longer continue its journey. the packet after exceeding that amount will be expired. thus it will prevent loops and eventually will prevent DoS.
+-fragmentation:
+	-flags
+	-fragment offset: simply the fragment number
+the idea behind that is to divide the packet into several smaller packets in case the orignal packet is too big or in case the transportation medium is slow (i.e copper).
+
+NOTE: the minimum IP header size is 20 bytes.
+
+Some Fields of IPv6 Header:
+NOTE: the length of the ipv6 header is fixed and it's 40 bytes.
+
+-Traffic Class: serves as a priority class for the packet
+-Flow Label
+-Packet Length: is the same as the total length field in ipv4
+-Next Header: is the same as the protocol field in ipv4
+-Hop Limit: is the same as the TTL field in ipv4
+
+IPv6 Features:
+-Extended Address Space
+-Auto Configuration: which allows the admin use the mac address as a part of the IP.
+-Tunneling: sending ipv6 packets over ipv4
+-Translating: sending ipv4 over ipv6
+-Authentication
+
+
+ICMP:
+-a protocol that is peer to the IP protocol but it's a replacement for it, the main usage is for 2 things reporting errors on the network and finding if a certain host is a alive.
+-2 common applications in use for the icmp protocol are traceroute and ping.
+
+ICMP Header:
+Code (1 Byte) and Type (1 Byte):
+are used together to define specifically the condition of destination host with the reason for this condition.
+for example type 3 code 3 means that the destination host is unreachable but because the port is not reachable, so that means that the host exists and we get this replay to a udp request that was sent to a specific host and port.
+
+ICMP Message Types:
+-Type 0 -> Echo Replay
+-Type 5 -> Redirect
+-Type 8 -> Echo Request
+-Type 3 -> Desintation is unreachable:
+	Code 0 -> Network Unreachable
+	Code 1 -> Host Unreachable
+	Code 3 -> Port Unreachable
+	Code 9 -> Network Prohibited
+-Type 11 -> Time Exceeded:
+	Code 0 -> TTL Expired in transit
+	Code 1 -> TTL Expired during ressembly
+
+
+
+TCP:
+a Connection Oriented protocol that guarantees the full delivery of data, one of the benificial features is flow of control which can be used by the server to either speed up or slow down the communication or in other words make clients either send smaller chunks or bigger chunks of data depending on its current state and it happens through the use of a field in the tcp header called "Window Size".
+
+NOTE: a tcp connection can be either be closed gracefully or atruply
+
+-in the 3 way handshake the client sends a ISN (initital sequence no) which is chosen randomly, the server then sends back an ack with ISN+1, then the client receives that and sends back an ack
+-during the data transmisision the client takes the ISN and increaments it by the amount of bytes by currently sent in the current segment (the data size is determined via the window size field that was received previously by the other host) and then the server receives the segment takes the sq no and increaments by 1 and then sends it back to the client, then when the client receives the segment and finds out that the sq no received is the next sq no that it determined then it knows that the server received the segement successfully.
+
+NOTE: minimum size of the tcp header is 20 bytes and more than that means that there are options.
+
+
+Virtualization:
+the idea is to run more than one guest os on the same hardware, it does that with the help of a software called "hybervisor" which uses the existing hardware to create virtual hardware that can be assigned the vms created.
+
+NOTE: virtualization uses isolation to isolate vms from each other.
+
+
+Virtualization Benfits:
+
+1.Isolation of VMs: but the security risk here is if an app running on that vm is compromised then all other apps are too and the entire vm is also compromised, and to solve this issue we can apply application level isolation.
+
+2.Disaster Recovery
+at the end of the day a vm is a collection of files, so in terms of recovering a vm it's just a matter of copying this files back again from the last backup, and the power of this comes when a vm went down or got compromised we can easily recover it in a time reaches to 30 seconds, this is called MTTR (Mean Time to Recover).
+
+VDI (Virtual Desktop Infrastructure): is a remote virtual desktop that is given to the employees rather than giving them actual laptops or pcs to work on.
+
+
+3.Can be Used in Malware Analysis
+
+
+Virtualization Risks:
+1.what if the hybervisor got compromised then the attacker will have access to all vms as well as the host machine
+
+
+2.Isolation Violation:
+can lead "VM Escape" which can give the attacker access to the host machine.
+
+VM Escapse: code that runs from the guest os but gets executed on the host os.
+
+
+How to defend aganist the above security risks:
+by installing patches for the hybervisor as soon as they arrive, by also doing hardening on these vms namely that we need to have the bair minimum services and applications running on that vm.
+
+Cloud Deployment Types:
+-Private Cloud
+-Public Cloud
+-Hybird
+
+Cloud Benifits:
+-Cost Effceint
+-Speed when to comes to creating and deploying
+-Scaling
+-Security
+
+the characteristics of public cloud:
+On-demand self-service
+Broad network access
+Resource pooling
+Rapid elasticity
+Measured service
+Multitenancy
+
+Types of Cloud Services:
+-Infrastructure as a service
+-Platform as a service
+-Software as a service
+
+Serverless Computing Features:
+• Does not use dedicated containers
+• Event-triggered computing requests
+• Ephemeral environment
+• Servers fully managed by third party (e.g., AWS)
+• Referred to as Functions as a Service (FaaS)
+
+Infrastructure-as-Code:
+it allows you to write code to deploy for example vms or configuring a firewall to automate this process.

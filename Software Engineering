@@ -57,6 +57,15 @@ Requirements Analysis Stratigies:
 2.Root Cause Analysis
 3.Duration Analysis: measures the time of the whole process and of the individual steps of the process and if the first is greater than the later there must be something wrong
 4.Activity-Based Costing: measures costs instead of time
-5.Informal Benchmarking: when for example building a website that provides some sort of a service then you would visit similar sites to gain some insights about you would do it or what things you can borrow from them.
+5.Informal Benchmarking: when for example building a website that provides some sort of a service then you would visit similar sites to gain some insights about how you would do it or what things you can borrow from them.
 6.Outcome Anaylsis
 7.Technology Analysis: what new technologies that could add a bussiness value
+
+
+Requirements Gathering Flow:
+-the analysis team would use the most approriate requirements gathering techniques that suits the needs of the project
+-then they will use requirements analysis techinques to analyze and try to come up with the bussiness requirements
+-then a requirements defination will be written
+-then the team create use cases
+-and creates process models and data models
+-then finally a system proposal is created
