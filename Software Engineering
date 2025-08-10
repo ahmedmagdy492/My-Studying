@@ -60,12 +60,10 @@ Requirements Analysis Stratigies:
 5.Informal Benchmarking: when for example building a website that provides some sort of a service then you would visit similar sites to gain some insights about how you would do it or what things you can borrow from them.
 6.Outcome Anaylsis
 7.Technology Analysis: what new technologies that could add a bussiness value
+8.Activity Elimination
 
 
-Requirements Gathering Flow:
--the analysis team would use the most approriate requirements gathering techniques that suits the needs of the project
--then they will use requirements analysis techinques to analyze and try to come up with the bussiness requirements
--then a requirements defination will be written
--then the team create use cases
--and creates process models and data models
--then finally a system proposal is created
+Bottom-Line:
+-do the requirements eliciting using the techniques discussed above and write down the requirements defination (Functional, Non-Functional).
+-analyze the requirements gathered and prioterize the features
+-create use cases and then process model and data model.

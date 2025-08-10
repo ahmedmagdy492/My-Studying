@@ -136,8 +136,11 @@ There are 3 ways to find an equation of a line:
  Graphing Linear inequality in 2 variables:
  1.pretend that the inequality is actually an equation and graph the line but be careful because:
  -if the line is part of the solution set then you should draw a solid line
- -if the line is part of the solution set then you should draw a dashed line.
+ -if the line is not part of the solution set then you should draw a dashed line.
 
  2.next you should pick a point and check whether it's part of the solution set or not:
  -if it's part of the solution set then that entire half is as well
  -otherwise the entire other half is the solution set
+
+
+ NOTE: in solving systems of linear inequality the end goal is to find the shaded area that is an intersection between 2 inequalities.

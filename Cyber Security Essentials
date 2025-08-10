@@ -228,3 +228,96 @@ Serverless Computing Features:
 
 Infrastructure-as-Code:
 it allows you to write code to deploy for example vms or configuring a firewall to automate this process.
+
+
+Cloud Security:
+is always a shared responsiablity between the provider and the subscriber.
+
+NOTE: shared resonsiabliity is not always clear and the demarcation of each party regarding the security so SLAs (Service Level Agreements) can help to clarify this a bit further.
+
+NOTE: there are security and privacy frameworks that gives you the ability to rate the security of a cloud provider.
+
+NOTE: CSA is an organization that produces CSA Guidence Domain Matrix that helps both cloud provider and cloud customer to know more about the differnet domains that they should look at regarding cloud security.
+
+
+Cloud Inftrastructure:
+the cloud infrastructure is divded into regions, each region is isolated from other regions (can be connected for transfering data though), each region consists of availabilty zones that are connected to each other, each availabilty zone consists of 1 or more data centers with redaundant power, networking and connectivity
+
+VPC (Virtual Private Cloud):
+is a dedicated network on the cloud that you can use to place your servers, firewalls and internet gateway in case you want to add some instances to be available on the network, and you can segment your vpc so that you can create for example a dmz to isolate the internal network from the public network.
+
+Internet gateway:
+connects your instances that are placed in your vpc to the internet. and you can also network access control through it.
+
+NOTE: we can divide our VPC into several network segements, each one have an ip range and each one can either be a public or a private subnet, the public subnet is connected to a internet gateway and all the instances on that subnet has a public ip address.
+
+NOTE: in order for a machine that is setting on the private subnet to access the internet we have to place a NAT Gateway which will assign an elastic IP to this machine on the public subnet so that it can access the internet, the NAT gateway only allow outbound traffic and not traffic that connects from outbound.
+
+NACL (Network Access contorl list):
+allows you to put a list of rules that applies to ingress and egress traffic on the vpc.
+
+NOTE: very important thing to note here is that rules are numbered and they are applied from lowest to highest, in other words the rule that matches the traffic will applied and any other rule afterwards will not.
+
+NOTE: rules are stateless: Responses to ingress traffic are subject to egress rules.
+
+in Amazon the virtual machine is called EC2 instance. you can control the ingress and egress traffic of the EC2 instance. it's stateful.
+
+NOTE: All rules are evaluated, and the most permissive rule is used to make a decision.
+
+NOTE: secure cloud archeticture recommends to have 2 seperate vpcs one for production and another one for management that contains the rdp gateways to admin instances.
+
+
+Securing Wireless Networks:
+Types of Wireless Networks:
+-Traditional Wireless (IEEE 802.11)
+-PAN (Personal Area Network):
+	-Bluetooth
+	-NFC
+	-Cellular (Mobile: 5G)
+-IoT
+
+Types of Security in Traditional Wireless Networks:
+-WEP, WPA1, WPA2, WPA3
+
+
+IEEE 802:
+is a set of standards and part of this standanrds is the 802 part 11, which gives us methods on how to create wlans.
+
+NOTE: the 802.11 standarnd is being improved either from the security perspictive or from the capability perspective.
+
+NOTE: the 802.11 standard has gone through a lot of improvements over the years and these improvements has a postfix or a letter or letters attached at the end of its name for example:
+802.11a, 802.11b, 802.11g
+
+for example 802.11a contained the following improvements:
+-operates at 2.4ghz frequency
+
+and 802.11b containd the following improvements:
+-operates at 5.0ghz frequency
+
+NOTE: in 2009 802.11n was introduced it contained some performance improvements such as MIMO which stands for multiple inputs and multiple outputs and one example on that you might have seen routers with multiple antenas which allows it handle multiple inputs and multiple outputs at a time.
+
+more recent versions such as 802.11ac improved the bandwidth and the range siginficantly and added the ability to support more than one link aggregated which led to supporting more speeds.
+
+NOTE: to avoid confusion they invented another naming convention to alias new standards from the 802.11 standard like for example:
+802.11ax is WI-FI 6
+
+
+Encryption Mechanisms Applied Wi-Fi:
+WEP:
+-uses symmeteric encryption
+-uses an algorithm called RC4
+Issues:
+-encryption key is limited to 40 bit length
+-weak encryption algorithm as on a busy network the pre-shared key can be discovered
+
+NOTE: if a device is Wi-Fi Certified that means that the device aligns with what Wi-Fi Alliance has put in place.
+
+WPA1:
+came as a software upgrade to support older hardware and allow the consumers to not purchase new hardware devices.
+it used the same encryption algorithm RC4 but with a larger key length and introduced a new protocol called TKIP to ensure integerity by adding something called Message Integerity Check (MIC) but later it turned out that we have the same issue of insuffcient IV length which led to key repeteation
+
+WPA2:
+come as a total replacement for the software and hardware due to using a new encryption algorithm AES and larger key length and works as follows:
+(4-Way Handshake):
+-the client will initiially encrypt a packet using the pre-shared key which should already be known by the client and if the access point can decrypt the packet then the client can communicate further and generate the session keys based on the pre-shared key.
+later on some research found out that some vendors' implementation were doing key reuse or even if part of the iv was repeated it will reuse the key and some implementation such as on android and linux were so week that it was using a key of all 0's.
