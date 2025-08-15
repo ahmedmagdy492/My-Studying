@@ -321,3 +321,39 @@ come as a total replacement for the software and hardware due to using a new enc
 (4-Way Handshake):
 -the client will initiially encrypt a packet using the pre-shared key which should already be known by the client and if the access point can decrypt the packet then the client can communicate further and generate the session keys based on the pre-shared key.
 later on some research found out that some vendors' implementation were doing key reuse or even if part of the iv was repeated it will reuse the key and some implementation such as on android and linux were so week that it was using a key of all 0's.
+
+
+WPA3:
+-192 bit key support, uses pre-shared key for authentication only and not used for generating the session keys.
+-better password guessing protection.
+-supports OWE which allows for encryption even on insecure WLANs.
+-the discovery of the communication session encryption keys will not result in the discovery of the pre-shared key.
+-PMF prototected managment frames: which are used to protect aganist an adverseray impersonate an access point and try to send management frames to trick clients to for example disconnect from the wlan. 
+
+types of attacks:
+-downgrade attack to wpa2
+-password cracking through the timing techinque by determining what is wrong username or password based on the time the system takes to check.
+
+
+Rogue Access Point:
+can be used to create an evil twin access point that have the same name as a known access point to a victim device driving the victims into thinking that it's the legimetiat access point and convincing them into connecting to it.
+
+to prevent such an attack we can use certificate based authentication to ensure that the access point is the one that we trust.
+
+DoS Attacks on Wireless Networks:
+this can be achieved by jamming or in other words by sending radio signals with a specific frequency for example 2.4ghz or 5ghz to jam and remove all the signals that's comming out of a specific access point.
+
+we can measure the signal strength using SNR (Signal to Noise Radio).
+
+PANs:
+Personal Area Networks are networks that have limited range and may allow single device to connect at a time, examples include:
+-Bluetooth
+-NFC
+-Zigbee
+-RFID: used by id cards in companies or cards that are used in elevators.
+
+Most Well Known Attack on Bluetooth: BlueBorne
+
+ZigBee: is a low power, low cost that is alteranative to bluetooth devices.
+
+NOTE: NFC is a subset of RFID.
