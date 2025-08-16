@@ -352,8 +352,11 @@ Personal Area Networks are networks that have limited range and may allow single
 -Zigbee
 -RFID: used by id cards in companies or cards that are used in elevators.
 
+NOTE: relys on IEEE 802.15
+NOTE: SIG does with bluetooth standardization what WiFi Alliance does with WLANs. 
+
 Most Well Known Attack on Bluetooth: BlueBorne
 
-ZigBee: is a low power, low cost that is alteranative to bluetooth devices.
+ZigBee: is a set of technologies and standards, designed to be a low power, low cost that is alteranative to bluetooth devices.
 
 NOTE: NFC is a subset of RFID.
