@@ -140,3 +140,14 @@ Not Not D is D
 
 8.Contraposition:
 if we have P -> Q so we can conclude Not Q -> Not P
+
+Implication:
+if p then q
+p: the hypothesis
+q: conclusion
+
+Such a sentence is called conditional because the truth of statement q is conditioned on the truth of statement p
+
+the implication is false only when p is true and q is false
+
+NOTE: if p of the conditional is false then the whole statement is true by default no matter what q is.
