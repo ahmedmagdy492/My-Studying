@@ -151,3 +151,6 @@ Such a sentence is called conditional because the truth of statement q is condit
 the implication is false only when p is true and q is false
 
 NOTE: if p of the conditional is false then the whole statement is true by default no matter what q is.
+
+Negation of Conditional:
+the negation of a conditional ~(p -> q) is logically equalivant to p ^ ~q
