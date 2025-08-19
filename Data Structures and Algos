@@ -372,6 +372,10 @@ Conditions to Find a Predecessor of a Node:
 -if the given node has a left then the predecessor is the right most node in the left subtree.
 -if there is no left subtree; then it's the ancestor that this path is its right node
 
+NOTE:
+to convert a traversal back to the original general tree we have to have inorder + any other type of the following traversals: pre-order, post-order, level-order
+NOTE: the full binary tree is an exception to the above rule.
+
 Heap Data Structure:
 is a special type of a balanced binary tree that either is a min-heap or a max-heap which means each root node in the tree should be either the max or the min among the children.
 
