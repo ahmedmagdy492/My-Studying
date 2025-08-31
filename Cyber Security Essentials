@@ -360,3 +360,68 @@ Most Well Known Attack on Bluetooth: BlueBorne
 ZigBee: is a set of technologies and standards, designed to be a low power, low cost that is alteranative to bluetooth devices.
 
 NOTE: NFC is a subset of RFID.
+
+there is no such thing as ultimate security solution that can be applied and you are done, security is applied on all levels:
+-preimiter: anti-ddos
+-network: firewall, ips, ids
+-host: anti-malware, hardening
+-appliation: peneteration testing the appliations
+-data: data security technologies
+
+Focus of Security is Risk
+Risk = Threats X Vulnerabilities
+
+CIA Triad:
+Confidentiality: the privacy of information (opposite: information disclosure)
+Integerity
+Availability
+
+Different organizations can have different priorities in the CIA triad. Confidentiality is usually very important
+to government organizations or entities with very sensitive information, and integrity is important to financial
+institutions. Understanding what the priorities are for your organization is a tremendous help in prioritizing
+security plans for your organization, from design to incident response
+
+The key to success in each project lies in finding the right balance between security and functionality
+
+The best way to achieve this would be by adopting the "secure by design" concept.
+
+NOTE: in general organizations tend to focus on 1 or 2 of these measures depending on its needs
+
+Defense in Depth Startiges:
+-Filtering: is the fondation of defense in depth, can be applied on the network level or on the host level, examples on network level:
+ -firewall: stateless then evolved into stateful and now we have next generation firewall which focuses more on inspecting the content of each packet not only the headers.
+ -anti-ddos
+ -mail relays
+ -proxy servers
+
+host level:
+ -anti-virus: signature based
+ -EDR: behavior based
+ -application control: only allow certain apps to run on the endpoints
+
+Approaches to Defense in Depth:
+-Uniform Protection:
+ applying security equally to all parts of the organizations network for example: firewalls, vpns, ids, antiviruses and this is the weakest approach
+
+-Protected Enclaves:
+ segements all the network into claves and seperates and restericts access to the most critical one by for example applying vlans and adding in a firewall
+
+-Information Centeric:
+ securing the information by employing layers, each layer encapsulates the layer underneath it, does data classification
+
+-Vector-Oriented:
+ searching for attack vectors that i have, this could be:
+ -malcious usb drives
+ -malcious mail attachments
+ -spoofed mails
+and begin to prevent them
+
+
+Configuration
+hardening is a key concept in your DiD approach and can be applied to network components (routers,
+switches, firewalls); operating system best practices, third-party software, and cloud configurations.
+
+
+Things to note:
+-Different Security Devices
+-Defense in-depth approaches
