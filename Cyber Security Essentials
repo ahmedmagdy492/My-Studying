@@ -360,3 +360,11 @@ Most Well Known Attack on Bluetooth: BlueBorne
 ZigBee: is a set of technologies and standards, designed to be a low power, low cost that is alteranative to bluetooth devices.
 
 NOTE: NFC is a subset of RFID.
+
+Some Key Terms in WiFi:
+-SSID: the wireless network name
+-ESSID: the wider wireless network name in case there are multiple of access points connecting together.
+-BSSID: the mac address of the access point.
+-WPA2-PSK: Wifi networks that you connect to by providing a pre-shared password that's the same for everyone
+-WPA2-EAP: Wifi networks that you authenticate to by providing a username and password, which is sent to a RADIUS server.
+-RADIUS: A server for authenticating clients, not just for wifi.
