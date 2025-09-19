@@ -429,6 +429,108 @@ Configuration
 hardening is a key concept in your DiD approach and can be applied to network components (routers,
 switches, firewalls); operating system best practices, third-party software, and cloud configurations.
 
+To Manage your Configuration you need 2 things:
+-an accurate baseline document
+-a way to detect something occurs to that baseline
+
+
+NOTE: Defense in depth is not only applicable to on-permise networks but can be easily applied on the cloud
+
+Zero Trust:
+is a princple that came to complement DiD not to replace it and it assumes zero trust even aganist the internals
+
+Key Factors in Zero Trust:
+-Encryption
+-Authentication
+
+Basic Principles behind Zero-Trust Model:
+-Internal and external threats will always be present
+-Every user, device, or network connection must be proven
+-Log and inspect all network traffic
+
+Variable Trust:
+Variable trust enables you to dynamically change access for good or bad based on conditions:
+-Type of user access
+-Geo location
+-Device Compliancy
+-Type of Application
+
+the user will be granted access based on the condition, if a condition is met then a certain score value is added to the total score and if the final score value is beyond a certain threshold then the user will grant access.
+
+Identity Management and Access Control:
+
+Key Terms:
+-Digital Identity
+-Authentication
+-Authorization
+-Accountability
+
+Authentication:
+the process of proving that you are the owner of an account,
+types of authenticators:
+-something you know: an example is a password
+-something you have: something you physically have such as a token
+-somehing you are: such as face id or fingerprint
+
+Proces of Enrolling a subject:
+1.idenity profing
+2.gain certain level of assurance
+3.decide whether or not the user will get the credientials
+
+steps of identity proofing:
+-resolution
+-validation
+-verfication
+
+identity assurance levels:
+-IAL 1: Self-Asserted -> no verfication or validation
+-IAL 2: Evidence-Based
+-IAL 3: Physical Check
+
+
+Authenticators Assurance Level:
+-AAL 1: at least single factor authenticators
+-AAL 2: any 2 factor authentticators and strong crypto
+-AAL 3: selected 2 factor authenticators and strong crypto
+depending on the context or the level of sensivity of the resource being accessed a level of assurance will be chosen.
+
+Common Authentication Protocols:
+-SSO (Single Sign-ON): accessing multiple resources with a single account, example services that use single sign on: LDAP, Microsoft Active Directory, Kerberos
+
+Examples on SSO Protocols:
+-SAML
+-OAuth2
+
+Access Control:
+-Controlling Access
+-Access Management
+-Monitoring Access
+
+Controling Access:
+4 principles:
+-Least Privilages:
+give the subscribed subject the access he/she needs to do his/her job 
+-Need to Know:
+give acces to someone on a certain resource when he/she needs it only and revoke when he/she no longer needs it
+-Seperation of duties
+-Rotation of duties
+
+Access Control Techniques:
+-Discretionary Access Control (DAC): giving access by the owner to a certain resource by simply giving the other party their credentials
+-Mandatory Access Control (MAC): Controls are set by the system and cannot be overwritten by the administrator, controling access via system enforced credentials that are non-transferable
+
+the above 2 techniques are 2 main techqineus and the following are based on either DAC or MAC:
+-Role-Based Access Control (RBAC)
+-Lattice-Based Access Control (LBAC): defines resterication on the interaction between a subject and an object.
+
+Access Management:
+is divided into 4 tasks:
+-Account Admininstration
+-Maintanince
+-Monitoring
+-Revokation
+
+when organizations grow the use of privilaged access acounts also grows so it becomes diffcult to manage these accounts and keep track of who has access to what, so that's what makes PAM (Privileged Access Management tools) tools comes into play.
 
 Things to note:
 -Different Security Devices
