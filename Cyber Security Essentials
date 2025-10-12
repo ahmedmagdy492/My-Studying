@@ -515,6 +515,8 @@ give acces to someone on a certain resource when he/she needs it only and revoke
 -Seperation of duties
 -Rotation of duties
 
+Accountability is acheived through the logging and to make the logs tamper-proof we need to make it on a seperate server and use log-forwarding to pass logs from all systems to the log server.
+
 Access Control Techniques:
 -Discretionary Access Control (DAC): giving access by the owner to a certain resource by simply giving the other party their credentials
 -Mandatory Access Control (MAC): Controls are set by the system and cannot be overwritten by the administrator, controling access via system enforced credentials that are non-transferable
@@ -531,6 +533,43 @@ is divided into 4 tasks:
 -Revokation
 
 when organizations grow the use of privilaged access acounts also grows so it becomes diffcult to manage these accounts and keep track of who has access to what, so that's what makes PAM (Privileged Access Management tools) tools comes into play.
+
+Ways to handle privilaged access:
+-PAM tool
+-3-tiered admininstrative model
+
+
+NOTE: in order to achieve the security of a system you need ensure Confedentiality, Integertiy and Availability and in order achieve those you need to have proper identification, authentication, authorization, access control and accountability.
+
+Password Security:
+Passwords are stored in hashes, which is done by using a derivation function, one key characteristic of such a function is that it transforms its input to a format that is irreversable.
+
+What determines the strength of a password hash:
+-Hash Function used
+-password and derived key length
+-character set support: how hard the password you pick
+-difficulty factor: how many times you will hash the hash of the password before storing it
+
+Password Cracking Techinques:
+-Brute Force Attacks:
+ -enumerate all possible combinations
+-Dictionary Attacks:
+ -you have a table of possible passwords and you just try them.
+-Hyberid:
+ -combination of both dictionary and bruteforce
+-Pre-Computed Attacks:
+ -a dictioanary of pre computed hashes.
+
+Ways to protect aganist password cracking attacks:
+1.Enforce strong password policy:
+-force passwords longer than 8 chars
+-check for recogniazable words
+-block after a certain number of attempts
+
+2.Fight aganist cracking by not storing the exact hash of user passwords:
+-salting: adding different keywords to the hashing function while it's computing the hashes.
+-peppering: ensuring that the produced hashes are unique.
+NOTE: the salt is unique per password.
 
 Things to note:
 -Different Security Devices
